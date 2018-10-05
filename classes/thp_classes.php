@@ -13,6 +13,7 @@ class Page {
 	public $time_start; // used to measure length for process
 	public $links=array("print"=>"'javascript:window.print();'");
 	public $hints=array("print"=>"Print this page");
+	public $appendTitle='';
 	public function debug($message,$values) {
         echo("<p>$message".":"); print_r($values); echo("</p>\n");
     }
@@ -24,6 +25,20 @@ class Page {
     public function disableStickyHeader(){
     	$this->addStickyHeader=FALSE;
     }
+    
+    /* dynamic property setter/getter for this class */
+    public function get($prop){
+    	if(isset($this->$prop)){
+	   return $this->$prop;
+	}
+        return NULL;
+     }
+	
+     public function set($prop, $value){
+    	if(isset($this->$prop)){
+	   $this->$prop = $value;
+    	}
+     }
 	
 	public function menu(){
 		$menu=$_SESSION["menu"];
@@ -73,7 +88,7 @@ $(document).ready(function() { $('#datatable').DataTable( {"order": [[0, "desc"]
             $hint=$this->hints[$key];
             echo("<a href=$link class='fa fa-$key' title='$hint'></a>\n");
         }
-        echo("</h1>\n");
+        echo($this->appendTitle."</h1>\n");
 		$reply=$_SESSION["reply"];
 		if($reply>''){
 			unset($_SESSION["reply"]); 
