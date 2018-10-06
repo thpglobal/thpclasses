@@ -690,7 +690,7 @@ class Table { // These are public for now but may eventually be private with set
 				$nstart2=($rowspan>1 ? $nstart+$nrowspan : $nstart+1);
 		        for($j=$nstart2;$j<$ncols;$j++) {
 					$v=$row[$j];
-					if ( is_numeric($v) and ($j>($this->ntext)) ) $v=number_format($v,$this->dpoints);
+					if ( is_numeric($v) and ($j>=($this->ntext)) ) $v=number_format($v,$this->dpoints);
 					echo("<td>$v</td>");
 				}
                 echo("</tr>\n");
