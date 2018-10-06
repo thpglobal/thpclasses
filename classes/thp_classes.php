@@ -185,6 +185,7 @@ class Filter {
 		echo("<div class='pure-u-1 pure-u-md-1-4' style='background-color:red !important; color:white !important;'>$msg</div>\n");
 	}
 	public function query($name,$query){
+		if($this->db==NULL) Die("You forgot to pass $db in the start method.");
 		$pdo_stmt=$this->db->query($query);
 		if(is_object($pdo_stmt)){
 			$array = $pdo_stmt->fetchAll(PDO::FETCH_KEY_PAIR);
