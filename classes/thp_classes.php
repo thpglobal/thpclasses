@@ -105,8 +105,8 @@ $(document).ready(function() { $('#datatable').DataTable( {"order": [[0, "desc"]
 		$now=$_SESSION[$name];
 		if($now<>'off') $now='on'; // default is ON
 		$then=($now=='on' ? 'off' : 'on');
-		echo("<a class='fa fa-toggle-$now' href='?$name=$then'></a> ");
-		echo( ($now=='on' ? $on_msg : $off_msg) );
+		$this->appendTitle.="<a class='fa fa-toggle-$now' href='?$name=$then'></a> ";
+		$this->appendTitle .= ($now=='on' ? $on_msg : $off_msg) ;
 	}
 	
 	## If addStickyHeader variable is set to true, fire up the sitcky event. Else don't do anything. 
