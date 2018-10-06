@@ -487,16 +487,16 @@ class Table { // These are public for now but may eventually be private with set
     }
     
 // SUM UP THE $contents from column $col1 onwards (counting from zero)
-	public function totals($col1=2){ // basically an alias
+	public function totals($col1=2,$row1=1){ // basically an alias
 		$this->sumrows($col1);
 	}
-	public function sumrows($col1=2){
+	public function sumrows($col1=2,$row1=1){
 		$nrows=sizeof($this->contents);
 		$ncols=sizeof($this->contents[0]);
 		for($j=0;$j<$col1;$j++) $sums[$j]='';
 		$sums[$col1-1]="TOTALS:";
 		for($j=$col1;$j<$ncols;$j++){
-			for($i=1;$i<$nrows;$i++) $sums[$j] += $this->contents[$i][$j];
+			for($i=$row1;$i<$nrows;$i++) $sums[$j] += $this->contents[$i][$j];
 		}
 	    $this->contents[]=$sums;
     }
