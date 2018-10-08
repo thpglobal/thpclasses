@@ -382,13 +382,13 @@ class Table { // These are public for now but may eventually be private with set
 	public function rowspan($n=2){ // set number of columns to include in rowspan
 		$this->rowspan=$n;
 	}
-	public function sumcols($n=4){ // sum the last $n columns to a new Total column
+	public function sumcols($col1=2,$row1=1){ // sum the last columns starting with $n to a new Total column, startin with row 1
 		$nrows=sizeof($this->contents);
 		$ncols=sizeof($this->contents[0]);
 		$this->contents[0][$ncols]="Total";
-		for($i=1;$i<$nrows;$i++){
+		for($i=$row1;$i<$nrows;$i++){
 			$this->contents[$i][$ncols]=0;
-			for($j=($ncols-$n);$j<$ncols;$j++) $this->contents[$i][$ncols] += $this->contents[$i][$j];
+			for($j=$col1;$j<$ncols;$j++) $this->contents[$i][$ncols] += $this->contents[$i][$j];
 		}
 	}
 	
