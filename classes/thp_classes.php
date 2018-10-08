@@ -42,20 +42,22 @@ class Page {
 	
 	public function menu(){
 		$menu=$_SESSION["menu"];
-		echo("<div class='pure-menu pure-menu-horizontal hidden-print'>\n\t<ul class='pure-menu-list'>\n");
-		foreach($menu as $key=>$links){
-			if(is_array($links)) {
-				echo("\t\t<li class='pure-menu-item pure-menu-has-children pure-menu-allow-hover'>\n");
-				echo("\t\t\t<a href='#' class='pure-menu-link'>$key</a>\n\t\t\t<ul class='pure-menu-children'>\n");
-				foreach($links as $tag=>$link){
-					echo("\t\t\t<li class='pure-menu-item'><a class='pure-menu-link' href='$link'>$tag</a></li>\n");
+		if(isset($_SESSION["menu"]) and sizeof($menu)>0) { 
+			echo("<div class='pure-menu pure-menu-horizontal hidden-print'>\n\t<ul class='pure-menu-list'>\n");
+			foreach($menu as $key=>$links){
+				if(is_array($links)) {
+					echo("\t\t<li class='pure-menu-item pure-menu-has-children pure-menu-allow-hover'>\n");
+					echo("\t\t\t<a href='#' class='pure-menu-link'>$key</a>\n\t\t\t<ul class='pure-menu-children'>\n");
+					foreach($links as $tag=>$link){
+						echo("\t\t\t<li class='pure-menu-item'><a class='pure-menu-link' href='$link'>$tag</a></li>\n");
+					}
+					echo("\t\t</ul>\n\t</li>\n");
+				}else{
+					echo("\t\t<li class='pure-menu-item'><a class='pure-menu-link' href='$links'>$key</a></li>\n");
 				}
-				echo("\t\t</ul>\n\t</li>\n");
-			}else{
-				echo("\t\t<li class='pure-menu-item'><a class='pure-menu-link' href='$links'>$key</a></li>\n");
 			}
+			echo("\t</ul>\n</div>\n");
 		}
-		echo("\t</ul>\n</div>\n");
 	}
     
     public function start($title="THP",$lang="en"){
