@@ -33,7 +33,6 @@ class Page {
 	}
         return NULL;
      }
-	
      public function set($prop, $value){
     	if(isset($this->$prop)){
 	   $this->$prop = $value;
