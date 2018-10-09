@@ -243,6 +243,9 @@ class Form {
 	public function hidden($array) {
 		$this->hidden=$array;
 	}
+	public function ignore($array){
+		$this->ignore=$array;
+	}
 	public function data($array) { // these are the existing values
 		$this->data=$array;
 	}
@@ -323,7 +326,7 @@ class Form {
 			$name=$meta[$column_index]["name"];
 			$type=$meta[$column_index]["native_type"];
 			$value=$this->data[$name];
-			if(isset($this->hidden[$name]) or ($name=="id")){
+			if(is_member($name,$this->hidden) or ($name=="id")){
 				if(!($value>'')) $value=$_SESSION[$name];
 				$this->hide($name,$value);
 			}elseif($name=='User_Email'){
@@ -339,7 +342,7 @@ class Form {
 				$this->textarea($name);
 			}elseif($type=='DATE'){
 				$this->date($name);		
-			}elseif(!isset($this->ignore[$name])) {
+			}elseif(!is_member($name,$this->ignore)) {
 				$this->text($name);
 			}
 		}
