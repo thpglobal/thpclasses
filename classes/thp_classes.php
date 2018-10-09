@@ -222,6 +222,7 @@ class Form {
     private $div1="<div class='pure-control-group'>\n<label for=";
 	public $data=array();
 	public $hidden=array("id");
+	public $ignore=array();
 	private function debug($name,$item){
 		if($_SESSION["debug"]) {
 			echo("<p>$name: "); print_r($item); echo("</p>\n");
@@ -338,7 +339,7 @@ class Form {
 				$this->textarea($name);
 			}elseif($type=='DATE'){
 				$this->date($name);		
-			}else{
+			}elseif(!isset($this->ignore[$name])) {
 				$this->text($name);
 			}
 		}
