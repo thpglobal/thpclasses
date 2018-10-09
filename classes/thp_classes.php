@@ -326,7 +326,7 @@ class Form {
 			$name=$meta[$column_index]["name"];
 			$type=$meta[$column_index]["native_type"];
 			$value=$this->data[$name];
-			if(is_member($name,$this->hidden) or ($name=="id")){
+			if(in_array($name,$this->hidden) or ($name=="id")){
 				if(!($value>'')) $value=$_SESSION[$name];
 				$this->hide($name,$value);
 			}elseif($name=='User_Email'){
@@ -342,7 +342,7 @@ class Form {
 				$this->textarea($name);
 			}elseif($type=='DATE'){
 				$this->date($name);		
-			}elseif(!is_member($name,$this->ignore)) {
+			}elseif(!in_array($name,$this->ignore)) {
 				$this->text($name);
 			}
 		}
