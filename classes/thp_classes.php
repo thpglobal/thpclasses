@@ -700,7 +700,6 @@ class Table { // These are public for now but may eventually be private with set
 		
 		echo("</tbody>\n</table>\n");
 		$_SESSION["contents"]=$this->contents;
-	}
-		
+	}	
 }
 ?>
