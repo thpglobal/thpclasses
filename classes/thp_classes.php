@@ -276,11 +276,13 @@ class Form {
 		if($minlength>0) echo(' required><span class=status></span');
 		echo("></div>\n");
     }
-    public function date($name){
-		if(!isset($_SeSSION["lastdate"])) $_SESSION["lastdate"]=date("Y-m-d");
-		if(!isset($this->data[$name])) $this->data[$name]=$_SESSION["lastdate"];
+    public function date($name,$required=0){
+	if(!isset($_SeSSION["lastdate"])) $_SESSION["lastdate"]=date("Y-m-d");
+	if(!isset($this->data[$name])) $this->data[$name]=$_SESSION["lastdate"];
         echo($this->div1."'$name'>".ucwords($name).":</label>");
-        echo("<input type=date name='$name' value='".$this->data[$name]."'></div>\n");
+        echo("<input type=date name='$name' value='".$this->data[$name]."'");
+        if($required) echo (' required><span class=status></span>');
+        echo("</div>\n");
     }
     public function textarea($name,$rename='',$required=0){
 		$label=($rename>'' ? $rename : $name);
@@ -294,9 +296,10 @@ class Form {
     public function hide($name,$value){
         echo("<input type=hidden name='$name' value='$value'>\n");
     }
-    public function pairs($name,$array){
+    public function pairs($name,$array,$required=0){
+        $requiredAttr=($required) ? ' required ' : '';
         echo($this->div1."'$name'>".ucwords($name).":</label>");
-        echo("<select name='$name'>\n<option value=0>(Select)\n");
+        echo("<select name='$name' $requiredAttr>\n<option value=0>(Select)\n");
         foreach($array as $key=>$value){
             echo("<option value='$key'");
             if($key==$this->data[$name]) echo(" selected");
@@ -304,10 +307,10 @@ class Form {
         }
         echo("</select></div>\n");
     }
-	public function query($name,$query){
+	public function query($name,$query,$required=0){
 		$pdo_stmt=$this->db->query($query);
 		if(!is_object($pdo_stmt)) Die("Fatal Error - bad query - $query \n");
-		$this->pairs($name,$pdo_stmt->fetchAll(PDO::FETCH_KEY_PAIR));
+		$this->pairs($name,$pdo_stmt->fetchAll(PDO::FETCH_KEY_PAIR),$required);
 	}
 	public function record($table,$id){ // goes inside start and end
 		// Also can create a new record if id==0
