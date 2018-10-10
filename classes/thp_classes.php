@@ -299,7 +299,7 @@ class Form {
     public function pairs($name,$array,$required=0){
         $requiredAttr=($required) ? ' required ' : '';
         echo($this->div1."'$name'>".ucwords($name).":</label>");
-        echo("<select name='$name' $requiredAttr>\n<option value=0>(Select)\n");
+        echo("<select name='$name' $requiredAttr><span class=status></span>\n<option value=0>(Select)\n");
         foreach($array as $key=>$value){
             echo("<option value='$key'");
             if($key==$this->data[$name]) echo(" selected");
