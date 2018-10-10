@@ -582,7 +582,8 @@ class Table { // These are public for now but may eventually be private with set
 			if($nsums and (($sump>0) or ($sump<0))){ // do we add summing rows?
 				$label=$row[$ni+3]; // L8 is the label for the sum
 				if($label=="") $label="Total # participants";
-				$line=array($row[0],$row[1],$row[2],$label); // The first 4 columns
+				for($j=0;$j<$ni;$j++) $line[$j]=$row[$j];
+				$line[$ni]=$label;
 				for($j=1;$j<$nc;$j++) { // loop through columns to be summed
 					$participants=0;
 					if($sump>0) { // normal sum
