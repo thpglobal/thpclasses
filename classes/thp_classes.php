@@ -578,6 +578,7 @@ class Table { // These are public for now but may eventually be private with set
 				$this->row($line);
 			}
 			$sump=$row[$ni+1]; // Do we sum anything for this indicator?
+			if($_SESSION["debug"]) echo("<p>Above loop $nsums $sump ".$row[$ni+3]."</p>\n");
 			if($nsums and (($sump>0) or ($sump<0))){ // do we add summing rows?
 				$label=$row[$ni+3]; // L8 is the label for the sum
 				if($label=="") $label="Total # participants";
@@ -591,6 +592,7 @@ class Table { // These are public for now but may eventually be private with set
 					}
 					$line[]=$participants; // append to line
 				}
+				if($_SESSION["debug"]) print_r($row);
 				$this->row($line); // append to grid
 				$sumw=$row[$ni+2];
 				if($sumw>0) { // sum up number of workshop for SumW>0
