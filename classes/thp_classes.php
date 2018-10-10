@@ -580,10 +580,12 @@ class Table { // These are public for now but may eventually be private with set
 				$this->row($line);
 			}
 			$sump=$row[$ni+1]; // Do we sum anything for this indicator?
+			if($_SESSION["debug"]) echo("<p>Above loop $nsums $sump ".$row[$ni+3]."</p>\n");
 			if($nsums and (($sump>0) or ($sump<0))){ // do we add summing rows?
 				$label=$row[$ni+3]; // L8 is the label for the sum
 				if($label=="") $label="Total # participants";
-				$line=array($row[0],$row[1],$row[2],$label); // The first 4 columns
+				for($j=0;$j<$ni;$j++) $line[$j]=$row[$j];
+				$line[$ni]=$label;
 				for($j=1;$j<$nc;$j++) { // loop through columns to be summed
 					$participants=0;
 					if($sump>0) { // normal sum
@@ -593,10 +595,12 @@ class Table { // These are public for now but may eventually be private with set
 					}
 					$line[]=$participants; // append to line
 				}
+				if($_SESSION["debug"]) print_r($line);
 				$this->row($line); // append to grid
 				$sumw=$row[$ni+2];
 				if($sumw>0) { // sum up number of workshop for SumW>0
-					$line=array($row[0],$row[1],$row[2],"Total # workshops"); // The first 4 columns
+					for($j=0;$j<$ni;$j++) $line[$j]=$row[$j];
+					$line[$ni]="Total # workshops";
 					for($j=1;$j<$nc;$j++) { // loop through columns to be summed							
 						$workshops=0;
 						for($i=$sumw;$i<=$n;$i++) $workshops += $row[$ni+$nsums+($nd*$j)+$i];
