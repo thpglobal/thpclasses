@@ -597,7 +597,8 @@ class Table { // These are public for now but may eventually be private with set
 				$this->row($line); // append to grid
 				$sumw=$row[$ni+2];
 				if($sumw>0) { // sum up number of workshop for SumW>0
-					$line=array($row[0],$row[1],$row[2],"Total # workshops"); // The first 4 columns
+					for($j=0;$j<$ni;$j++) $line[$j]=$row[$j];
+					$line[$ni]="Total # workshops";
 					for($j=1;$j<$nc;$j++) { // loop through columns to be summed							
 						$workshops=0;
 						for($i=$sumw;$i<=$n;$i++) $workshops += $row[$ni+$nsums+($nd*$j)+$i];
