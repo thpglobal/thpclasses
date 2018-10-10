@@ -592,7 +592,7 @@ class Table { // These are public for now but may eventually be private with set
 					}
 					$line[]=$participants; // append to line
 				}
-				if($_SESSION["debug"]) print_r($row);
+				if($_SESSION["debug"]) print_r($line);
 				$this->row($line); // append to grid
 				$sumw=$row[$ni+2];
 				if($sumw>0) { // sum up number of workshop for SumW>0
