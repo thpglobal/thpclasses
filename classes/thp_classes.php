@@ -740,7 +740,7 @@ class Table { // These are public for now but may eventually be private with set
 			for($j=$nstart; $j<$ncols; $j++) echo("<td>".$this->contents[0][$j]."</td>");
 			echo("</tr></tfoot>\n");
 		}
-		echo(</table>\n");
+		echo("</table>\n");
 		$_SESSION["contents"]=$this->contents;
 	}	
 }
