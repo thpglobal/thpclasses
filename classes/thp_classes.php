@@ -331,9 +331,10 @@ class Form {
 			$name=$meta[$column_index]["name"];
 			$type=$meta[$column_index]["native_type"];
 			$value=$this->data[$name];
-			if(in_array($name,$this->hidden) or ($name=="id")){
-				if(!($value>'')) $value=$_SESSION[$name];
-				$this->hide($name,$value);
+			if($name=="id"){
+				$this->hide($name,$id);
+			}elseif(isset($this->hidden[$name]) or (){
+				$this->hide($name,$this->hidden[$name]));
 			}elseif($name=='User_Email'){
 				$this->hide($name,strtolower($_SERVER["USER_EMAIL"]));
 			}elseif(substr($name,-3)=="_ID"){
