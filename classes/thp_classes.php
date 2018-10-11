@@ -333,7 +333,7 @@ class Form {
 			$value=$this->data[$name];
 			if($name=="id"){
 				$this->hide($name,$id);
-			}elseif(isset($this->hidden[$name]) or (){
+			}elseif(isset($this->hidden[$name])){
 				$this->hide($name,$this->hidden[$name]));
 			}elseif($name=='User_Email'){
 				$this->hide($name,strtolower($_SERVER["USER_EMAIL"]));
