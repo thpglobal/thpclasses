@@ -84,7 +84,7 @@ $(document).ready(function() {
     } );
  
     // DataTable
-    var table = $('#example').DataTable();
+    var table = $('#datatable').DataTable();
  
     // Apply the search
     table.columns().every( function () {
