@@ -72,11 +72,33 @@ class Page {
 		if($this->addStickyHeader){echo("<script src='/static/irStickyHeader.js'></script>\n");}
         if($this->datatable=="1"){ // Additional setup for using DataTables
 ?>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/jquery.dataTables.css'>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script> 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/jquery.dataTables.min.css'>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
 <script>
-$(document).ready(function() { $('#datatable').DataTable( {"order": [[0, "desc"]]} ); });
+$(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#datatable tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#example').DataTable();
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+} );
 </script>
 <?php
         }
