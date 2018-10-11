@@ -733,8 +733,14 @@ class Table { // These are public for now but may eventually be private with set
                 echo("</tr>\n");
 		    }
 		}
-		
-		echo("</tbody>\n</table>\n");
+		echo("</tbody>\n");
+		// for datatables, add a footer
+		if($_SESSION["datatable"]) {
+			echo("<tfoot><tr>");
+			for($j=$nstart; $j<$ncols; $j++) echo("<td>".$this->contents[0][$j]."</td>");
+			echo("</tr></tfoot>\n");
+		}
+		echo(</table>\n");
 		$_SESSION["contents"]=$this->contents;
 	}	
 }
