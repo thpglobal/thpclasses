@@ -709,7 +709,7 @@ class Table { // These are public for now but may eventually be private with set
 		            $g=$row[0];
 		            if($g>$group) {
 		                $group=$g;
-		                echo("<tr><th colspan=".($ncols-1).">". ($this->showGroupID) ? "{$group}. " : '' .$this->groups[$group]."</th></tr>\n");
+		                echo("<tr><th colspan=".($ncols-1).">". (($this->showGroupID) ? "{$group}. " : '') .$this->groups[$group]."</th></tr>\n");
 		            }
 		        }
 				$tag=$row[$nstart]; // if there is an id here, this is it
@@ -745,6 +745,6 @@ class Table { // These are public for now but may eventually be private with set
 		}
 		echo("</table>\n");
 		$_SESSION["contents"]=$this->contents;
-	}	
+	}
 }
 ?>
