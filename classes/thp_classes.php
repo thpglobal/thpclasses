@@ -386,6 +386,7 @@ class Table { // These are public for now but may eventually be private with set
 	public $extra=array(); // extra headers
 	public $ntext=1; // number of columns to not be formatted
 	public $groups=array(); // headers
+        public $showGroupID=TRUE;
 	public $extraheader=""; // Optional Extra headers string
 	public $infocol=array(); // Definitions of column headers
 	public $inforow=array(); // Definitions of rows
@@ -402,12 +403,12 @@ class Table { // These are public for now but may eventually be private with set
 	    	return $this->$prop;
 	    }
         return NULL;
-    }
+        }
 	public function set($prop, $value){
     	if(isset($this->$prop)){
 	       $this->$prop = $value;
     	}
-    }
+        }
     
     public function info($definition){ // return a string function with info symbol and title
 	    return "<span title='$definition' class='fa fa-info-circle'></span>";
@@ -509,8 +510,9 @@ class Table { // These are public for now but may eventually be private with set
 	public function ntext($n=1){ // set the number of text columns
 		$this->ntext=$n;
 	}
-    public function groups($row) {
+    public function groups($row,$showGroupID=TRUE) {
         $this->groups=$row;
+        $this->showGroupID=$showGroupID;
     }
     public function inforow($array) {
         $this->inforow=$array;
@@ -706,7 +708,7 @@ class Table { // These are public for now but may eventually be private with set
 		            $g=$row[0];
 		            if($g>$group) {
 		                $group=$g;
-		                echo("<tr><th colspan=".($ncols-1).">{$group}. ".$this->groups[$group]."</th></tr>\n");
+		                echo("<tr><th colspan=".($ncols-1).">". ($this->showGroupID) ? "{$group}. " : '' .$this->groups[$group]."</th></tr>\n");
 		            }
 		        }
 				$tag=$row[$nstart]; // if there is an id here, this is it
