@@ -319,10 +319,12 @@ class Form {
         echo("<input type=hidden name='$name' value='$value'>\n");
     }
     public function pairs($name,$array,$required=0){
-		if($_SESSION["debug"]) echo("<p>$name=>".$this->data["name"]."</p>\n");
+	if($_SESSION["debug"]) echo("<p>$name=>".$this->data["name"]."</p>\n");
         $requiredAttr=($required) ? ' required ' : '';
+        //HtML5 requires required value to be empty (not zero) for validation
+        $requiredVal=($required) ? '' : 0;
         echo($this->div1."'$name'>".ucwords($name).":</label>");
-        echo("<select name='$name' $requiredAttr>\n<option value=0>(Select)\n");
+        echo("<select name='$name' $requiredAttr>\n<option value='$requiredVal'>(Select)\n");
         foreach($array as $key=>$value){
             echo("<option value='$key'");
             if($key==$this->data[$name]) echo(" selected");
