@@ -443,15 +443,11 @@ class Table { // These are public for now but may eventually be private with set
 		
 	public function query($query){ // load results of a query into the grid
 		$pdo_stmt=$this->db->query($query);
-		if(is_object($pdo_stmt)){
-			foreach(range(0, $pdo_stmt->columnCount() - 1) as $column_index)
+		foreach(range(0, $pdo_stmt->columnCount() - 1) as $column_index)
 			{
 				$meta = $pdo_stmt->getColumnMeta($column_index);
 				$this->contents[0][$column_index]=$meta["name"];
 			}
-		}else{ 
-			Die("Fatal error with query $query"); 
-		}
 		while($row = $pdo_stmt->fetch(PDO::FETCH_NUM)) $this->contents[]=$row;
 	}
 	public function column($id_col,$dest_col,$array){
