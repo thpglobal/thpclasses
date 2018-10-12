@@ -319,6 +319,7 @@ class Form {
         echo("<input type=hidden name='$name' value='$value'>\n");
     }
     public function pairs($name,$array,$required=0){
+		if($_SESSION["debug"]) echo("<p>$name=>".$this->data["name"]."</p>\n");
         $requiredAttr=($required) ? ' required ' : '';
         echo($this->div1."'$name'>".ucwords($name).":</label>");
         echo("<select name='$name' $requiredAttr>\n<option value=0>(Select)\n");
@@ -342,8 +343,8 @@ class Form {
 		if($id=='') $id=0;
 		$this->hide("table",$table);
 		$pdo_stmt=$this->db->query("select * from $table where id='$id'");
-		$this->data = $pdo_stmt->fetch(PDO::FETCH_ASSOC);
 		if(!is_object($pdo_stmt)) Die("Fatal Error - bad query - $query \n");
+		$this->data = $pdo_stmt->fetch(PDO::FETCH_ASSOC);
 		
 		foreach(range(0, $pdo_stmt->columnCount() - 1) as $column_index)
 		{ $meta[$column_index] = $pdo_stmt->getColumnMeta($column_index);}
