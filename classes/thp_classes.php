@@ -470,7 +470,17 @@ class Table { // These are public for now but may eventually be private with set
 			if(key_exists($map,$array)) $this->contents[$i][$dest_col]=$array[$map];
 		}
 	}
-			
+	public function map_query($id_col,$dest_col,$query) {
+		// This will map multiple columns directly from the array
+		$this->backmap($id_col);
+		$pdo_stmt=$this->db->query($query);
+		while($row = $pdo_stmt->fetch(PDO::FETCH_NUM)) {
+			$n=sizeof($row);
+			$i=$this->backmap[$row[0]]; // into which row do we plant this?
+			for($j=1;$j<$n;$j++) $this->contents[$i][$j+$dest_col-1]=$row[$j];
+		}
+	}		
+				
 	public function loadrows($result) { // load from the output of a pdo query
 		while($row=$result->fetch(PDO::FETCH_NUM)) $this->row($row);
 	}
