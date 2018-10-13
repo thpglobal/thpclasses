@@ -209,13 +209,7 @@ class Filter {
 	}
 	public function query($name,$query){
 		if($this->db==NULL) Die("You forgot to pass $db in the start method.");
-		$pdo_stmt=$this->db->query($query);
-		if(is_object($pdo_stmt)){
-			$array = $pdo_stmt->fetchAll(PDO::FETCH_KEY_PAIR);
-			return $this->pairs($name,$array);
-		}else{
-			Die("</div>Fatal Error: bad query form: $query.");
-		}
+		return $this->pairs($name, $this->db->query($query)->fetchAll(PDO::FETCH_KEY_PAIR) );
 	}
 	public function table($name,$where=''){
 		$where_clause=($where=='' ? "" : "where $where");
