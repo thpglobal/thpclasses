@@ -159,7 +159,7 @@ $(document).ready(function() {
 // END CLASS PAGE
 // CLASS FILTER - dropdowns that - on change - restart the page and set $_SESSION["name"];
 class Filter {
-	private $db;
+	protected $db;
 	public $width=4; // Filter denomiator, eg normally 1/4 of screen
 	public $showOffLabel=false;
 	
@@ -234,8 +234,8 @@ class Filter {
 // END CLASS FILTER
 // CLASS FORM - EDIT A RECORD
 class Form {
-	private $db;
-    private $div1="<div class='pure-control-group'>\n<label for=";
+	protected $db;
+        private $div1="<div class='pure-control-group'>\n<label for=";
 	public $data=array();
 	public $hidden=array("id");
 	public $ignore=array();
@@ -376,7 +376,7 @@ class Form {
 // START CLASS TABLE
 //
 class Table { // These are public for now but may eventually be private with setters
-	private $db; // database connection
+	protected $db; // database connection
 	public $contents=array(array()); // main 2d array
 	public $rowspan=0; // If>0, then start rowspan with column this many columns
 	public $backmap=array(); // Create backpointers to the array after pivot
