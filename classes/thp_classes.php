@@ -461,7 +461,7 @@ class Table { // These are public for now but may eventually be private with set
 			$id=$this->contents[$i][$id_col]; 
 			$map=str_replace(".","_",$id);
 //			echo(" $i $id $map;");
-			if(key_exists($map,$array)) $this->contents[$i][$dest_col]=$array[$map];
+			if(!empty($array) and key_exists($map,$array)) $this->contents[$i][$dest_col]=$array[$map];
 		}
 	}
 	public function map_query($id_col,$dest_col,$query) {
