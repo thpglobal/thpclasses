@@ -450,7 +450,7 @@ class Table { // These are public for now but may eventually be private with set
 		foreach($array as $key=>$value){
 			$j=substr($key,-1); // Get the digit after the_
 			$id=substr($key,0,-2); // Get the indicator name before the _
-			if(key_exists($id,$backmap)) $this->contents[$this->backmap[$id]+$j-1][$dest_col]=$value;
+			if(key_exists($id,$this->backmap)) $this->contents[$this->backmap[$id]+$j-1][$dest_col]=$value;
 		}
 	}
 	public function map($id_col,$dest_col,$array){
