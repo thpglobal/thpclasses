@@ -7,7 +7,6 @@
 require(__DIR__."/../../includes/thpsecurity.php"); // this version sets up up PDO object and global permission variables
 // START CLASS PAGE
 class Page {
-    
 	public $datatable = "0";
 	public $addStickyHeader = TRUE;
 	public $time_start; // used to measure length for process
@@ -15,29 +14,28 @@ class Page {
 	public $hints=array("print"=>"Print this page");
 	public $appendTitle='';
 	public function debug($message,$values) {
-        echo("<p>$message".":"); print_r($values); echo("</p>\n");
-    }
-    
-    public function datatable(){
-        $this->datatable="1";
-    }
-    
-    public function disableStickyHeader(){
-    	$this->addStickyHeader=FALSE;
-    }
-    
-    /* dynamic property setter/getter for this class */
-    public function get($prop){
-    	if(isset($this->$prop)){
+		echo("<p>$message".":"); print_r($values); echo("</p>\n");
+	}
+
+	public function datatable(){
+		$this->datatable="1";
+	}
+	public function disableStickyHeader(){
+		$this->addStickyHeader=FALSE;
+	}
+
+/* dynamic property setter/getter for this class */
+	public function get($prop){
+		if(isset($this->$prop)){
 			return $this->$prop;
 		}
-        return NULL;
-     }
-     public function set($prop, $value){
-    	if(isset($this->$prop)){
+		return NULL;
+	}
+	public function set($prop, $value){
+		if(isset($this->$prop)){
 			$this->$prop = $value;
-    	}
-     }
+		}
+	}
 	
 	public function menu(){
 		$menu=$_SESSION["menu"];
@@ -58,19 +56,19 @@ class Page {
 			echo("\t</ul>\n</div>\n");
 		}
 	}
-    
-    public function start($title="THP",$lang="en"){
+
+	public function start($title="THP",$lang="en"){
 		$_SESSION["datatable"]=$this->datatable; // save for access by Table class
-        foreach($_GET as $key=>$value) $_SESSION[$key]=$value;
-		$this->time_start=microtime(true);        
-        echo("<!DOCTYPE html>\n<html lang=$lang>\n<head>\n<title>$title</title>\n");
-        echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css'>\n");
+		foreach($_GET as $key=>$value) $_SESSION[$key]=$value;
+		$this->time_start=microtime(true);
+		echo("<!DOCTYPE html>\n<html lang=$lang>\n<head>\n<title>$title</title>\n");
+		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>\n");
 		echo("<link rel='stylesheet' href='/static/pure.thp.css'>\n");
 		echo("<link rel='stylesheet' href='/static/thp.form.css'>\n");
 		if($this->addStickyHeader){echo("<script src='/static/irStickyHeader.js'></script>\n");}
-        if($this->datatable=="1"){ // Additional setup for using DataTables
+		if($this->datatable=="1"){ // Additional setup for using DataTables
 ?>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/jquery.dataTables.min.css'>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script> 
@@ -118,12 +116,12 @@ $(document).ready(function() {
 				$color="green";
 				if(substr($reply,0,5)=="Error") $color="red";
 			echo("<p style='text-align:center;color:white;background-color:".$color."'>$reply</p>\n");
-    	}
+		}
 	}
-    public function icon($type="edit",$link="/edit",$hint="Edit this record"){
-        $this->links[$type]=$link;
-        $this->hints[$type]=$hint;
-    }
+	public function icon($type="edit",$link="/edit",$hint="Edit this record"){
+		$this->links[$type]=$link;
+		$this->hints[$type]=$hint;
+	}
 	public function toggle($name,$on_msg='On',$off_msg='Off'){
 		$now=$_SESSION[$name];
 		if($now<>'off') $now='on'; // default is ON
@@ -137,18 +135,18 @@ $(document).ready(function() {
 	public function fireStickyHeader(){
 		if( $this->addStickyHeader ) {
 			echo "<script>
-		    // self executing function
-		    (function() {
-		    	var tables = document.getElementsByTagName('table');
-		    	//fire for all tables in the page
+			// self executing function
+			(function() {
+				var tables = document.getElementsByTagName('table');
+				//fire for all tables in the page
 				for(i = 0;i < tables.length; i++){
-    				lrStickyHeader(tables[i]);
+					lrStickyHeader(tables[i]);
 				}
 			})();
 			</script>\n";
 		}
 	}
-    public function end(){
+	public function end(){
 		$time=microtime(true)-($this->time_start);
 		echo("<p><i>Run time: $time</i></p>\n");
 		echo("</div>\n");
@@ -383,7 +381,7 @@ class Table { // These are public for now but may eventually be private with set
 	public $extra=array(); // extra headers
 	public $ntext=1; // number of columns to not be formatted
 	public $groups=array(); // headers
-        public $showGroupID=TRUE;
+	public $showGroupID=TRUE;
 	public $extraheader=""; // Optional Extra headers string
 	public $infocol=array(); // Definitions of column headers
 	public $inforow=array(); // Definitions of rows
