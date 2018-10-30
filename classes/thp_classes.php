@@ -542,6 +542,7 @@ class Table { // These are public for now but may eventually be private with set
 	// Link any foreign keys to their dependent table name field
 	public function smartquery($table,$where="",$yearfilter=""){ // option to limit a date to a year
 		$yearclause='';
+		$whereclause='';
 		$from=" from $table a";
 		$alias=97; // ascii for lowercase a
 		$pdo_stmt=$this->db->query("select * from $table limit 0"); // we need the names of the fields
@@ -557,8 +558,10 @@ class Table { // These are public for now but may eventually be private with set
 				$query .= "a.$name, ";
 			}
 		}
+		if($where>"" or $yearclause>"") $whereclause=" where ";
+		if($where>"") $whereclause.=$where;
 		if($where>"" and $yearclause>"") $yearclause=" and $yearclause";
-		$query=substr($query,0,-2).$from.($where>"" ? " where " : "").$yearclause." order by 1 desc limit 1500";
+		$query=substr($query,0,-2).$from.$whereclause.$yearclause." order by 1 desc limit 1500";
 		if($_SESSION["debug"]) echo("<p>Debug Smart $query</p>\n");
 		$this->query($query);		
 	}
