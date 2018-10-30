@@ -29,8 +29,8 @@ class Page {
     /* dynamic property setter/getter for this class */
     public function get($prop){
     	if(isset($this->$prop)){
-		return $this->$prop;
-	}
+			return $this->$prop;
+		}
         return NULL;
      }
      public function set($prop, $value){
@@ -200,7 +200,7 @@ class Filter {
 		if($now<>'off') $now='on';
 		$then=($now=='on' ? 'off' : 'on');
 		echo("<div class='pure-u-1 pure-u-md-1-4'>$name: ". ($this->showOffLabel ? $off_msg : '') . 
-		     "<a class='fa fa-3x fa-toggle-$now' href='?$name=$then'></a>");
+			"<a class='fa fa-3x fa-toggle-$now' href='?$name=$then'></a>");
 		echo($on_msg."</div>");
 		return $now;
 	}
@@ -216,26 +216,26 @@ class Filter {
 		return $this->query($name,"select id,name from $name $where_clause order by 2");
 	}
 	public function pairs($name,$array,$all='(All)'){
-        if (!isset($_SESSION[$name])) $_SESSION[$name] = "0";
+		if (!isset($_SESSION[$name])) $_SESSION[$name] = "0";
 		echo "<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>" .
-        	"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" .
+			"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" .
 			"<select id='$name' name=$name onchange=this.form.submit(); >\n";
 		if($all>'') echo("<option value=0>$all\n");
-        foreach($array as $key=>$value) { // default to first if required
+		foreach($array as $key=>$value) { // default to first if required
 			if(($all=='') and ($_SESSION[$name]==0)) $_SESSION[$name]=$key;
-            echo("<option value=$key");
-            if($key==$_SESSION[$name]) echo(" SELECTED");
-            echo(">$value\n");
-        }
-        echo("</select></div></form>\n");
+			echo("<option value=$key");
+			if($key==$_SESSION[$name]) echo(" SELECTED");
+			echo(">$value\n");
+		}
+		echo("</select></div></form>\n");
 		return $_SESSION[$name];
-    }	
+	}	
 }
 // END CLASS FILTER
 // CLASS FORM - EDIT A RECORD
 class Form {
 	protected $db;
-        private $div1="<div class='pure-control-group'>\n<label for=";
+	private $div1="<div class='pure-control-group'>\n<label for=";
 	public $data=array();
 	public $hidden=array("id");
 	public $ignore=array();
@@ -245,17 +245,17 @@ class Form {
 		}
 	}
 	
-    public function start($db=NULL,$action="/update"){
+	public function start($db=NULL,$action="/update"){
 		$this->db=$db; // reference database connection
-        echo("<form class='pure-form pure-form-aligned' method='post'");
-        if($action>'') echo (" action='$action'");
-        echo(">\n<Fieldset>\n");
-    }
-    public function end($submit="Save Data"){
-        echo("\n\n<div class='pure-controls'>".
-	    '<button type="submit" class="pure-button pure-button-primary">'.$submit.'</button>'.
-    	"</div>\n</fieldset>\n</form>\n");
-    }
+		echo("<form class='pure-form pure-form-aligned' method='post'");
+		if($action>'') echo (" action='$action'");
+		echo(">\n<Fieldset>\n");
+	}
+	public function end($submit="Save Data"){
+		echo("\n\n<div class='pure-controls'>".
+		'<button type="submit" class="pure-button pure-button-primary">'.$submit.'</button>'.
+		"</div>\n</fieldset>\n</form>\n");
+	}
 	public function hidden($array) {
 		$this->hidden=$array;
 	}
@@ -269,8 +269,8 @@ class Form {
 		echo($this->div1."'$name'>$name:</label>");
 		echo('<input type=hidden name='.$name.' value=0>');
 		echo('<label class=switch><input type=checkbox name='.$name);
-        if($this->data[$name]>0) echo(" checked");
-        echo ("><span class=slider></span></label></div>\n");
+		if($this->data[$name]>0) echo(" checked");
+		echo ("><span class=slider></span></label></div>\n");
 	}
 		
 	public function num($name,$min=NULL,$max=NULL){
@@ -278,41 +278,41 @@ class Form {
 		if($value=='') $value=0;
 		$label=ucwords($name);
 		if($min<>NULL) $label .= "$min to $max";
-        echo($this->div1."'$name'>".ucwords($name).":</label>");
-        echo("<input type=number name='$name' value='$value'");
-        if($min<>NULL) echo(" min='$min'");
-        if($max<>NULL) echo(" max='$max'");
+		echo($this->div1."'$name'>".ucwords($name).":</label>");
+		echo("<input type=number name='$name' value='$value'");
+		if($min<>NULL) echo(" min='$min'");
+		if($max<>NULL) echo(" max='$max'");
 		if($min<>NULL) echo("><span class=status></span");
-        echo("></div>\n");
-    }
-    public function text($name,$rename='',$minlength=0){
+		echo("></div>\n");
+	}
+	public function text($name,$rename='',$minlength=0){
 		$label=($rename>'' ? $rename : $name);
-        echo($this->div1."'$name'>".ucwords($label).":</label>");
-        echo("<input type=text name='$name' value='".$this->data[$name]."'");
+		echo($this->div1."'$name'>".ucwords($label).":</label>");
+		echo("<input type=text name='$name' value='".$this->data[$name]."'");
 		if($minlength>0) echo(' required><span class=status></span');
 		echo("></div>\n");
-    }
-    public function date($name,$required=0){
-	if(!isset($_SeSSION["lastdate"])) $_SESSION["lastdate"]=date("Y-m-d");
-	if(!isset($this->data[$name])) $this->data[$name]=$_SESSION["lastdate"];
-        echo($this->div1."'$name'>".ucwords($name).":</label>");
-        echo("<input type=date name='$name' value='".$this->data[$name]."'");
-        if($required) echo (' required><span class=status></span>');
-        echo("</div>\n");
-    }
-    public function textarea($name,$rename='',$required=0){
+	}
+	public function date($name,$required=0){
+		if(!isset($_SeSSION["lastdate"])) $_SESSION["lastdate"]=date("Y-m-d");
+		if(!isset($this->data[$name])) $this->data[$name]=$_SESSION["lastdate"];
+		echo($this->div1."'$name'>".ucwords($name).":</label>");
+		echo("<input type=date name='$name' value='".$this->data[$name]."'");
+		if($required) echo (' required><span class=status></span>');
+		echo("</div>\n");
+	}
+	public function textarea($name,$rename='',$required=0){
 		$label=($rename>'' ? $rename : $name);
-        echo($this->div1."'$name'>".ucwords($label).":</label>");
-        echo("<textarea name=$name rows=5 cols=60");
+		echo($this->div1."'$name'>".ucwords($label).":</label>");
+		echo("<textarea name=$name rows=5 cols=60");
 		if($required) echo(" REQUIRED");
 		echo(">".$this->data[$name]."</textarea>\n");
 		if($required) echo("<span class=status></span>");
 		echo("</div>\n");
-    }
-    public function hide($name,$value){
-        echo("<input type=hidden name='$name' value='$value'>\n");
-    }
-    public function pairs($name,$array,$required=0){
+	}
+	public function hide($name,$value){
+		echo("<input type=hidden name='$name' value='$value'>\n");
+	}
+	public function pairs($name,$array,$required=0){
 	if($_SESSION["debug"]) echo("<p>$name=>".$this->data["name"]."</p>\n");
         $requiredAttr=($required) ? ' required ' : '';
         //HtML5 requires required value to be empty (not zero) for validation
