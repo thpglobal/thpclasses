@@ -29,13 +29,13 @@ class Page {
     /* dynamic property setter/getter for this class */
     public function get($prop){
     	if(isset($this->$prop)){
-	   return $this->$prop;
+		return $this->$prop;
 	}
         return NULL;
      }
      public function set($prop, $value){
     	if(isset($this->$prop)){
-	   $this->$prop = $value;
+			$this->$prop = $value;
     	}
      }
 	
@@ -557,8 +557,8 @@ class Table { // These are public for now but may eventually be private with set
 				$query .= "a.$name, ";
 			}
 		}
-		if($where>"") $yearclause=" and $yearclause";
-		$query=substr($query,0,-2).$from.$where.$yearclause." order by 1 desc limit 1500";
+		if($where>"" and $yearclause>"") $yearclause=" and $yearclause";
+		$query=substr($query,0,-2).$from.($where>"" ? " where " : "").$yearclause." order by 1 desc limit 1500";
 		if($_SESSION["debug"]) echo("<p>Debug Smart $query</p>\n");
 		$this->query($query);		
 	}
