@@ -540,13 +540,15 @@ class Table { // These are public for now but may eventually be private with set
 	    $this->contents[]=$sums;
     }
 	// Link any foreign keys to their dependent table name field
-	public function smartquery($table,$where=""){
+	public function smartquery($table,$where="",$yearfilter=""){ // option to limit a date to a year
+		$yearclause='';
 		$from=" from $table a";
 		$alias=97; // ascii for lowercase a
 		$pdo_stmt=$this->db->query("select * from $table limit 0"); // we need the names of the fields
 		$query="select ";
 		foreach(range(0, $pdo_stmt->columnCount() - 1) as $column_index) {
 			$name=$pdo_stmt->getColumnMeta($column_index)["name"];
+			if($yearfilter>"" and substr($name,-5)=="_Date") $yearclause=" year($name)='$yearfilter' ";
 			if(substr($name,-3)=="_ID") {
 				$alias++; // go to the next lowercase letter
 				$from .=" left outer join ".strtolower(substr($name,0,-3))." ".chr($alias)." on a.$name=".chr($alias).".id ";
@@ -555,7 +557,8 @@ class Table { // These are public for now but may eventually be private with set
 				$query .= "a.$name, ";
 			}
 		}
-		$query=substr($query,0,-2).$from.$where." order by 1 desc limit 1500";
+		if($where>"") $yearclause=" and $yearclause";
+		$query=substr($query,0,-2).$from.$where.$yearclause." order by 1 desc limit 1500";
 		if($_SESSION["debug"]) echo("<p>Debug Smart $query</p>\n");
 		$this->query($query);		
 	}
