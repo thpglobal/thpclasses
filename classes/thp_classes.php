@@ -537,6 +537,18 @@ class Table { // These are public for now but may eventually be private with set
 		}
 	    $this->contents[]=$sums;
     }
+    
+    ### replace totals with dash for non-numeric columnns
+    ### call this method after calling totals or sumrows
+	public function replaceNonNumericSums($ntextN,$replaceStr=' — '){
+		$lastLine=array_pop($this->contents);
+		$lastLine[1]=count($grid->contents)-1;
+		for($i=2;$i<$ntextN;$i++){
+   			$lastLine[$i]=$replaceStr;
+		}
+		$grid->contents[]=$lastLine;
+	}
+    
 	// Link any foreign keys to their dependent table name field
 	public function smartquery($table,$where="",$yearfilter=""){ // option to limit a date to a year
 		$yearclause='';
