@@ -542,11 +542,11 @@ class Table { // These are public for now but may eventually be private with set
     ### call this method after calling totals or sumrows
 	public function replaceNonNumericSums($ntextN,$replaceStr=' — '){
 		$lastLine=array_pop($this->contents);
-		$lastLine[1]=count($grid->contents)-1;
+		$lastLine[1]=count($this->contents)-1;
 		for($i=2;$i<$ntextN;$i++){
    			$lastLine[$i]=$replaceStr;
 		}
-		$grid->contents[]=$lastLine;
+		$this->contents[]=$lastLine;
 	}
     
 	// Link any foreign keys to their dependent table name field
