@@ -786,7 +786,7 @@ class Chart{
 			$y[]=$value;
 		}
 		echo("labels : ".json_encode($labels).",\n");
-		echo("datasets : [\n");
+		echo("datasets : [\n{\n");
 		echo("label : ".json_encode($title).",\n");
 		echo("fillColor : 'rgba(0,255,0,0.5)',\n");
 		echo("strokeColor : '#ACC26D',\n");
