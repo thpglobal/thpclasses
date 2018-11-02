@@ -774,7 +774,7 @@ class Table { // These are public for now but may eventually be private with set
 }
 class Chart{
 	public $ncharts=0; // count
-	public function show($title="Sample",$type="Radar",$data=array("A"=>1,"B"=>2,"C"=>3) {
+	public function show($title="Sample",$type="Radar",$data=array("A"=>1,"B"=>2,"C"=>3)) {
 		if($this->ncharts==0) echo ("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js></script>\n");
 		$this->ncharts++;
 		$n=$this->ncharts; // handy shorthand
