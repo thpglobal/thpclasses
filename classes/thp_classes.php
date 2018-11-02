@@ -297,8 +297,8 @@ class Form {
 		echo("<input type=date name='$name' value='".$this->data[$name]."'");
 		if(isset($_SESSION["mindate"])) echo(" min='".$_SESSION["mindate"]."'");
 		if(isset($_SESSION["maxdate"])) echo(" max='".$_SESSION["maxdate"]."'");		
-		if($required) echo (' required><span class=status></span>');
-		echo("</div>\n");
+		if($required) echo (' required');
+		echo("><span class=status></span></div>\n");
 	}
 	public function textarea($name,$rename='',$required=0){
 		$label=($rename>'' ? $rename : $name);
