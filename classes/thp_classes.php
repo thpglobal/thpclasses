@@ -465,12 +465,14 @@ class Table { // These are public for now but may eventually be private with set
 	}
 	public function map_query($id_col,$dest_col,$query) {
 		// This will map multiple columns directly from the array
+		if(sizeof($this->backmap)==0) $this->backmap($id_col);
+		if($_SESSION["debug"]) echo("<p>Backmap".print_r($this->backmap,TRUE)."</p>\n");
 		if($_SESSION["debug"]) echo("<p>Map Query $query</p>\n");
 		$pdo_stmt=$this->db->query($query);
 		$nrows=sizeof($this->contents);
 		while($row = $pdo_stmt->fetch(PDO::FETCH_NUM)) {
 			$n=sizeof($row);
-			$i=$this->backy[$row[0]]; // into which row do we plant this?
+			$i=$this->backmap[$row[0]]; // into which row do we plant this?
 			if($_SESSION["debug"]) echo("<p>Map n $n i $i ".print_r($row,TRUE)."</p>\n");
 			if($i>0 and $i<$nrows) {
 				for($j=1;$j<$n;$j++) $this->contents[$i][$j+$dest_col-1]=$row[$j];
