@@ -290,11 +290,13 @@ class Form {
 		if($minlength>0) echo(' required><span class=status></span');
 		echo("></div>\n");
 	}
-	public function date($name,$required=0){
+	public function date($name,$required=0){ // This restricts daterange to mindate/maxdate if set
 		if(!isset($_SeSSION["lastdate"])) $_SESSION["lastdate"]=date("Y-m-d");
 		if(!isset($this->data[$name])) $this->data[$name]=$_SESSION["lastdate"];
 		echo($this->div1."'$name'>".ucwords($name).":</label>");
 		echo("<input type=date name='$name' value='".$this->data[$name]."'");
+		if(isset($_SESSION["mindate"])) echo(" min='".$_SESSION["mindate"]."'");
+		if(isset($_SESSION["maxdate"])) echo(" max='".$_SESSION["maxdate"]."'");		
 		if($required) echo (' required><span class=status></span>');
 		echo("</div>\n");
 	}
