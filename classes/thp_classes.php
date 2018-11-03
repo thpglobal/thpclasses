@@ -7,7 +7,7 @@
 require(__DIR__."/../../includes/thpsecurity.php"); // this version sets up up PDO object and global permission variables
 // START CLASS PAGE
 class Page {
-	public $datatable = "0";
+	public $datatable = FALSE;
 	public $addStickyHeader = TRUE;
 	public $css=array("/static/pure.thp.css","/static/thp.form.css"); // defaults used by thpmne
 	public $time_start; // used to measure length for process
@@ -19,7 +19,7 @@ class Page {
 	}
 
 	public function datatable(){
-		$this->datatable="1";
+		$this->datatable=TRUE;
 	}
 	public function disableStickyHeader(){
 		$this->addStickyHeader=FALSE;
