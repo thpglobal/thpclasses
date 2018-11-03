@@ -10,6 +10,7 @@ class Page {
 	public $datatable = FALSE;
 	public $addStickyHeader = TRUE;
 	public $css=array("/static/pure.thp.css","/static/thp.form.css"); // defaults used by thpmne
+	public $preh1=""; // used for dashboard colorbar etc
 	public $time_start; // used to measure length for process
 	public $links=array("print"=>"'javascript:window.print();'");
 	public $hints=array("print"=>"Print this page");
@@ -104,6 +105,7 @@ $(document).ready(function() {
         echo("</head>\n<body>\n");
 		$this->menu();
         echo("<div class=container>\n");
+		echo($this->preh1); //used for dashboard colorbar or whatever
         echo("<h1>$title ");
         foreach($this->links as $key=>$link) {
             $hint=$this->hints[$key];
