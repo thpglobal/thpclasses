@@ -776,6 +776,12 @@ class Table { // These are public for now but may eventually be private with set
 }
 class Chart{
 	public $ncharts=0; // count
+	public $fill='rgba(0,255,0,0.5)';
+	public $stroke='#ACC26D';
+	public $point='#fff';
+	public $pointStroke='#9DB86D';
+	public function dark(){ // change color scheme for dashboards
+	}
 	public function show($title="Sample",$type="Radar",$data=array("A"=>1,"B"=>2,"C"=>3)) {
 		if($this->ncharts==0) echo ("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js></script>\n");
 		$this->ncharts++;
@@ -790,10 +796,10 @@ class Chart{
 		echo("labels : ".json_encode($labels).",\n");
 		echo("datasets : [\n{\n");
 		echo("label : ".json_encode($title).",\n");
-//		echo("fillColor : 'rgba(0,255,0,0.5)',\n");
-//		echo("strokeColor : '#ACC26D',\n");
-//		echo("pointColor : '#fff',\n");
-//		echo("pointStrokeColor : '#9DB86D',\n");
+		echo("fillColor : '{$this->fill}',\n");
+		echo("strokeColor : '{$this->stroke}',\n");
+		echo("pointColor : '{$this->point}',\n");
+		echo("pointStrokeColor : '{$this->pointStroke}',\n");
 		echo("data : ".json_encode($y)."\n}]}\n");
 		echo("var c$n = document.getElementById('chart$n').getContext('2d');\n");
 		echo("new Chart(c$n).$type(data$n);\n</script>\n");
