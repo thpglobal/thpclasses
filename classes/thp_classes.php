@@ -790,10 +790,10 @@ class Chart{
 		echo("labels : ".json_encode($labels).",\n");
 		echo("datasets : [\n{\n");
 		echo("label : ".json_encode($title).",\n");
-		echo("fillColor : 'rgba(0,255,0,0.5)',\n");
-		echo("strokeColor : '#ACC26D',\n");
-		echo("pointColor : '#fff',\n");
-		echo("pointStrokeColor : '#9DB86D',\n");
+//		echo("fillColor : 'rgba(0,255,0,0.5)',\n");
+//		echo("strokeColor : '#ACC26D',\n");
+//		echo("pointColor : '#fff',\n");
+//		echo("pointStrokeColor : '#9DB86D',\n");
 		echo("data : ".json_encode($y)."\n}]}\n");
 		echo("var c$n = document.getElementById('chart$n').getContext('2d');\n");
 		echo("new Chart(c$n).$type(data$n);\n</script>\n");
