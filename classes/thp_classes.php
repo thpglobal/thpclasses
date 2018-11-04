@@ -780,8 +780,7 @@ class Chart{
 	public $stroke='#ACC26D';
 	public $point='#fff';
 	public $pointStroke='#9DB86D';
-	public $options="scales:{xAxes:[{gridLines:{color:'yellow'}}],
-	yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'yellow'}}]}\n");
+	public $options="scales:{xAxes:[{gridLines:{color:'yellow'}}],yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'yellow'}}]}\n";
 	public function start($color='white'){
 		echo("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js></script>\n");
 		echo("<script>\n");
