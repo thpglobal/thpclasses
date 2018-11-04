@@ -795,7 +795,9 @@ class Chart{
 		echo("Chart.defaults.global.maintainAspectRatio = true;\n");
 		echo("Chart.defaults.global.legend.display = false;\n");
 		echo("var ChartOptions = {".$this->options."};\n</script>\n");
+		echo("<div class=pure-g>\n");
 	}
+	public function end() { echo("</div>\n"); }
 	public function make($n,$ctitle,$ctype,$x,$y){
 		echo("<div class='pure-u-1-3'><h3>$ctitle</h3><canvas id=chart$n width=500 height=350></canvas></div>\n");
 		echo("<script>\n");
