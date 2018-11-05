@@ -780,8 +780,10 @@ class Chart{
 	public $stroke='#ACC26D';
 	public $point='#fff';
 	public $pointStroke='#9DB86D';
+	public $db=NULL;
 	public $options="scales:{xAxes:[{gridLines:{color:'yellow'}}],yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'yellow'}}]}\n";
-	public function start($color='white'){
+	public function start($db=NULL, $color='white'){ // color not yet implmented
+		$this->db=$db;
 		echo("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js></script>\n");
 		echo("<script>\n");
 		echo("Chart.defaults.global.responsive = true;\n");
@@ -798,6 +800,12 @@ class Chart{
 		echo("<div class=pure-g>\n");
 	}
 	public function end() { echo("</div>\n"); }
+	public function query($n,$title,$query) {
+		if($db==NULL) Die("You forgot the Chart::start($db) method.");
+		$pdo_stmt=$db->query($query);
+		while($line=$pdo_stmt->fetch(PDO::FETCH_NUM)){ $x[]=$line[0];$y[]=$line[1];}	
+		$this->make($n,$title,'bar',$x,$y);
+	}
 	public function make($n,$ctitle,$ctype,$x,$y){
 		echo("<div class='pure-u-1-3'><h3>$ctitle</h3><canvas id=chart$n width=500 height=350></canvas></div>\n");
 		echo("<script>\n");
