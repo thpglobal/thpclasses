@@ -776,14 +776,12 @@ class Table { // These are public for now but may eventually be private with set
 }
 class Chart{
 	public $ncharts=0; // count
-	public $fill='rgba(0,255,0,0.5)';
-	public $stroke='#ACC26D';
-	public $point='#fff';
-	public $pointStroke='#9DB86D';
+	public $color='white'; // default text color, defines regular page from dashboard dark page
 	public $db=NULL;
 	public $options="scales:{xAxes:[{gridLines:{color:'yellow'}}],yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'yellow'}}]}\n";
 	public function start($db=NULL, $color='white'){ // color not yet implmented
 		$this->db=$db;
+		$this->color=$color;
 		echo("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js></script>\n");
 		echo("<script>\n");
 		echo("Chart.defaults.global.responsive = true;\n");
@@ -801,8 +799,8 @@ class Chart{
 	}
 	public function end() { echo("</div>\n"); }
 	public function query($n,$title,$query) {
-		if($db==NULL) Die("You forgot the Chart::start($db) method.");
-		$pdo_stmt=$db->query($query);
+		if($this->db==NULL) Die("You forgot the Chart::start($db) method.");
+		$pdo_stmt=$this->db->query($query);
 		while($line=$pdo_stmt->fetch(PDO::FETCH_NUM)){ $x[]=$line[0];$y[]=$line[1];}	
 		$this->make($n,$title,'bar',$x,$y);
 	}
