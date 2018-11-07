@@ -697,7 +697,7 @@ class Table { // These are public for now but may eventually be private with set
 		echo("</table>\n");
 	}
 	// SHOW THE TABLE - Including the id column on hrefs, but do skip the groups column
-	public function $secondRowspan=0; // Notes fields need a rowspan mid-row for studies etc.
+	public $secondRowspan=0; // Notes fields need a rowspan mid-row for studies etc.
 	public function show($href=''){
         // Set parameters appropriate to various options
 	    $ngroups=sizeof($this->groups); // Option to group rows with subheaders
