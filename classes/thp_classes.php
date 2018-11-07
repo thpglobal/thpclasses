@@ -68,7 +68,7 @@ class Page {
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>\n");
 		foreach($this->css as $css) echo("<link rel='stylesheet' href='$css'>\n");
-		if($this->addStickyHeader){echo("<script src='/static/irStickyHeader.js'></script>\n");}
+//		if($this->addStickyHeader){echo("<script src='/static/irStickyHeader.js'></script>\n");} // JC REMOVED
 		if($this->datatable=="1"){ // Additional setup for using DataTables
 ?>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/jquery.dataTables.min.css'>
@@ -134,7 +134,7 @@ $(document).ready(function() {
 	
 	## If addStickyHeader variable is set to true, fire up the sitcky event. Else don't do anything. 
 	## Pages which don't need this sticky header can set this variable to false to avoid this option. 
-	public function fireStickyHeader(){
+	public function fireStickyHeader(){ /* // JC COMMENTED OUT
 		if( $this->addStickyHeader ) {
 			echo "<script>
 			// self executing function
@@ -147,12 +147,13 @@ $(document).ready(function() {
 			})();
 			</script>\n";
 		}
+		*/
 	}
 	public function end(){
 		$time=microtime(true)-($this->time_start);
 		echo("<p><i>Run time: $time</i></p>\n");
 		echo("</div>\n");
-		$this->fireStickyHeader();
+//		$this->fireStickyHeader(); // JC COMMENTED OUT
         echo("</body></html>\n");
     }
 }
@@ -723,13 +724,14 @@ class Table { // These are public for now but may eventually be private with set
 		// Start outputing the table
 		$striped=($nclasses>0 ? "" : "pure-table-striped");
 		$tid=($_SESSION["datatable"] ? "id='datatable'" : "");
+		$sticky=($_SESSION["datatable"] ? "" : "class=sticky");
 		echo("<table $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
 		if(strlen($this->extraheader)>0) echo($this->extraheader);
 		foreach($this->contents as $i=>$row) {
 			if($i==0){ // column headers - replace underscores with blanks to look nicer
 		        for($j=$nstart;$j<$ncols;$j++){
 		        	if( isset($this->infocol[$row[$j]]) ){ $infoc=$this->info($this->infocol[$row[$j]]);}else{$infoc='';}
-		        	echo("<th>".str_replace("_"," ",$row[$j])."$infoc</th>");
+		        	echo("<th $sticky>".str_replace("_"," ",$row[$j])."$infoc</th>");
 		        }
 		        echo("</tr>\n</thead>\n<tbody>\n");
 		    }else{ // regular rows (perhaps preceded by a full-width bar?
