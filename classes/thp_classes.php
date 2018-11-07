@@ -724,7 +724,7 @@ class Table { // These are public for now but may eventually be private with set
 		// Start outputing the table
 		$striped=($nclasses>0 ? "" : "pure-table-striped");
 		$tid=($_SESSION["datatable"] ? "id='datatable'" : "");
-		$sticky=($_SESSION["datatable"] ? "" : "class=sticky");
+		$sticky=($_SESSION["datatable"] ? "" : "style='position: sticky; top: -1px;'");
 		echo("<table $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
 		if(strlen($this->extraheader)>0) echo($this->extraheader);
 		foreach($this->contents as $i=>$row) {
