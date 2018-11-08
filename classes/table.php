@@ -21,16 +21,12 @@ class Table { // These are public for now but may eventually be private with set
 	
 	/* dynamic property setter/getter for this class */
 	public function get($prop){
-    	if(isset($this->$prop)){
-	    	return $this->$prop;
-	    }
+    	if(isset($this->$prop)) return $this->$prop;
         return NULL;
-        }
+	}
 	public function set($prop, $value){
-    	if(isset($this->$prop)){
-	       $this->$prop = $value;
-    	}
-        }
+    	if(isset($this->$prop)) $this->$prop = $value;
+	}
     
     public function info($definition){ // return a string function with info symbol and title
 	    return "<span title='$definition' class='fa fa-info-circle'></span>";
