@@ -236,7 +236,36 @@ class Table { // These are public for now but may eventually be private with set
 		if($_SESSION["debug"]) echo("<p>Debug Smart $query</p>\n");
 		$this->query($query);
 	}
-	
+
+	public function thead(){
+		$header=$this->contents[0];
+		echo("<table class='pure-table pure-table-bordered'><thead><tr>");
+		for($j=1;$j<sizeof($header);$j++) echo("<th style='position: sticky; top: -1px;'>".str_replace('_',' ',$header[$j])."</th>");
+		echo("</tr></thead>");	
+	}
+
+	// Replaces the need for several lines in any page using an indicator table - defaults for Africa
+	public function indicators($table="af_indicator",$where="Source_ID=2",$start_row=1) { // set up standard disaggregated indicators
+		// load them into contents, rowspan, inforow, classes arrays
+		$query="select * from $table where $where order by tag";
+		$this->rowspan=array(); // Empty the array
+		$pdo_stmt=$this->db->query($query);
+		$i=$start_row;
+		while($line=$pdo_stmt->fetch()){ // run through all lines in the query
+			$rs=$line["rowspan"]; $id=$line["tag"];
+			if(!$rs) $rs=1; // default if zero or null
+			$this->rowspan[$id]=$rs;
+			if($line["SR"]) $this->classes[$id]="sr";
+			$row=array(substr($id,0,1),$id,$line["name"]);
+			$this->inforow[$id]=$line["Definition"];
+			$this->backmap[$id]=$i; // start of disaggregated indicator set
+			for($k=1;$k<=$rs;$k++) {
+				$row[3]=$line["L".$k];
+				$this->contents[$i]=$row;
+				$i++;
+			}
+		}
+	}	
 	// Pivot data into the table after column j=$ni, for k=$nc groups of m=$nd columns
 	public function pivot($query,$ni,$nc,$nd,$nsums=0){
 		// $ni indicates the position of the rowspan field, typically column 3 counting from zero
