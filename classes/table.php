@@ -305,20 +305,7 @@ class Table { // These are public for now but may eventually be private with set
 			$j++;
 		}
 	}
-	// SHOW THE TABLE WITH NO HEADER
-	// Needed when you output two tables and only one has a sticky header
-	public function show_noheader($href='') {
-		echo("<table class='pure-table $striped pure-table-bordered'>\n");
-		foreach($this->contents as $row) {
-			echo("<tr>");
-			$n=sizeof($row);
-			if($href>'') echo("<td><a href='$href'>".$row[0]."</a></td>\n");
-			if($href=='') echo("<td>".$row[0]."</td>");
-			for($i=1;$i<$n;$i++) echo("<td>".$row[$i]."</td>");
-			echo("</tr>\n");
-		}
-		echo("</table>\n");
-	}
+	
 	// SHOW THE TABLE - Including the id column on hrefs, but do skip the groups column
 	public $secondRowspan=0; // Notes fields need a rowspan mid-row for studies etc.
 	public function show($href=''){
