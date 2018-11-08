@@ -5,6 +5,7 @@
 // Table -- Sets up and outputs a 2d table - also backing it up into $_SESSION["contents"];
 // Form -- Sets up an editing form with validation
 require(__DIR__."/../../includes/thpsecurity.php"); // this version sets up up PDO object and global permission variables
+require(__DIR__."/chart.php");
 // START CLASS PAGE
 class Page {
 	public $datatable = FALSE;
