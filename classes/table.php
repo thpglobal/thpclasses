@@ -438,6 +438,7 @@ class Table { // These are public for now but may eventually be private with set
 		}
 		// Start outputing the table
 		$striped=($nclasses>0 ? "" : "pure-table-striped");
+		$sticky=($_SESSION["datatable"] ? "" : "style='position: sticky; top: -1px;'");
 		$tid=($_SESSION["datatable"] ? "id='datatable'" : "");
 		echo("<table $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
 		if(strlen($this->extraheader)>0) echo($this->extraheader);
@@ -445,7 +446,7 @@ class Table { // These are public for now but may eventually be private with set
 			if($i==0){ // column headers - replace underscores with blanks to look nicer
 		        for($j=$nstart;$j<$ncols;$j++){
 		        	if( isset($this->infocol[$row[$j]]) ){ $infoc=$this->info($this->infocol[$row[$j]]);}else{$infoc='';}
-		        	echo("<th>".str_replace("_"," ",$row[$j])."$infoc</th>");
+		        	echo("<th $sticky>".str_replace("_"," ",$row[$j])."$infoc</th>");
 		        }
 		        echo("</tr>\n</thead>\n<tbody>\n");
 		    }else{ // regular rows (perhaps preceded by a full-width bar?
