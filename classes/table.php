@@ -462,7 +462,7 @@ class Table { // These are public for now but may eventually be private with set
 				$valueBuildArray[][] = 0.00;
 		        for($k=$nstart2;$k<$ncols;$k++) {
 		        	if( is_numeric($row[$k]) )
-		        	$valueBuildArray[$i][$k] = number_format($row[$k],$this->dpoints);
+		        	$valueBuildArray[$i][$k] = round($row[$k],$this->dpoints);
 	        	}
 	        	//var_dump($valueBuildArray);
 		        
@@ -499,7 +499,7 @@ class Table { // These are public for now but may eventually be private with set
 	        	for($j=$nstart2;$j<$ncols;$j++) {
 					$v=$row[$j];
 					if ( is_numeric($v) and ($j>=($this->ntext)) ){
-						$v=number_format($v,$this->dpoints);						
+						$v=number_format($v,$this->dpoints);			
 						$actual = $valueBuildArray[$i][5];
 						$target = $valueBuildArray[$i][6];
 						$average = $valueBuildArray[$i][8];
