@@ -10,6 +10,6 @@ if(!file_exists('../includes/menu.php')){
 	<li>Rename includes/menu_demo.php to menu.php</li>
 	<li>Come back to this page</li>
 </ul>
-?>
+<?php }
 $page->end();
 ?>
