@@ -1,5 +1,5 @@
 <?php // Edit one record from old budget tables - called from list1
-require_once("../classes/thp_classes.php");
+require_once(__DIR__."/../classes/thp_classes.php");
 $table=$_SESSION["table"];
 $id=$_SESSION["id"];
 if($id=='') $id=0;

@@ -7,14 +7,6 @@ session_start();
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(E_ALL & ~E_NOTICE);
-/*
-// based on PSR-4-autoloader-examples.md
-function zipautoload($class) {
-	$file="../php-zip/src/".str_replace("\\","/",$class).".php";
-	require $file;
-}
-spl_autoload_register("zipautoload");
-*/
 
 $contents=$_SESSION["contents"];
 if(sizeof($contents)==0) {$_SESSION["reply"]="Error: Nothing to export."; header("Location:/error");}
@@ -32,7 +24,7 @@ $ncols=sizeof($contents[0]);
 $nrows=sizeof($contents);
 for($i=0;$i<$nrows;$i++){
 	$sheet1b .= '<row r="'.($i+1).'">';
-	for($j=0;$j<$ncols;$j++) { 
+	for($j=0;$j<$ncols;$j++) {
 		$value=$contents[$i][$j];
 		if(!is_numeric($value)) {
 			$value=htmlspecialchars($value);
@@ -86,14 +78,19 @@ $zip=new ZipArchive; // formerly $zipFile = new \PhpZip\ZipFile();
 $zip->open($tmp,ZipArchive::CREATE);
 $zip->addFromString("xl/drawings/drawing1.xml", $drawing );
 $zip->addFromString("xl/worksheets/sheet1.xml", $sheet1 );
-$zip->addFromString("xl/worksheets/_rels/sheet1.xml.rels", $sheet1rels )
-$zip->addFromString("xl/sharedStrings.xml", $sharedstrings )
-$zip->addFromString("xl/styles.xml", $style )
-$zip->addFromString("xl/workbook.xml" ,$workbook )
-$zip->addFromString("xl/_rels/workbook.xml.rels", $workbookrels )
-$zip->addFromString("_rels/.rels", $rels)
+$zip->addFromString("xl/worksheets/_rels/sheet1.xml.rels", $sheet1rels );
+$zip->addFromString("xl/sharedStrings.xml", $sharedstrings );
+$zip->addFromString("xl/styles.xml", $style );
+$zip->addFromString("xl/workbook.xml" ,$workbook );
+$zip->addFromString("xl/_rels/workbook.xml.rels", $workbookrels );
+$zip->addFromString("_rels/.rels", $rels);
 $zip->addFromString("[Content_Types].xml" , $contenttypes );
 $zip->close();
 
-echo file_get_contents($tmp); // download the file contents to the browser
+file_get_contents($tmp); // download the file contents to the browser
+header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+header("Cache-Control: no-store, no-cache");
+header('Content-Disposition: attachment; filename="'.$fname.'"');
+copy($tmp,'php://output');
+
 ?>
