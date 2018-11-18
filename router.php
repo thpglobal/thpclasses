@@ -1,8 +1,8 @@
 <?php
-$path="";
+$path=$_SERVER['REQUEST_URI'];
 if(isset($_SERVER['PATH_INFO'])) {
-	include('app'.$_SERVER['PATH_INFO'].'.php');
+	include('app'.$path.'.php');
 }else{
-	include('app/hello.php');
+	include('app/demo.php');
 }
 ?>
