@@ -1,4 +1,4 @@
-<?php // Edit one record from old budget tables - called from list1
+<?php // Edit one record from old budget tables
 require(__DIR__."/../classes/thp_classes.php"); // Load the classes
 $table=$_SESSION["table"];
 $id=$_SESSION["id"];
