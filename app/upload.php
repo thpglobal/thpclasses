@@ -1,6 +1,6 @@
 <?php
 // Generic Spreadsheet upload - forwarding to generic import
-require_once("../thpclasses/classes/thp_classes.php");
+require(__DIR__."/../classes/thp_classes.php"); // Load the classes
 $into=$_GET["into"];
 if($into=="") $into="/dump"; // Default to show $contents
 $page=new Page;
