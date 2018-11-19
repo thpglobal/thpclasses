@@ -3,10 +3,10 @@
 
 /* Sample Menu items */
 $menu=array("Home"=>"/",
-            "Export"=>"export",
-            "Import"=>"upload",
-			"Query"=>"query",
-			"Session"=>"session",
-			"List"=>"list"
-			);
+	"Export"=>"export",
+	"Import"=>"upload",
+	"Query"=>"query",
+	"Session"=>"session",
+	"List"=>"list"
+	);
 ?>
