@@ -25,7 +25,7 @@ function goback($reply){
 	header("Location:$back");
 }
 //Connect to the database
-$db = new PDO("sqlite:example.db");
+$db = new PDO("sqlite:/tmp/example.db");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $email="test@test.org"; // clear the session
 $can_edit=TRuE; // default for the demo
