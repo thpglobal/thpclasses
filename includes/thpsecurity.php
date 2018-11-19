@@ -6,7 +6,7 @@ ini_set('display_startup_errors',1);
 error_reporting(E_ALL & ~E_NOTICE);
 
 session_start();
-require_once($_SERVER['DOCUMENT_ROOT']."/../includes/menu.php");
+include(__DIR__."/menu.php");
 
 $time_start = microtime(true);   // use to track execution time in end_page.php
 $today=date("Y-m-d");
