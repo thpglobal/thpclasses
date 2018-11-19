@@ -9,4 +9,5 @@ $menu=array("Home"=>"/",
 	"Session"=>"session",
 	"List"=>"list"
 	);
+$_SESSION["menu"]=$menu;
 ?>
