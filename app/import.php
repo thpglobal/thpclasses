@@ -1,9 +1,6 @@
 <?php
 // Import an xlsx file into $contents based on ZipArchive
-session_start();
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(E_ALL & ~E_NOTICE);
+require(__DIR__."/../includes/thpsecurity.php");
 $into=$_SESSION["into"];
 if($into=="") $into="/dump";
 $tmpname=$_FILES['userfile']['tmp_name'];
