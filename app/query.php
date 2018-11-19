@@ -1,6 +1,6 @@
 <?php
 // Simple query display
-require_once("../thpclasses/classes/thp_classes.php");
+require(__DIR__."/../classes/thp_classes.php"); // Load the classes
 $page=new Page;
 $page->icon("download","/export","Download as excel");
 $page->start("Query");
