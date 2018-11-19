@@ -13,8 +13,8 @@ debug("Dest:",$dest);
 rename($tmpname,$dest); // Move the file from uploads to the regular temp area.
 // extract everything to the temporary file system
 $zip = new ZipArchive;
-$zip->openFile($dest)
-->extractTo($dir);
+$zip->open($dest);
+$zip->extractTo($dir);
 debug("Unzipped xl folder",scandir($dir.'/xl/'));
 // Open up shared strings & the first worksheet
 $strings=array();
