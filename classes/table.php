@@ -464,7 +464,6 @@ class Table { // These are public for now but may eventually be private with set
 		        	if( is_numeric($row[$k]) )
 		        	$valueBuildArray[$i][$k] = round($row[$k],$this->dpoints);
 	        	}
-	        	//var_dump($valueBuildArray);
 		        
 				$tag=$row[$nstart]; // if there is an id here, this is it
 				$class=$this->classes[$tag]; // is there a special class definition for this row?
@@ -480,41 +479,45 @@ class Table { // These are public for now but may eventually be private with set
 					}else{ echo("<td$rs>".$info.$row[$nstart]."</td>");} // or no link
 					// are there more columns within the rowspan?
 					if($nrowspan>1){
-						for($j=$nstart+1;$j<($nstart+$nrowspan);$j++){
-							//color for Notes column
-							$actual = $valueBuildArray[$i][5];
-							$target = $valueBuildArray[$i][6];
-							$average = $valueBuildArray[$i][8];
-
-							if( ( $actual == 0 ) && ( $target > 0 ) &&  ( $j == 3 ) ){
-								echo("<td$rs style='background:yellow;'>$row[$j]</td>");
-							}elseif( ( $actual < $target ) && ( $actual < $average ) &&  ( $j == 3 ) ){
-								echo("<td$rs style='background:orange;'>$row[$j]</td>");
-							}else							
-								echo("<td$rs>$row[$j]</td>");
-						}						
+						for($j=$nstart+1;$j<($nstart+$nrowspan);$j++){							
+							echo("<td$rs>$row[$j]</td>");
+						}
 					}
 				}
 				$nstart2=($rowspan>1 ? $nstart+$nrowspan : $nstart+1);
 	        	for($j=$nstart2;$j<$ncols;$j++) {
 					$v=$row[$j];
+					$actual  = $valueBuildArray[$i][4];
+					$target  = $valueBuildArray[$i][5];
+					$average = $valueBuildArray[$i][7];
+						
 					if ( is_numeric($v) and ($j>=($this->ntext)) ){
 						$v=number_format($v,$this->dpoints);			
-						$actual = $valueBuildArray[$i][5];
-						$target = $valueBuildArray[$i][6];
-						$average = $valueBuildArray[$i][8];
-						if( ( ( $target == 0 ) || ( $average == 0 ) ) && ( ( $j == 6 ) || ( $j == 8 ) ) ){
+						if( ( $target == 0 ) && ( $j == 5 ) ){
 							echo("<td style='background:gray;'>$v</td>");	
-						}elseif( ( ( $actual < $target ) || ( $actual < $average ) ) && ( ( $j == 6 ) || ( $j == 8 ) ) ){
+						}elseif( ( $average == 0 ) && ( $j == 7 ) ){
+							echo("<td style='background:gray;'>$v</td>");	
+						}elseif( ( $actual < $target ) && ( $j == 5  ) ){
 							echo("<td style='background:orange;'>$v</td>");
-						}elseif( ( ( $actual >= $target ) || ( $actual >= $average ) ) && ( ( $j == 6 ) || ( $j == 8 ) ) ){
+						}elseif( ( $actual < $average ) && ( $j == 7 ) ){
+							echo("<td style='background:orange;'>$v</td>");
+						}elseif( ( $actual >= $target ) && ( $j == 5 ) ){
 							echo("<td style='background:green;'>$v</td>");
-						}else
+						}elseif( ( $actual >= $average ) && ( $j == 7 ) ){
+							echo("<td style='background:green;'>$v</td>");
+						}else{
 							echo("<td>$v</td>");
-		
-					}else
-						echo("<td>$v</td>");
-										
+				        }
+					}else{
+						 //color coding for notes column
+						 if( ( $actual==0) && ( $target>0 ) &&  ( $j == 8 ) ){
+							 echo("<td style='background:yellow;'>$row[$j]</td>");
+						 }elseif( ( $actual<$target ) && ( $actual<$average ) && ( $j == 8 ) ){
+							 echo("<td style='background:orange;'>$row[$j]</td>");
+						 }else
+						     echo("<td>$v</td>");
+				    }
+
 				}
                 echo("</tr>\n");
 		    }
