@@ -3,6 +3,7 @@
 class Chart{
 	public $ncharts=0; // count
 	public $color='white'; // default text color, defines regular page from dashboard dark page
+	public $fill="rgba(0,255,0,0.5)";
 	public $db=NULL;
 	public $options="scales:{xAxes:[{gridLines:{color:'yellow'}}],yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'yellow'}}]}\n";
 	public function start($db=NULL, $color='white'){ // color not yet implmented
