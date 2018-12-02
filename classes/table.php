@@ -243,7 +243,7 @@ class Table { // These are public for now but may eventually be private with set
 	// Replaces the need for several lines in any page using an indicator table - defaults for Africa
 	public function indicators($table="af_indicator",$where="Source_ID=2",$start_row=1) { // set up standard disaggregated indicators
 		// load them into contents, rowspan, inforow, classes arrays
-		$query="select * from $table ".($where>"" ? "where" : "") $where order by tag";
+		$query="select * from $table ".($where>"" ? "where" : "")." $where order by tag";
 		$this->rowspan=array(); // Empty the array
 		$pdo_stmt=$this->db->query($query);
 		$i=$start_row;
