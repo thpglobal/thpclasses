@@ -494,17 +494,17 @@ class Table { // These are public for now but may eventually be private with set
 					if ( is_numeric($v) and ($j>=($this->ntext)) ){
 						$v=number_format($v,$this->dpoints);			
 						if( ( $target == 0 ) && ( $j == 5 ) ){
-							echo("<td style='background:gray;'>$v</td>");	
+							echo("<td style='background:#e6e6ea;'>$v</td>");	
 						}elseif( ( $average == 0 ) && ( $j == 7 ) ){
-							echo("<td style='background:gray;'>$v</td>");	
+							echo("<td style='background:#e6e6ea;'>$v</td>");	
 						}elseif( ( $actual < $target ) && ( $j == 5  ) ){
-							echo("<td style='background:orange;'>$v</td>");
+							echo("<td style='background:#feb2a8;'>$v</td>");
 						}elseif( ( $actual < $average ) && ( $j == 7 ) ){
-							echo("<td style='background:orange;'>$v</td>");
+							echo("<td style='background:#feb2a8;'>$v</td>");
 						}elseif( ( $actual >= $target ) && ( $j == 5 ) ){
-							echo("<td style='background:green;'>$v</td>");
+							echo("<td style='background:#dcedc1;'>$v</td>");
 						}elseif( ( $actual >= $average ) && ( $j == 7 ) ){
-							echo("<td style='background:green;'>$v</td>");
+							echo("<td style='background:#dcedc1;'>$v</td>");
 						}else{
 							echo("<td>$v</td>");
 				        }
