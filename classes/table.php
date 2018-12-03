@@ -392,9 +392,10 @@ class Table { // These are public for now but may eventually be private with set
 					if($nrowspan>1) for($j=$nstart+1;$j<($nstart+$nrowspan);$j++) echo("<td$rs>$row[$j]</td>");
 				}
 				$nstart2=($rowspan>1 ? $nstart+$nrowspan : $nstart+1);
+				$zeros=".00000000";
 		        for($j=$nstart2;$j<$ncols;$j++) {
 					$v=$row[$j];
-					if ( is_float($v) and ($j>=($this->ntext)) ) $v=number_format($v,$this->dpoints);
+					if ( is_numeric($v) and strpos($v,'.') and ($j>=($this->ntext)) ) $v=number_format($v,$this->dpoints);
 					echo("<td>$v</td>");
 				}
                 echo("</tr>\n");
