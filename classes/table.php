@@ -29,7 +29,7 @@ class Table { // These are public for now but may eventually be private with set
 	}
     
     public function info($definition){ // return a string function with info symbol and title
-	    return "<span title='$definition' class='fa fa-info-circle'></span>";
+	    if($definition>'') return "<span title='$definition' class='fa fa-info-circle'></span>";
     }
 	public function rowspan($n=2){ // set number of columns to include in rowspan
 		$this->rowspan=$n;
@@ -332,8 +332,8 @@ class Table { // These are public for now but may eventually be private with set
 	}
 	
 	// SHOW THE TABLE - Including the id column on hrefs, but do skip the groups column
-	public $secondRowspan=0; // Notes fields need a rowspan mid-row for studies etc.
-	public function show($href=''){
+	public $rowspan2=0; // Notes fields need a rowspan mid-row for studies etc.
+	public function showx($href=''){ // experimental version
         // Set parameters appropriate to various options
 	    $ngroups=sizeof($this->groups); // Option to group rows with subheaders
 	    $ninforow=sizeof($this->inforow); // Option to show info symbols at start of row
@@ -397,7 +397,11 @@ class Table { // These are public for now but may eventually be private with set
 					$v=$row[$j];
 					$dp=(strpos($v,'.') ? $this->dpoints : 0);
 					if ( is_numeric($v) and ($j>=($this->ntext)) ) $v=number_format($v,$dp);
-					echo("<td>$v</td>");
+					if($j==$this->rowspan2 and $rs>'') {
+						echo("<td$rs>$v</td>"); $rs=''; // clear it after it is used once
+					}elseif($j<>$this->rowspan2) {
+						echo("<td>$v</td>");
+					}
 				}
                 echo("</tr>\n");
 		    }
@@ -412,7 +416,6 @@ class Table { // These are public for now but may eventually be private with set
 		echo("</table>\n");
 		$_SESSION["contents"]=$this->contents;
 	}
-	
 	// SHOW THE TABLE with colors in different cells 
 	// Used for the Audit pages, can be optimized later
 	// to take colorColumns as parameter
