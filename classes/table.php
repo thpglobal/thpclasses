@@ -395,7 +395,8 @@ class Table { // These are public for now but may eventually be private with set
 				$zeros=".00000000";
 		        for($j=$nstart2;$j<$ncols;$j++) {
 					$v=$row[$j];
-					if ( is_numeric($v) and strpos($v,'.') and ($j>=($this->ntext)) ) $v=number_format($v,$this->dpoints);
+					$dp=($strpos($v,'.') ? $this->dpoints : 0);
+					if ( is_numeric($v) and ($j>=($this->ntext)) ) $v=number_format($v,$dp);
 					echo("<td>$v</td>");
 				}
                 echo("</tr>\n");
