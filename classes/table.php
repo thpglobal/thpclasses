@@ -517,7 +517,7 @@ class Table { // These are public for now but may eventually be private with set
 						 //color coding for notes column
 						 if( ( $actual==0) && ( $target>0 ) &&  ( $j == 8 ) ){
 							 echo("<td style='background:yellow;'>$row[$j]</td>");
-						 }elseif( ( $actual<$target ) && ( $actual<$average ) && ( $j == 8 ) ){
+						 }elseif( ($actual<($target * 0.5)) && ($actual<($average * 0.5)) && ($j == 8) ){
 							 echo("<td style='background:orange;'>$row[$j]</td>");
 						 }else
 						     echo("<td>$v</td>");
