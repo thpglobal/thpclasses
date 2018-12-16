@@ -397,8 +397,8 @@ class Table { // These are public for now but may eventually be private with set
 					$v=$row[$j];
 					$dp=(strpos($v,'.') ? $this->dpoints : 0);
 					if ( is_numeric($v) and ($j>=($this->ntext)) ) $v=number_format($v,$dp);
-					if($j==$this->rowspan2 and $rs>'') {
-						echo("<td$rs>$v</td>"); $rs=''; // clear it after it is used once
+					if( ($j==$this->rowspan2) and ($rowspan[$i]>0)) {
+						echo("<td$rs>$v</td>");
 					}elseif($j<>$this->rowspan2) {
 						echo("<td>$v</td>");
 					}
