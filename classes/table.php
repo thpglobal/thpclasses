@@ -75,14 +75,11 @@ class Table { // These are public for now but may eventually be private with set
 		}
 	}
 	public function map($id_col,$dest_col,$array){
-		// maps with no reference to rowspan
-		$nrows=sizeof($this->contents);
-		for($i=1;$i<$nrows;$i++) {
-			$id=$this->contents[$i][$id_col]; 
-			$map=str_replace(".","_",$id);
-//			echo(" $i $id $map;");
-			if(!empty($array) and key_exists($map,$array)) $this->contents[$i][$dest_col]=$array[$map];
-		}
+		if(sizeof($this->backmap)==0) $this->backmap($id_col);
+		foreach($array as $key=>$value) {
+			$map=str_replace("_",".",$key);
+			if($this->backmap[$map]) $this->contents[$this->backmap[$map]][$dest_col]=$value;
+		}											 
 	}
 	public function map_query($id_col,$dest_col,$query) {
 		// This will map multiple columns directly from the array
