@@ -24,7 +24,6 @@ class Filter {
         echo("</div>\n");
     }
 	public function range($name,$n1=1, $n2=4){
-		if(!( ($_SESSION[$name]>=$n1) and ($_SESSION[$name]<=$n2) )) $_SESSION[$name]=$n2;
 		for($i=$n1;$i<=$n2;$i++) $array[$i]=$i;
 		return $this->pairs($name,$array);
 	}
@@ -58,7 +57,7 @@ class Filter {
 		return $this->query($name,"select id,name from $name $where_clause order by 2");
 	}
 	public function pairs($name,$array,$all='(All)'){
-		if (!isset($_SESSION[$name])) $_SESSION[$name] = "0";
+		if (!isset($_SESSION[$name])) $_SESSION[$name] = 0;
 		echo "<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>" .
 			"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" .
 			"<select id='$name' name=$name onchange=this.form.submit(); >\n";
