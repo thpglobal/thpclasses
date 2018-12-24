@@ -230,10 +230,10 @@ class Table { // These are public for now but may eventually be private with set
 		$this->query($query);
 	}
 
-	public function thead(){
+	public function thead($jstart=1){
 		$header=$this->contents[0];
 		echo("<table class='pure-table pure-table-bordered'><thead><tr>");
-		for($j=1;$j<sizeof($header);$j++) echo("<th style='position: sticky; top: -1px;'>".str_replace('_',' ',$header[$j])."</th>");
+		for($j=$jstart;$j<sizeof($header);$j++) echo("<th style='position: sticky; top: -1px;'>".str_replace('_',' ',$header[$j])."</th>");
 		echo("</tr></thead>");	
 	}
 
