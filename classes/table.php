@@ -232,7 +232,9 @@ class Table { // These are public for now but may eventually be private with set
 
 	public function thead($jstart=1){
 		$header=$this->contents[0];
-		echo("<table class='pure-table pure-table-bordered'><thead><tr>");
+		echo("<table class='pure-table pure-table-bordered'><thead>");
+		if(strlen($this->extraheader)>0) echo($this->extraheader);
+		echo("<tr>");
 		for($j=$jstart;$j<sizeof($header);$j++) echo("<th style='position: sticky; top: -1px;'>".str_replace('_',' ',$header[$j])."</th>");
 		echo("</tr></thead>");	
 	}
