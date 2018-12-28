@@ -32,8 +32,24 @@ class Page {
 			$this->$prop = $value;
 		}
 	}
-	
-	public function menu(){
+	public function menu() { // new responsive version
+		$menu=$_SESSION["menu"];
+		if(isset($_SESSION["menu"]) and sizeof($menu)>0) { 
+			echo("<div class=topnav id=myTopnav>\n");
+			foreach($menu as $key=>$item){
+				if(is_array($item) ){
+					echo("<div class=dropdown>\n");
+					echo("\t<button class=dropbtn>$key<i class='fa fa-caret-down'></i></button>\n"); 
+					echo("\t<div class=dropdown-content>\n");
+					foreach($item as $b=>$a) echo("\t\t<a href='$a'>$b</a>\n");
+					echo("\t</div>\n</div>\n");
+				}else echo("\t<a href='$item'>$key</a>\n");
+			}
+			echo('\t<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>');
+			echo("\n</div>\n");
+		}
+	}
+	public function menux(){
 		$menu=$_SESSION["menu"];
 		if(isset($_SESSION["menu"]) and sizeof($menu)>0) { 
 			echo("<div class='pure-menu pure-menu-horizontal hidden-print'>\n\t<ul class='pure-menu-list'>\n");
