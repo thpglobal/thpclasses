@@ -73,7 +73,9 @@ class Page {
 		$_SESSION["datatable"]=$this->datatable; // save for access by Table class
 		foreach($_GET as $key=>$value) $_SESSION[$key]=$value;
 		$this->time_start=microtime(true);
-		echo("<!DOCTYPE html>\n<html lang=$lang>\n<head>\n<title>$title</title>\n");
+		echo("<!DOCTYPE html>\n<html lang=$lang>\n<head>\n");
+		echo("<meta name=viewport content='width=device-width, initial-scale=1'>\n");
+		echo("<title>$title</title>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>\n");
