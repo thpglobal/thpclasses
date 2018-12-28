@@ -4,6 +4,7 @@ class Chart{
 	public $ncharts=0; // count
 	public $color='white'; // default text color, defines regular page from dashboard dark page
 	public $fill="rgba(0,255,0,0.5)";
+	public $width=3; // put 3 across unless changed
 	public $db=NULL;
 	public $options="scales:{xAxes:[{gridLines:{color:'yellow'}}],yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'yellow'}}]}\n";
 	public function start($db=NULL, $color='white'){ // color not yet implmented
@@ -32,7 +33,8 @@ class Chart{
 		$this->make($n,$title,'bar',$x,$y);
 	}
 	public function make($n,$ctitle,$ctype,$x,$y){
-		echo("<div class='pure-u-1-3'><h3>$ctitle</h3><canvas id=chart$n width=500 height=350></canvas></div>\n");
+		$width=$this->width;
+		echo("<div class='pure-u-1-1 pure-u-md-1-$width'><h3>$ctitle</h3><canvas id=chart$n width=500 height=350></canvas></div>\n");
 		echo("<script>\n");
 		echo("var data$n = { \n");
 		echo("  labels : ".json_encode($x).",\n");
@@ -55,7 +57,8 @@ class Chart{
 		if($this->ncharts==0) echo ("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js></script>\n");
 		$this->ncharts++;
 		$n=$this->ncharts; // handy shorthand
-		echo("<div style='width:420; float:left;'><h3>$title</h3><canvas id=chart$n width=400 height=300></canvas></div>\n");
+		$width=$this->width;
+		echo("<div style='pure-u-1-1 pure-u-md-1-$width'><h3>$title</h3><canvas id=chart$n width=400 height=300></canvas></div>\n");
 		echo("<script>\n");
 		echo("var data$n = {\n");
 		foreach($data as $key=>$value) {
