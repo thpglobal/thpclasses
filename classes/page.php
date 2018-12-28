@@ -45,8 +45,13 @@ class Page {
 					echo("\t</div>\n</div>\n");
 				}else echo("\t<a href='$item'>$key</a>\n");
 			}
-			echo('\t<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>');
+			echo('<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>');
 			echo("\n</div>\n");
+			echo("<script>\n");
+			echo("function myFunction() {\n");
+			echo('  var x = document.getElementById("myTopnav");'."\n");
+			echo('  if (x.className === "topnav") {x.className += " responsive"; } else { x.className = "topnav";}'."\n");
+			echo("}\n</script\n>");
 		}
 	}
 	public function menux(){
@@ -66,11 +71,6 @@ class Page {
 				}
 			}
 			echo("\t</ul>\n</div>\n");
-			echo("<script>\n");
-			echo("function myFunction() {\n");
-			echo('  var x = document.getElementById("myTopnav");'."\n");
-			echo('  if (x.className === "topnav") {x.className += " responsive"; } else { x.className = "topnav";}'."\n");
-			echo("}\n</script\n>");
 		}
 	}
 
