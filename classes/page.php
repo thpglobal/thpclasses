@@ -43,15 +43,15 @@ class Page {
 					echo("\t<div class=dropdown-content>\n");
 					foreach($item as $b=>$a) echo("\t\t<a href='$a'>$b</a>\n");
 					echo("\t</div>\n</div>\n");
-				}else echo("\t<a href='$item'>$key</a>\n");
+				} else echo("\t<a href='$item'>$key</a>\n");
 			}
 			echo('<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>');
 			echo("\n</div>\n");
 			echo("<script>\n");
 			echo("function myFunction() {\n");
 			echo('  var x = document.getElementById("myTopnav");'."\n");
-			echo('  if (x.className === "topnav") {x.className += " responsive"; } else { x.className = "topnav";}'."\n");
-			echo("}\n</script\n>");
+			echo('  if (x.className === "topnav") { x.className += " responsive"; } else { x.className = "topnav"; }'."\n");
+			echo("}\n</script>\n");
 		}
 	}
 	public function menux(){
@@ -150,23 +150,6 @@ $(document).ready(function() {
 		$this->appendTitle .= ($now=='on' ? $on_msg : $off_msg) ;
 	}
 	
-	## If addStickyHeader variable is set to true, fire up the sitcky event. Else don't do anything. 
-	## Pages which don't need this sticky header can set this variable to false to avoid this option. 
-	public function fireStickyHeader(){ /* // JC COMMENTED OUT
-		if( $this->addStickyHeader ) {
-			echo "<script>
-			// self executing function
-			(function() {
-				var tables = document.getElementsByTagName('table');
-				//fire for all tables in the page
-				for(i = 0;i < tables.length; i++){
-					lrStickyHeader(tables[i]);
-				}
-			})();
-			</script>\n";
-		}
-		*/
-	}
 	public function end(){
 		$time=microtime(true)-($this->time_start);
 		echo("<p><i>Run time: $time</i></p>\n");
