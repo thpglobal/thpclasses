@@ -9,7 +9,7 @@ class Table { // These are public for now but may eventually be private with set
 	public $extra=array(); // extra headers
 	public $ntext=1; // number of columns to not be formatted
 	public $groups=array(); // headers
-	public $showGroupID=TRUE;
+	public $showGroupID=TRUE; //Print ID and name in the column (rowspanned) header. Set False for not displaying ID.
 	public $extraheader=""; // Optional Extra headers string
 	public $infocol=array(); // Definitions of column headers
 	public $inforow=array(); // Definitions of rows
