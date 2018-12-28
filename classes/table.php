@@ -3,6 +3,7 @@
 class Table { // These are public for now but may eventually be private with setters
 	protected $db; // database connection
 	public $contents=array(array()); // main 2d array
+	public $hidelink=FALSE; // Option to put href on next column
 	public $rowspan=0; // If>0, then start rowspan with column this many columns
 	public $backmap=array(); // Create backpointers to the array after pivot
 	public $extra=array(); // extra headers
@@ -338,6 +339,7 @@ class Table { // These are public for now but may eventually be private with set
 	    $ninforow=sizeof($this->inforow); // Option to show info symbols at start of row
 		$nclasses=sizeof($this->classes); // Are there special row colors?
 	    $nstart=($ngroups>0 ? 1 : 0); // If groups, then don't display col 0
+		if($this->hidelink) $nstart++;
 	    $group=-99;
 		$nrows=sizeof($this->contents);
 	    $ncols=sizeof($this->contents[0]);
@@ -375,7 +377,8 @@ class Table { // These are public for now but may eventually be private with set
 		                echo("<tr><th colspan=".($ncols-1).">". (($this->showGroupID) ? "{$group}. " : '') .$this->groups[$group]."</th></tr>\n");
 		            }
 		        }
-				$tag=$row[$nstart]; // if there is an id here, this is it
+				$ntag=($this->hidelink ? $nstart-1 : $nstart);
+				$tag=$row[$ntag]; // if there is an id here, this is it
 				$class=$this->classes[$tag]; // is there a special class definition for this row?
 				if($class>'') $class=" class=$class";			
 			    echo("<tr$class>"); // Start outputing rows
@@ -385,7 +388,7 @@ class Table { // These are public for now but may eventually be private with set
 					$rs=($rowspan[$i]>1 ? " rowspan=".$rowspan[$i] : ""); // is there a rowspan clause in the TDs?
 					if($ninforow>0) $info=$this->info($this->inforow[$row[$nstart]]); // Does the row include an info icon?
 					if($href>'') {
-						echo("<td$rs><a href='".$href.$row[$nstart]."'>".$info.$row[$nstart]."</a></td>"); // a link?
+						echo("<td$rs><a href='".$href.$row[$ntag]."'>".$info.$row[$nstart]."</a></td>"); // a link?
 					}else{ echo("<td$rs>".$info.$row[$nstart]."</td>");} // or no link
 					// are there more columns within the rowspan?
 					if($nrowspan>1) for($j=$nstart+1;$j<($nstart+$nrowspan);$j++) echo("<td$rs>$row[$j]</td>");
