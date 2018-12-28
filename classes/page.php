@@ -66,6 +66,11 @@ class Page {
 				}
 			}
 			echo("\t</ul>\n</div>\n");
+			echo("<script>\n");
+			echo("function myFunction() {\n");
+			echo('  var x = document.getElementById("myTopnav");'."\n");
+			echo('  if (x.className === "topnav") {x.className += " responsive"; } else { x.className = "topnav";}'."\n");
+			echo("}\n</script\n>");
 		}
 	}
 
