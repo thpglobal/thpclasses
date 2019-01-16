@@ -69,7 +69,7 @@ class Table { // These are public for now but may eventually be private with set
 	public function column($id_col,$dest_col,$array){
 		if($_SESSION["debug"]) {echo("<p>Column:"); print_r($array); echo("</p>\n");}
 		if(sizeof($this->backmap)==0) $this->backmap($id_col);
-		foreach($array as $key=>$value){
+		foreach( (array) $array as $key=>$value){
 			$j=substr($key,-1); // Get the digit after the_
 			$id=substr($key,0,-2); // Get the indicator name before the _
 			if(key_exists($id,$this->backmap)) $this->contents[$this->backmap[$id]+$j-1][$dest_col]=$value;
@@ -77,7 +77,7 @@ class Table { // These are public for now but may eventually be private with set
 	}
 	public function map($id_col,$dest_col,$array){
 		if(sizeof($this->backmap)==0) $this->backmap($id_col);
-		foreach($array as $key=>$value) {
+		foreach( (array) $array as $key=>$value) {
 			$map=str_replace("_",".",$key);
 			if($this->backmap[$map]) $this->contents[$this->backmap[$map]][$dest_col]=$value;
 		}											 
@@ -110,7 +110,7 @@ class Table { // These are public for now but may eventually be private with set
 		$pdo_stmt=$this->db->query("select * from $table where id='$id'");
 		if(!is_object($pdo_stmt)) Die("</div>Fatal Error: bad query in Table: $query.");
 		$data=$pdo_stmt->fetch(PDO::FETCH_ASSOC);
-		foreach($data as $key=>$value) {
+		foreach( (array) $data as $key=>$value) {
 			$row[0]=$key; $row[1]=$value;
 			$this->contents[]=$row;
 		}
