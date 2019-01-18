@@ -231,15 +231,6 @@ class Table { // These are public for now but may eventually be private with set
 		$this->query($query);
 	}
 
-	public function thead($jstart=1){
-		$header=$this->contents[0];
-		echo("<table class='pure-table pure-table-bordered'><thead>");
-		if(strlen($this->extraheader)>0) echo($this->extraheader);
-		echo("<tr>");
-		for($j=$jstart;$j<sizeof($header);$j++) echo("<th style='position: sticky; top: -1px;'>".str_replace('_',' ',$header[$j])."</th>");
-		echo("</tr></thead>");	
-	}
-
 	// Replaces the need for several lines in any page using an indicator table - defaults for Africa
 	public function indicators($table="af_indicator",$where="Source_ID=2",$start_row=1) { // set up standard disaggregated indicators
 		// load them into contents, rowspan, inforow, classes arrays
@@ -331,13 +322,15 @@ class Table { // These are public for now but may eventually be private with set
 		}
 	}
 	
-	public function thead(){
+	public function thead($jstart=1){
+		$row=$this->contents[0];
+		$ncols=sizeof($row);
 		$striped=($nclasses>0 ? "" : "pure-table-striped");
 		$tid=($_SESSION["datatable"] ? "id='datatable'" : "");
 		$sticky=($_SESSION["datatable"] ? "" : "style='position: sticky; top: -1px;'");
 		echo("<table $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
 		if(strlen($this->extraheader)>0) echo($this->extraheader);
-		for($j=$nstart;$j<$ncols;$j++){
+		for($j=$jstart;$j<$ncols;$j++){
 			if( isset($this->infocol[$row[$j]]) ){ $infoc=$this->info($this->infocol[$row[$j]]);}else{$infoc='';}
 			echo("<th $sticky>".str_replace("_"," ",$row[$j])."$infoc</th>");
 		}
@@ -373,7 +366,7 @@ class Table { // These are public for now but may eventually be private with set
 			}
 		}
 		// output the header
-		$this->thead();
+		$this->thead($nstart);
 		// now output all the regular rows
 		for($i=1;$i<$nrows;$i++) {
 			$row=$this->contents[$i]; // take the next row in line
