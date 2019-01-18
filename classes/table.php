@@ -331,8 +331,24 @@ class Table { // These are public for now but may eventually be private with set
 		}
 	}
 	
+	public function thead(){
+		$striped=($nclasses>0 ? "" : "pure-table-striped");
+		$tid=($_SESSION["datatable"] ? "id='datatable'" : "");
+		$sticky=($_SESSION["datatable"] ? "" : "style='position: sticky; top: -1px;'");
+		echo("<table $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
+		if(strlen($this->extraheader)>0) echo($this->extraheader);
+		for($j=$nstart;$j<$ncols;$j++){
+			if( isset($this->infocol[$row[$j]]) ){ $infoc=$this->info($this->infocol[$row[$j]]);}else{$infoc='';}
+			echo("<th $sticky>".str_replace("_"," ",$row[$j])."$infoc</th>");
+		}
+		echo("</tr>\n</thead>\n<tbody>\n");
+	}
+	
 	// SHOW THE TABLE - Including the id column on hrefs, but do skip the groups column
+	// Discovered a big problem - foreach doesn't go in order! Yikes!
+	
 	public $rowspan2=0; // Notes fields need a rowspan mid-row for studies etc.
+	
 	public function show($href=''){ // experimental version
         // Set parameters appropriate to various options
 	    $ngroups=sizeof($this->groups); // Option to group rows with subheaders
@@ -345,7 +361,7 @@ class Table { // These are public for now but may eventually be private with set
 	    $ncols=sizeof($this->contents[0]);
 		$nrowspan=$this->rowspan;
 		// If we're doing rowspan, set up the array
-		if($nrowspan) {
+		if($nrowspan) { // note rowspan here is a local array
 			$first="";
 			$r=1; // keep your finger on first row in group
 			for($i=1;$i<$nrows;$i++){
@@ -356,60 +372,52 @@ class Table { // These are public for now but may eventually be private with set
 				}
 			}
 		}
-		// Start outputing the table
-		$striped=($nclasses>0 ? "" : "pure-table-striped");
-		$tid=($_SESSION["datatable"] ? "id='datatable'" : "");
-		$sticky=($_SESSION["datatable"] ? "" : "style='position: sticky; top: -1px;'");
-		echo("<table $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
-		if(strlen($this->extraheader)>0) echo($this->extraheader);
-		foreach($this->contents as $i=>$row) {
-			if($i==0){ // column headers - replace underscores with blanks to look nicer
-		        for($j=$nstart;$j<$ncols;$j++){
-		        	if( isset($this->infocol[$row[$j]]) ){ $infoc=$this->info($this->infocol[$row[$j]]);}else{$infoc='';}
-		        	echo("<th $sticky>".str_replace("_"," ",$row[$j])."$infoc</th>");
-		        }
-		        echo("</tr>\n</thead>\n<tbody>\n");
-		    }else{ // regular rows (perhaps preceded by a full-width bar?
-				if($ngroups>0) { // output a bar based on column zero if requested
-		            $g=$row[0];
-		            if($g>$group) {
-		                $group=$g;
-		                echo("<tr><th colspan=".($ncols-1).">". (($this->showGroupID) ? "{$group}. " : '') .$this->groups[$group]."</th></tr>\n");
-		            }
-		        }
-				$ntag=($this->hidelink ? $nstart-1 : $nstart);
-				$tag=$row[$ntag]; // if there is an id here, this is it
-				$class=$this->classes[$tag]; // is there a special class definition for this row?
-				if($class>'') $class=" class=$class";			
-			    echo("<tr$class>"); // Start outputing rows
-				// Here is where all the variability comes in
-				// if there are rowspans we send out the that many columns only at start of a rowspan group
-				if( ($nrowspan==0) or ($rowspan[$i]>0)){ // do we output the first bits of this row or not?
-					$rs=($rowspan[$i]>1 ? " rowspan=".$rowspan[$i] : ""); // is there a rowspan clause in the TDs?
-					if($ninforow>0) $info=$this->info($this->inforow[$row[$nstart]]); // Does the row include an info icon?
-					if($href>'') {
-						echo("<td$rs><a href='".$href.$row[$ntag]."'>".$info.$row[$nstart]."</a></td>"); // a link?
-					}else{ echo("<td$rs>".$info.$row[$nstart]."</td>");} // or no link
-					// are there more columns within the rowspan?
-					if($nrowspan>1) for($j=$nstart+1;$j<($nstart+$nrowspan);$j++) echo("<td$rs>$row[$j]</td>");
+		// output the header
+		thead();
+		// now output all the regular rows
+		for($i=1;$i<$nrows;$i++) {
+			$row=$this->contents[$i]; // take the next row in line
+			if($ngroups>0) { // output a bar based on column zero if requested
+				$g=$row[0];
+				if($g>$group) {
+					$group=$g;
+					echo("<tr><th colspan=".($ncols-1).">". (($this->showGroupID) ? "{$group}. " : '') .$this->groups[$group]."</th></tr>\n");
 				}
-				$nstart2=($rowspan>1 ? $nstart+$nrowspan : $nstart+1);
-				$zeros=".00000000";
-		        for($j=$nstart2;$j<$ncols;$j++) {
-					$v=$row[$j];
-					$dp=(strpos($v,'.') ? $this->dpoints : 0);
-					if ( is_numeric($v) and ($j>=($this->ntext)) ) $v=number_format($v,$dp);
-					if( ($j==$this->rowspan2) and ($rowspan[$i]>0)) {
-						echo("<td$rs>$v</td>");
-					}elseif($j<>$this->rowspan2) {
-						echo("<td>$v</td>");
-					}
+			}
+			$ntag=($this->hidelink ? $nstart-1 : $nstart);
+			$tag=$row[$ntag]; // if there is an id here, this is it
+			$class=$this->classes[$tag]; // is there a special class definition for this row?
+			if($class>'') $class=" class=$class";
+			echo("<tr$class>"); // Start outputing rows
+			// Here is where all the variability comes in
+			// if there are rowspans we send out the that many columns only at start of a rowspan group
+			if( ($nrowspan==0) or ($rowspan[$i]>0)){ // do we output the first bits of this row or not?
+				$rs=($rowspan[$i]>1 ? " rowspan=".$rowspan[$i] : ""); // is there a rowspan clause in the TDs?
+				if($ninforow>0) $info=$this->info($this->inforow[$row[$nstart]]); // Does the row include an info icon?
+				if($href>'') {
+					echo("<td$rs><a href='".$href.$row[$ntag]."'>".$info.$row[$nstart]."</a></td>"); // a link?
+				} else { 
+					echo("<td$rs>".$info.$row[$nstart]."</td>");
+				} // or no link
+				// are there more columns within the rowspan?
+				if($nrowspan>1) for($j=$nstart+1;$j<($nstart+$nrowspan);$j++) echo("<td$rs>$row[$j]</td>");
+			}
+			$nstart2=($rowspan>1 ? $nstart+$nrowspan : $nstart+1);
+			$zeros=".00000000";
+	        for($j=$nstart2;$j<$ncols;$j++) {
+				$v=$row[$j];
+				$dp=(strpos($v,'.') ? $this->dpoints : 0);
+				if ( is_numeric($v) and ($j>=($this->ntext)) ) $v=number_format($v,$dp);
+				if( ($j==$this->rowspan2) and ($rowspan[$i]>0)) {
+					echo("<td$rs>$v</td>");
+				} elseif($j<>$this->rowspan2) {
+					echo("<td>$v</td>");
 				}
-                echo("</tr>\n");
-		    }
-		}
+			} // end j
+			echo("</tr>\n");
+		} // end i
 		echo("</tbody>\n");
-		// for datatables, add a footer
+	// for datatables, add a footer
 		if($_SESSION["datatable"]) {
 			echo("<tfoot><tr>");
 			for($j=$nstart; $j<$ncols; $j++) echo("<th>".$this->contents[0][$j]."</th>");
