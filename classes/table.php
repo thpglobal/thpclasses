@@ -373,7 +373,7 @@ class Table { // These are public for now but may eventually be private with set
 			}
 		}
 		// output the header
-		thead();
+		$this->thead();
 		// now output all the regular rows
 		for($i=1;$i<$nrows;$i++) {
 			$row=$this->contents[$i]; // take the next row in line
