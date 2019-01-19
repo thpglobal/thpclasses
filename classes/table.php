@@ -13,6 +13,7 @@ class Table { // These are public for now but may eventually be private with set
 	public $extraheader=""; // Optional Extra headers string
 	public $infocol=array(); // Definitions of column headers
 	public $inforow=array(); // Definitions of rows
+    public $infoMatchWithID=FALSE; //Definitions array index will match against concat(id, '_', name) for more unique combination
 	public $classes=array(); // Used for specially coloring of rows
 	public $href="";
 	public $dpoints=0; // Decimal points
@@ -141,11 +142,13 @@ class Table { // These are public for now but may eventually be private with set
         $this->groups=$row;
         $this->showGroupID=$showGroupID;
     }
-    public function inforow($array) {
+    public function inforow($array,$infoMatchWithID=FALSE) {
         $this->inforow=$array;
+        if($infoMatchWithID){ $this->infoMatchWithID=TRUE; }
     }
-    public function infocol($array) {
+    public function infocol($array,$infoMatchWithID=FALSE) {
         $this->infocol=$array;
+        if($infoMatchWithID){ $this->infoMatchWithID=TRUE; }
     }
     
 // SUM UP THE $contents from column $col1 onwards (counting from zero)
@@ -331,7 +334,8 @@ class Table { // These are public for now but may eventually be private with set
 		echo("<table $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
 		if(strlen($this->extraheader)>0) echo($this->extraheader);
 		for($j=$jstart;$j<$ncols;$j++){
-			if( isset($this->infocol[$row[$j]]) ){ $infoc=$this->info($this->infocol[$row[$j]]);}else{$infoc='';}
+            $infoIndex=($this->infoMatchWithID) ? $row[$j-1].'_'.$row[$j] : $row[$j];
+			if( isset($this->infocol[$infoIndex]) ){$infoc=$this->info($this->infocol[$infoIndex]);}else{$infoc='';}
 			echo("<th $sticky>".str_replace("_"," ",$row[$j])."$infoc</th>");
 		}
 		echo("</tr>\n</thead>\n<tbody>\n");
