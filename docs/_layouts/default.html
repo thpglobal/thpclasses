@@ -13,16 +13,19 @@
     <header class="page-header" role="banner">
       <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
       <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
+		<p><a href="{{ site.baseurl}}/rules/" class="btn">Coding Rules</a>
+		<a href="{{ site.baseurl}}/page/" class="btn">Page Class</a>
+		<a href="{{ site.baseurl}}/filter/" class="btn">Filter Class</a>
+		<a href="{{ site.baseurl}}/form/" class="btn">Form Class</a>
+		<a href="{{ site.baseurl}}/table/" class="btn">Table Class</a>
+		<a href="{{ site.baseurl}}/chart/" class="btn">Chart Class</a>
+		</p><p>
+		<a href="{{ site.baseurl}}/" class="btn">Home</a>
         <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
         <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
         <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
-		<a href="#" class="btn">Page Class</a>
-		<a href="#" class="btn">Filter Class</a>
-		<a href="#" class="btn">Form Class</a>
-		<a href="#" class="btn">Table Class</a>
-		<a href="#" class="btn">Chart Class</a>
-		<a href="#" class="btn">Coding Rules</a>
-    </header>
+		</p>
+	  </header>
 
     <main id="content" class="main-content" role="main">
       {{ content }}
