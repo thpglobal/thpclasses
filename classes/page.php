@@ -35,7 +35,7 @@ class Page {
 	public function menu() { // new responsive version
 		$menu=$_SESSION["menu"];
 		if(isset($_SESSION["menu"]) and sizeof($menu)>0) { 
-			echo("<div class='topnav print-hidden' id=myTopnav>\n");
+			echo("<div class='topnav hidden-print' id=myTopnav>\n");
 			foreach($menu as $key=>$item){
 				if(is_array($item) ){
 					echo("<div class=dropdown>\n");
@@ -105,12 +105,12 @@ $(document).ready(function() {
 		$this->menu();
         echo("<div class=container>\n");
 		echo($this->preh1); //used for dashboard colorbar or whatever
-        echo("<h1>$title <div class=print-hidden>");
+        echo("<h1>$title <span class=hidden-print>");
         foreach($this->links as $key=>$link) {
             $hint=$this->hints[$key];
             echo("<a href=$link class='fa fa-$key' title='$hint'></a>\n");
         }
-        echo($this->appendTitle."</div></h1>\n");
+        echo($this->appendTitle."</span></h1>\n");
 		$reply=$_SESSION["reply"];
 		if($reply>''){
 			unset($_SESSION["reply"]); 
