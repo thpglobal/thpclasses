@@ -35,7 +35,7 @@ class Page {
 	public function menu() { // new responsive version
 		$menu=$_SESSION["menu"];
 		if(isset($_SESSION["menu"]) and sizeof($menu)>0) { 
-			echo("<div class=topnav id=myTopnav>\n");
+			echo("<div class='topnav print-hidden' id=myTopnav>\n");
 			foreach($menu as $key=>$item){
 				if(is_array($item) ){
 					echo("<div class=dropdown>\n");
@@ -52,25 +52,6 @@ class Page {
 			echo('  var x = document.getElementById("myTopnav");'."\n");
 			echo('  if (x.className === "topnav") { x.className += " responsive"; } else { x.className = "topnav"; }'."\n");
 			echo("}\n</script>\n");
-		}
-	}
-	public function menux(){
-		$menu=$_SESSION["menu"];
-		if(isset($_SESSION["menu"]) and sizeof($menu)>0) { 
-			echo("<div class='pure-menu pure-menu-horizontal hidden-print'>\n\t<ul class='pure-menu-list'>\n");
-			foreach($menu as $key=>$links){
-				if(is_array($links)) {
-					echo("\t\t<li class='pure-menu-item pure-menu-has-children pure-menu-allow-hover'>\n");
-					echo("\t\t\t<a href='#' class='pure-menu-link'>$key</a>\n\t\t\t<ul class='pure-menu-children'>\n");
-					foreach($links as $tag=>$link){
-						echo("\t\t\t<li class='pure-menu-item'><a class='pure-menu-link' href='$link'>$tag</a></li>\n");
-					}
-					echo("\t\t</ul>\n\t</li>\n");
-				}else{
-					echo("\t\t<li class='pure-menu-item'><a class='pure-menu-link' href='$links'>$key</a></li>\n");
-				}
-			}
-			echo("\t</ul>\n</div>\n");
 		}
 	}
 
@@ -124,12 +105,12 @@ $(document).ready(function() {
 		$this->menu();
         echo("<div class=container>\n");
 		echo($this->preh1); //used for dashboard colorbar or whatever
-        echo("<h1>$title ");
+        echo("<h1>$title <div class=print-hidden>");
         foreach($this->links as $key=>$link) {
             $hint=$this->hints[$key];
             echo("<a href=$link class='fa fa-$key' title='$hint'></a>\n");
         }
-        echo($this->appendTitle."</h1>\n");
+        echo($this->appendTitle."</div></h1>\n");
 		$reply=$_SESSION["reply"];
 		if($reply>''){
 			unset($_SESSION["reply"]); 
