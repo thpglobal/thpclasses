@@ -8,8 +8,8 @@ class Chart{
 	public $fill="rgba(0,255,0,0.5)";
 	public $width=3; // put 3 across unless changed
 	public $db=NULL;
-	public $options="scales:{xAxes:[{gridLines:{color:'{$this->gridcolor}'}}],
-	yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'{$this->gridcolor}'}}]}\n";
+	public $options="scales:{xAxes:[{gridLines:{color:'".$this->gridcolor."'}}],
+	yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'".{$this->gridcolor}."'}}]}\n";
 	public function start($db=NULL, $color='white'){ // color not yet implmented
 		$this->db=$db;
 		$this->color=$color;
@@ -75,7 +75,7 @@ class Chart{
 		echo("label : ".json_encode($title).",\n");
 		echo("data : ".json_encode($y)."\n}]}\n");
 		echo("var c$n = document.getElementById('chart$n').getContext('2d');\n");
- 		echo("var cc$n = new Chart(c$n,{ type: '$type', data: data$n } );\n");
+ 		echo("var cc$n = new Chart(c$n,{ type: '$type', data: data$n, , options: ChartOptions } );\n");
 		echo("</script>\n");
 	}
 }
