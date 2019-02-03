@@ -58,7 +58,7 @@ class Chart{
 		$this->ncharts++;
 		$n=$this->ncharts; // handy shorthand
 		$width=$this->width;
-		echo("<div style='pure-u-1-1 pure-u-md-1-$width'><h3>$title</h3><canvas id=chart$n width=400 height=300></canvas></div>\n");
+		echo("<div style='pure-u-1-1 pure-u-md-1-$width'><h3>$title</h3><canvas id=chart$n width=500 height=350></canvas></div>\n");
 		echo("<script>\n");
 		echo("var data$n = {\n");
 		foreach($data as $key=>$value) {
