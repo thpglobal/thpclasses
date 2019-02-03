@@ -54,7 +54,6 @@ class Chart{
  		echo("</script>\n");
 	}
 	public function show($title="Sample",$type="Radar",$data=array("A"=>1,"B"=>2,"C"=>3)) {
-		if($this->ncharts==0) echo ("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js></script>\n");
 		$this->ncharts++;
 		$n=$this->ncharts; // handy shorthand
 		$width=$this->width;
@@ -68,10 +67,6 @@ class Chart{
 		echo("labels : ".json_encode($labels).",\n");
 		echo("datasets : [\n{\n");
 		echo("label : ".json_encode($title).",\n");
-		echo("fillColor : '{$this->fill}',\n");
-		echo("strokeColor : '{$this->stroke}',\n");
-		echo("pointColor : '{$this->point}',\n");
-		echo("pointStrokeColor : '{$this->pointStroke}',\n");
 		echo("data : ".json_encode($y)."\n}]}\n");
 		echo("var c$n = document.getElementById('chart$n').getContext('2d');\n");
 		echo("new Chart(c$n).$type(data$n);\n</script>\n");
