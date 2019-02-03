@@ -18,8 +18,8 @@ class Chart{
 		echo("Chart.defaults.global.defaultColor = '{$this->color}';\n");
 		echo("Chart.defaults.global.defaultFontColor = '{$this->color}';\n");
 		echo("Chart.defaults.global.tooltips.backgroundColor = '{$this->color}';\n");
-		echo("Chart.defaults.global.tooltips.titleFontColor = {$this->background};\n");
-		echo("Chart.defaults.global.tooltips.bodyFontColor = {$this->background};\n");
+		echo("Chart.defaults.global.tooltips.titleFontColor = '{$this->background}';\n");
+		echo("Chart.defaults.global.tooltips.bodyFontColor = '{$this->background}';\n");
 		echo("Chart.defaults.global.animation.duration = 1500;\n");
 		echo("Chart.defaults.global.animation.easing = 'easeInOutQuart';\n");
 		echo("Chart.defaults.global.maintainAspectRatio = true;\n");
