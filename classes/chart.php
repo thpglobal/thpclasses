@@ -9,7 +9,7 @@ class Chart{
 	public $width=3; // put 3 across unless changed
 	public $db=NULL;
 	public $options="scales:{xAxes:[{gridLines:{color:'".$this->gridcolor."'}}],
-	yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'".{$this->gridcolor}."'}}]}\n";
+	yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'".$this->gridcolor."'}}]}\n";
 	public function start($db=NULL, $color='white'){ // color not yet implmented
 		$this->db=$db;
 		$this->color=$color;
