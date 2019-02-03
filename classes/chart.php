@@ -39,7 +39,7 @@ class Chart{
 	}
 	public function make($n,$ctitle,$ctype,$x,$y){
 		$width=$this->width;
-		$title=htmlspecialchars($ctitle);
+		$title=str_replace("'","&apos;",$ctitle);
 		echo("<div class='pure-u-1-1 pure-u-md-1-$width'><h3>$title</h3><canvas id=chart$n width=500 height=350></canvas></div>\n");
 		echo("<script>\n");
 		echo("var data$n = { \n");
