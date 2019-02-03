@@ -14,19 +14,11 @@ class Chart{
 		$this->color=$color;
 		$this->background=($color=='white' ? 'black' : 'white');
 		if($color=='black') $this->options=str_replace('yellow','blue',$this->options);
-		$this->gridcolor=($color=='white' ? 'yellow' : 'blue');
 		echo("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js></script>\n");
 		echo("<script>\n");
 		echo("Chart.defaults.global.responsive = true;\n");
 		echo("Chart.defaults.global.defaultColor = '{$this->color}';\n");
 		echo("Chart.defaults.global.defaultFontColor = '{$this->color}';\n");
-		echo("Chart.defaults.global.tooltips.backgroundColor = '{$this->color}';\n");
-		echo("Chart.defaults.global.tooltips.titleFontColor = '{$this->background}';\n");
-		echo("Chart.defaults.global.tooltips.bodyFontColor = '{$this->background}';\n");
-		echo("Chart.defaults.global.animation.duration = 1500;\n");
-		echo("Chart.defaults.global.animation.easing = 'easeInOutQuart';\n");
-		echo("Chart.defaults.global.maintainAspectRatio = true;\n");
-		echo("Chart.defaults.global.legend.display = false;\n");
 		echo("var ChartOptions = {".$this->options."};\n</script>\n");
 		echo("<div class=pure-g>\n");
 	}
@@ -76,7 +68,9 @@ class Chart{
 		echo("	backgroundColor: 'lightgreen',\n");
 		echo("data : ".json_encode($y)."\n}]}\n");
 		echo("var c$n = document.getElementById('chart$n').getContext('2d');\n");
- 		echo("var cc$n = new Chart(c$n,{ type: '$type', data: data$n, options: ChartOptions } );\n");
+ 		echo("var cc$n = new Chart(c$n,{ type: '$type', data: data$n");
+		if($type<>'radar') echo(", options: ChartOptions");
+		echo("} );\n");
 		echo("</script>\n");
 	}
 }
