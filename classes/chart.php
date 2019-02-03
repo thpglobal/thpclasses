@@ -4,14 +4,17 @@ class Chart{
 	public $ncharts=0; // count
 	public $color='white'; // default text color, defines regular page from dashboard dark page
 	public $background='black';
+	public $gridcolor='yellow';
 	public $fill="rgba(0,255,0,0.5)";
 	public $width=3; // put 3 across unless changed
 	public $db=NULL;
-	public $options="scales:{xAxes:[{gridLines:{color:'yellow'}}],yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'yellow'}}]}\n";
+	public $options="scales:{xAxes:[{gridLines:{color:'{$this->gridcolor}'}}],
+	yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'{$this->gridcolor}'}}]}\n";
 	public function start($db=NULL, $color='white'){ // color not yet implmented
 		$this->db=$db;
 		$this->color=$color;
 		$this->background=($color=='white' ? 'black' : 'white');
+		$this->gridcolor=($color=='white' ? 'yellow' : 'blue');
 		echo("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js></script>\n");
 		echo("<script>\n");
 		echo("Chart.defaults.global.responsive = true;\n");
