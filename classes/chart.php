@@ -73,6 +73,7 @@ class Chart{
 		echo("labels : ".json_encode($labels).",\n");
 		echo("datasets : [\n{\n");
 		echo("label : ".json_encode($title).",\n");
+		echo("	backgroundColor: 'lightgreen',\n");
 		echo("data : ".json_encode($y)."\n}]}\n");
 		echo("var c$n = document.getElementById('chart$n').getContext('2d');\n");
  		echo("var cc$n = new Chart(c$n,{ type: '$type', data: data$n, options: ChartOptions } );\n");
