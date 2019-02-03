@@ -19,7 +19,9 @@ class Chart{
 		echo("Chart.defaults.global.responsive = true;\n");
 		echo("Chart.defaults.global.defaultColor = '{$this->color}';\n");
 		echo("Chart.defaults.global.defaultFontColor = '{$this->color}';\n");
-		echo("var ChartOptions = {".$this->options."};\n</script>\n");
+		echo("var ChartOptions = {".$this->options."};\n");
+		echo("var RadarOptions = {scales: { ticks: { beginAtZero: true }}};\n");
+		echo("</script>\n");
 		echo("<div class=pure-g>\n");
 	}
 	public function end() { echo("</div>\n"); }
@@ -43,9 +45,7 @@ class Chart{
     	}else{
     		echo("	fill: true,\n");
     	}
-		echo("	backgroundColor: 'lightgreen',\n");
-		echo("	borderWidth: 2,\n	borderColor: 'lightgreen',\n");
-		echo("	pointBorderColor: 'lightgreen',\n");
+		echo("	backgroundColor: '".$this->fill."',\n");
 		echo("	data: ".json_encode($y)."\n	} \n], \n}; \n");
 		echo("var c$n = document.getElementById('chart".$n."').getContext('2d');\n");
  		echo("var cc$n = new Chart(c$n,{ type: '$ctype', data: data$n, options: ChartOptions } );\n");
@@ -65,11 +65,12 @@ class Chart{
 		echo("labels : ".json_encode($labels).",\n");
 		echo("datasets : [\n{\n");
 		echo("label : ".json_encode($title).",\n");
-		echo("	backgroundColor: 'lightgreen',\n");
+		echo("	backgroundColor: '".$this->fill."',\n");
 		echo("data : ".json_encode($y)."\n}]}\n");
 		echo("var c$n = document.getElementById('chart$n').getContext('2d');\n");
  		echo("var cc$n = new Chart(c$n,{ type: '$type', data: data$n");
 		if($type<>'radar') echo(", options: ChartOptions");
+		if($type=='radar') echo(", options: RadarOptions");
 		echo("} );\n");
 		echo("</script>\n");
 	}
