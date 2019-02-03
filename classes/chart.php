@@ -36,12 +36,13 @@ class Chart{
 	}
 	public function make($n,$ctitle,$ctype,$x,$y){
 		$width=$this->width;
-		echo("<div class='pure-u-1-1 pure-u-md-1-$width'><h3>$ctitle</h3><canvas id=chart$n width=500 height=350></canvas></div>\n");
+		$title=htmlspecialchars($ctitle);
+		echo("<div class='pure-u-1-1 pure-u-md-1-$width'><h3>$title</h3><canvas id=chart$n width=500 height=350></canvas></div>\n");
 		echo("<script>\n");
 		echo("var data$n = { \n");
 		echo("  labels : ".json_encode($x).",\n");
 		echo("  datasets : [{\n"); 
-		echo("	label: '$ctitle',\n");
+		echo("	label: '$title',\n");
 		if( 'line' == $ctype ){
 			echo("	fill: false,\n");
     	}else{
