@@ -3,6 +3,7 @@
 class Chart{
 	public $ncharts=0; // count
 	public $color='white'; // default text color, defines regular page from dashboard dark page
+	public $background='black';
 	public $fill="rgba(0,255,0,0.5)";
 	public $width=3; // put 3 across unless changed
 	public $db=NULL;
@@ -10,14 +11,15 @@ class Chart{
 	public function start($db=NULL, $color='white'){ // color not yet implmented
 		$this->db=$db;
 		$this->color=$color;
+		$this->background=($color=='white' ? 'black' : 'white');
 		echo("<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js></script>\n");
 		echo("<script>\n");
 		echo("Chart.defaults.global.responsive = true;\n");
-		echo("Chart.defaults.global.defaultColor = 'white';\n");
-		echo("Chart.defaults.global.defaultFontColor = 'white';\n");
-		echo("Chart.defaults.global.tooltips.backgroundColor = '#fff';\n");
-		echo("Chart.defaults.global.tooltips.titleFontColor = 'black';\n");
-		echo("Chart.defaults.global.tooltips.bodyFontColor = 'black';\n");
+		echo("Chart.defaults.global.defaultColor = '{$this->color}';\n");
+		echo("Chart.defaults.global.defaultFontColor = '{$this->color}';\n");
+		echo("Chart.defaults.global.tooltips.backgroundColor = '{$this->color}';\n");
+		echo("Chart.defaults.global.tooltips.titleFontColor = {$this->background};\n");
+		echo("Chart.defaults.global.tooltips.bodyFontColor = {$this->background};\n");
 		echo("Chart.defaults.global.animation.duration = 1500;\n");
 		echo("Chart.defaults.global.animation.easing = 'easeInOutQuart';\n");
 		echo("Chart.defaults.global.maintainAspectRatio = true;\n");
