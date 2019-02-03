@@ -72,6 +72,8 @@ class Chart{
 		echo("data : ".json_encode($y)."\n}]}\n");
 		echo("var c$n = document.getElementById('chart$n').getContext('2d');\n");
  		echo("var cc$n = new Chart(c$n,{ type: '$type', data: data$n } );\n");
+		echo("</script>\n");
+		echo("</div>\n");
 	}
 }
 ?>
