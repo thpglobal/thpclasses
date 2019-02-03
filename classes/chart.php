@@ -55,7 +55,7 @@ class Chart{
  		echo("var cc$n = new Chart(c$n,{ type: '$ctype', data: data$n, options: ChartOptions } );\n");
  		echo("</script>\n");
 	}
-	public function show($title="Sample",$type="Radar",$data=array("A"=>1,"B"=>2,"C"=>3)) {
+	public function show($title="Sample",$type="radar",$data=array("A"=>1,"B"=>2,"C"=>3)) {
 		$this->ncharts++;
 		$n=$this->ncharts; // handy shorthand
 		$width=$this->width;
