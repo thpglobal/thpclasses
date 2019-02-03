@@ -20,7 +20,7 @@ class Chart{
 		echo("Chart.defaults.global.defaultColor = '{$this->color}';\n");
 		echo("Chart.defaults.global.defaultFontColor = '{$this->color}';\n");
 		echo("var ChartOptions = {".$this->options."};\n");
-		echo("var RadarOptions = {scales: { ticks: { beginAtZero: true }}};\n");
+		echo("var RadarOptions = { scale: { ticks: { beginAtZero: true } } };\n");
 		echo("</script>\n");
 		echo("<div class=pure-g>\n");
 	}
