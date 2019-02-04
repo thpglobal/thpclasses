@@ -3,13 +3,14 @@
 class Chart{
 	public $ncharts=0; // count
 	public $color='white'; // default text color, defines regular page from dashboard dark page
-	public $background='black';
-	public $fill="rgba(0,255,0,0.5)";
+	public $background='black'; // default for dashboard
+	public $fill="rgba(0,255,0,0.5)"; // 50% transparent green
 	public $width=3; // put 3 across unless changed
-	public $db=NULL;
+	public $db=NULL; // only used with query method
 	public $options="scales:{xAxes:[{gridLines:{color:'yellow'}}],
-	yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'yellow'}}]}\n";
-	public function start($db=NULL, $color='white'){ // color not yet implmented
+	yAxes:[{ticks:{beginAtZero:true},gridLines:{color:'yellow'}}]}\n"; // default for black dashboard - auto changes to blue
+
+	public function start($db=NULL, $color='white'){ // loads chart.js and sets some basic defaults
 		$this->db=$db;
 		$this->color=$color;
 		$this->background=($color=='white' ? 'black' : 'white');
@@ -20,17 +21,20 @@ class Chart{
 		echo("Chart.defaults.global.defaultColor = '{$this->color}';\n");
 		echo("Chart.defaults.global.defaultFontColor = '{$this->color}';\n");
 		echo("var ChartOptions = {".$this->options."};\n");
-		echo("var RadarOptions = { scale: { ticks: { beginAtZero: true } } };\n");
+		echo("var RadarOptions = { scale: { ticks: { beginAtZero: true } } };\n"); // different for radar charts
 		echo("</script>\n");
-		echo("<div class=pure-g>\n");
+		echo("<div class=pure-g>\n"); // open a grid of sections.
 	}
-	public function end() { echo("</div>\n"); }
-	public function query($n,$title,$query) {
+
+	public function end() { echo("</div>\n"); } // close the grid
+
+	public function query($n,$title,$query) { // run a query direct into a barchart
 		if($this->db==NULL) Die("You forgot the Chart::start($db) method.");
 		$pdo_stmt=$this->db->query($query);
 		while($line=$pdo_stmt->fetch(PDO::FETCH_NUM)){ $x[]=$line[0];$y[]=$line[1];}	
 		$this->make($n,$title,'bar',$x,$y);
 	}
+
 	public function make($n,$ctitle,$ctype,$x,$y){
 		$width=$this->width;
 		$title=str_replace("'","&apos;",$ctitle);
@@ -48,31 +52,18 @@ class Chart{
 		echo("	backgroundColor: '".$this->fill."',\n");
 		echo("	data: ".json_encode($y)."\n	} \n], \n}; \n");
 		echo("var c$n = document.getElementById('chart".$n."').getContext('2d');\n");
- 		echo("var cc$n = new Chart(c$n,{ type: '$ctype', data: data$n, options: ChartOptions } );\n");
+ 		echo("var cc$n = new Chart(c$n,{ type: '$type', data: data$n");
+			if($type<>'radar') echo(", options: ChartOptions");
+			if($type=='radar') echo(", options: RadarOptions");
+			echo("} );\n");
  		echo("</script>\n");
 	}
+	// "show" was earlier used on various scripts and now just calls make
+	// it autoincrements a count, and accepts an associative array of data instead of separate X Y arrays.
 	public function show($title="Sample",$type="radar",$data=array("A"=>1,"B"=>2,"C"=>3)) {
 		$this->ncharts++;
-		$n=$this->ncharts; // handy shorthand
-		$width=$this->width;
-		echo("<div class='pure-u-1-1 pure-u-md-1-$width'><h3>$title</h3><canvas id=chart$n width=500 height=350></canvas></div>\n");
-		echo("<script>\n");
-		echo("var data$n = {\n");
-		foreach($data as $key=>$value) {
-			$labels[]=$key;
-			$y[]=$value;
-		}
-		echo("labels : ".json_encode($labels).",\n");
-		echo("datasets : [\n{\n");
-		echo("label : ".json_encode($title).",\n");
-		echo("	backgroundColor: '".$this->fill."',\n");
-		echo("data : ".json_encode($y)."\n}]}\n");
-		echo("var c$n = document.getElementById('chart$n').getContext('2d');\n");
- 		echo("var cc$n = new Chart(c$n,{ type: '$type', data: data$n");
-		if($type<>'radar') echo(", options: ChartOptions");
-		if($type=='radar') echo(", options: RadarOptions");
-		echo("} );\n");
-		echo("</script>\n");
+		foreach($data as $key=>$value) { $x[]=$key; $y[]=$value; };
+		$this->make($this->ncharts,$title,$type,$x,$y);
 	}
 }
 ?>
