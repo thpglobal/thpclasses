@@ -28,6 +28,7 @@ class Chart{
 
 	public function end() { echo("</div>\n"); } // close the grid
 
+	// This is the main working method that spits out the necessary javascript for a chart.
 	public function query($n,$title,$query) { // run a query direct into a barchart
 		if($this->db==NULL) Die("You forgot the Chart::start($db) method.");
 		$pdo_stmt=$this->db->query($query);
