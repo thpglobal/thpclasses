@@ -7,7 +7,8 @@ $menu=array("Home"=>"/",
 	"Import"=>"upload",
 	"Query"=>"query",
 	"Session"=>"session",
-	"List"=>"list"
+	"List"=>"list",
+			"Test"=>"test"
 	);
 $_SESSION["menu"]=$menu;
 ?>
