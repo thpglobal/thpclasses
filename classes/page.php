@@ -131,11 +131,10 @@ $(document).ready(function() {
 		$this->appendTitle .= ($now=='on' ? $on_msg : $off_msg) ;
 	}
 	
-	public function end(){
+	public function end($message=""){
 		$time=microtime(true)-($this->time_start);
-		echo("<p><i>Run time: $time</i></p>\n");
+		echo("<p><i>$message Run time: $time</i></p>\n");
 		echo("</div>\n");
-//		$this->fireStickyHeader(); // JC COMMENTED OUT
         echo("</body></html>\n");
     }
 }
