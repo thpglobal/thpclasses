@@ -39,7 +39,7 @@ class Form {
 		if($this->data[$name]>0) echo(" checked");
 		echo ("><span class=slider></span></label></div>\n");
 	}
-	public function rename($name,$showname)
+	public function rename($name,$showname) {
 		$value=$this->data[$name];
 		if($value=='') $value=0;
 		$label=ucwords($showname);
