@@ -39,7 +39,7 @@ class Form {
 		if($this->data[$name]>0) echo(" checked");
 		echo ("><span class=slider></span></label></div>\n");
 	}
-	public function renamed($name,$showname)
+	public function rename($name,$showname)
 		$value=$this->data[$name];
 		if($value=='') $value=0;
 		$label=ucwords($showname);
@@ -50,7 +50,7 @@ class Form {
 		if($max<>NULL) echo(" max='$max'");
 		if($min<>NULL) echo("><span class=status></span");
 		echo("></div>\n");
-	};
+	}
 	
 	public function num($name,$min=NULL,$max=NULL){
 		$value=$this->data[$name];
