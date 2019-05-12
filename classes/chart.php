@@ -50,7 +50,7 @@ class Chart{
     	}else{
     		echo("	fill: true,\n");
     	}
-		echo("	backgroundColor: '".$this->fill."',\n");
+		echo("	backgroundColor: ".json_encode($this->fill).",\n");
 		echo("	data: ".json_encode($y)."\n	} \n], \n}; \n");
 		echo("var c$n = document.getElementById('chart".$n."').getContext('2d');\n");
  		echo("var cc$n = new Chart(c$n,{ type: '$ctype', data: data$n");
