@@ -54,7 +54,7 @@ class Chart{
 		echo("	data: ".json_encode($y)."\n	} \n], \n}; \n");
 		echo("var c$n = document.getElementById('chart".$n."').getContext('2d');\n");
  		echo("var cc$n = new Chart(c$n,{ type: '$ctype', data: data$n");
-			if($ctype<>'radar') echo(", options: ChartOptions");
+			if($ctype<>'radar' and $ctype<>'pie') echo(", options: ChartOptions");
 			if($ctype=='radar') echo(", options: RadarOptions");
 			echo("} );\n");
  		echo("</script>\n");
