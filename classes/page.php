@@ -135,7 +135,6 @@ $(document).ready(function() {
 	public function end($message=""){
 		$time=microtime(true)-($this->time_start);
 		echo("<p><i>$message Run time: $time</i></p>\n");
-		echo("<p><a href='https://forms.gle/FB5pkmjGoqG3DpRC9' target='_blank'> Please fill out this form if you are experiencing any functional issues.</a></p>");
 		echo("</div>\n");
         echo("</body></html>\n");
     }
