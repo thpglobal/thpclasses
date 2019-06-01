@@ -1,7 +1,7 @@
 <?php
 // GENERIC UPDATE
 // This is called from various EDIT pages
-require_once('../includes/thpsecurity.php');
+require_once(__DIR__."/../../includes/thpsecurity.php');
 if($_SESSION["debug"]) echo("<html lang=en><head><meta charset='utf-8'></head><body><h1>Debug Update</h1>\n");
 //sometimes we need zero as default update value, set this variable from the app page
 $defaultUpdateValue=(isset($_SESSION['defaultUpdateValue'])) ? $_SESSION['defaultUpdateValue'] : "NULL";
@@ -9,7 +9,7 @@ $id=$_POST["id"];
 if($id=='') $id=0;
 $table=$_POST["table"];
 if($table=='') $table=$_SESSION["table"];
-if($table=='') goback("Error: Table not set in update - notify MEL.");
+if($table=='') goback("Error: Table not set in update.");
 $prefix=($id>0 ? "update" : "insert into");
 $suffix=($id>0 ? " where id='$id'" : "");
 $query="$prefix $table set ";
