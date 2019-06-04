@@ -10,7 +10,7 @@ if( isset($_GET["query"]) ){
 	$query=$_GET["query"];
 	$start=substr($query,0,4);
 	if(in_array($start,array("show","sele","expl"))){
-		if(!strpos($query,'limit')) {
+		if($start=='sele' and !strpos($query,'limit')) {
 			$query .= " limit 1000";
 			echo("<p>Note: Query limited to 1,000 rows</p>\n");
 		}
