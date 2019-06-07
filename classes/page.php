@@ -65,10 +65,9 @@ class Page {
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>\n");
-		echo("<link rel=stylesheet href=https://storage.googleapis.com/thp/thp.css>\n");
+		echo("<link rel=stylesheet href=/static/pure.thp.css>\n");
 		echo("<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap' rel='stylesheet'>\n");
 		foreach($this->css as $css) echo("<link rel='stylesheet' href='$css'>\n");
-//		if($this->addStickyHeader){echo("<script src='/static/irStickyHeader.js'></script>\n");} // JC REMOVED
 		if($this->datatable=="1"){ // Additional setup for using DataTables
 ?>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/jquery.dataTables.min.css'>
