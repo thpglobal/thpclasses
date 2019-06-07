@@ -56,8 +56,9 @@ class Page {
 	}
 
 	public function start($title="THP",$lang="en"){
-		$local_css="/static/pure.thp.css";
-		if(!file_exists($_SERVER["DOCUMENT_ROOT"]."/$local_css")) $local_css="https://storage.googleapis.com/thp/thp.css";
+//		$local_css="/static/pure.thp.css";
+//		if(!file_exists($_SERVER["DOCUMENT_ROOT"]."/$local_css")) 
+			$local_css="https://storage.googleapis.com/thp/thp.css";
 		$_SESSION["datatable"]=$this->datatable; // save for access by Table class
 		foreach($_GET as $key=>$value) $_SESSION[$key]=$value;
 		$this->time_start=microtime(true);
