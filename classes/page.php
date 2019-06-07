@@ -56,6 +56,8 @@ class Page {
 	}
 
 	public function start($title="THP",$lang="en"){
+		$local_css="/static/pure.thp.css";
+		if(!file_exists($_SERVER["DOCUMENT_ROOT"]."/$local_css")) $local_css="https://storage.googleapis.com/thp/thp.css";
 		$_SESSION["datatable"]=$this->datatable; // save for access by Table class
 		foreach($_GET as $key=>$value) $_SESSION[$key]=$value;
 		$this->time_start=microtime(true);
@@ -66,7 +68,7 @@ class Page {
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>\n");
 		echo("<link rel=stylesheet href=/static/pure.thp.css>\n");
-		echo("<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap' rel='stylesheet'>\n");
+		echo("<link href='$localcss' rel='stylesheet'>\n");
 		foreach($this->css as $css) echo("<link rel='stylesheet' href='$css'>\n");
 		if($this->datatable=="1"){ // Additional setup for using DataTables
 ?>
