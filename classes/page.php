@@ -118,7 +118,16 @@ $(document).ready(function() {
 				if(substr($reply,0,5)=="Error") $color="red";
 			echo("<p style='text-align:center;color:white;background-color:".$color."'>$reply</p>\n");
 		}
-		include("../includes/translate.php");
+		
+		echo("<div id='google_translate_element' style='position:absolute; top:4em; right:1em;'></div> 
+			<script type='text/javascript'> 
+				function googleTranslateElementInit() { 
+					new google.translate.TranslateElement({pageLanguage: 'bn'}, 'google_translate_element'); 
+				} 
+			</script> 
+		<script type='text/javascript' src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'></script>");
+	
+	
 	}
 	public function icon($type="edit",$link="/edit",$hint="Edit this record"){
 		$this->links[$type]=$link;
