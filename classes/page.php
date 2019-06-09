@@ -118,6 +118,7 @@ $(document).ready(function() {
 				if(substr($reply,0,5)=="Error") $color="red";
 			echo("<p style='text-align:center;color:white;background-color:".$color."'>$reply</p>\n");
 		}
+		include("../includes/translate.php");
 	}
 	public function icon($type="edit",$link="/edit",$hint="Edit this record"){
 		$this->links[$type]=$link;
