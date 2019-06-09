@@ -105,7 +105,8 @@ $(document).ready(function() {
         echo("<div class=container>\n");
 		echo($this->preh1); //used for dashboard colorbar or whatever
         echo("<h1>$title <span class=hidden-print>");
-        foreach($this->links as $key=>$link) {
+        include("../includes/translate.php");
+		foreach($this->links as $key=>$link) {
             $hint=$this->hints[$key];
             echo("<a href=$link class='fa fa-$key' title='$hint'></a>\n");
         }
