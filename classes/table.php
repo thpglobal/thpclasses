@@ -506,26 +506,26 @@ class Table { // These are public for now but may eventually be private with set
 					if ( is_numeric($v) and ($j>=($this->ntext)) ){
 						$v=number_format($v,$this->dpoints);			
 						if( ( $target == 0 ) && ( $j == 5 ) ){
-							echo("<td style='background:#e6e6ea;'>$v</td>");	
+							echo("<td style='background:#e6e6ea !important;'>$v</td>");	
 						}elseif( ( $average == 0 ) && ( $j == 7 ) ){
-							echo("<td style='background:#e6e6ea;'>$v</td>");	
+							echo("<td style='background:#e6e6ea !important;'>$v</td>");	
 						}elseif( ( $actual < $target ) && ( $j == 5  ) ){
-							echo("<td style='background:#feb2a8;'>$v</td>");
+							echo("<td style='background:#feb2a8 !important;'>$v</td>");
 						}elseif( ( $actual < $average ) && ( $j == 7 ) ){
-							echo("<td style='background:#feb2a8;'>$v</td>");
+							echo("<td style='background:#feb2a8 !important;'>$v</td>");
 						}elseif( ( $actual >= $target ) && ( $j == 5 ) ){
-							echo("<td style='background:#dcedc1;'>$v</td>");
+							echo("<td style='background:#dcedc1 !important;'>$v</td>");
 						}elseif( ( $actual >= $average ) && ( $j == 7 ) ){
-							echo("<td style='background:#dcedc1;'>$v</td>");
+							echo("<td style='background:#dcedc1 !important;'>$v</td>");
 						}else{
 							echo("<td>$v</td>");
 				        }
 					}else{
 						 //color coding for notes column
 						 if( ( $actual==0) && ( $target>0 ) &&  ( $j == 8 ) ){
-							 echo("<td style='background:yellow;'>$row[$j]</td>");
+							 echo("<td style='background:yellow !important;'>$row[$j]</td>");
 						 }elseif( ($actual<($target * 0.5)) && ($actual<($average * 0.5)) && ($j == 8) ){
-							 echo("<td style='background:orange;'>$row[$j]</td>");
+							 echo("<td style='background:orange !important;'>$row[$j]</td>");
 						 }else
 						     echo("<td>$v</td>");
 				    }
