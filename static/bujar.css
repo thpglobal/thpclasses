@@ -254,7 +254,7 @@ tr.ind {
 
 .pure-table-odd td, .pure-table-striped tr:nth-child(2n-1) td{
 	background-color: white;
-	border: 1px solid #cbcbcb;
+	border: 1px solid #cbcbcb !important;
 }
 
 .pure-table-bordered td {
