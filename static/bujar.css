@@ -91,7 +91,7 @@
 
 /* handy adaptations from bootstrap */
 .jumbotron {
-    padding: 2em; background-color:#e5f8f7; font-size:16pt; margin:auto; border-radius: 25px;
+    padding: 2em; background-color:#ccf; font-size:16pt; margin:auto; border-radius: 25px;
 }
 
 a.fa {text-decoration:none; color:black;}
@@ -254,7 +254,7 @@ tr.ind {
 
 .pure-table-odd td, .pure-table-striped tr:nth-child(2n-1) td{
 	background-color: white;
-	/* border: 1px solid #cbcbcb; */
+	border: 1px solid #cbcbcb;
 }
 
 .pure-table-bordered td {
