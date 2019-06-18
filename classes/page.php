@@ -4,7 +4,7 @@ class Page {
 	public $datatable = FALSE;
 	public $addStickyHeader = TRUE;
 	//public $css=array("https://storage.googleapis.com/thp/thp.css"); // default used by thpmne
-	public $css=array("/static/bujar.css"); // default used by thpmne
+	public $css=array("/static/bujar2.css"); // default used by thpmne
 	public $preh1=""; // used for dashboard colorbar etc
 	public $time_start; // used to measure length for process
 	public $links=array("print"=>"'javascript:window.print();'");
