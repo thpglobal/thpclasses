@@ -90,6 +90,10 @@
 }
 
 /* handy adaptations from bootstrap */
+.largeScreen {
+    padding: 1.5em; background-color:#e5f7f8 !important; margin:auto; border-radius: 5px;
+}
+
 .jumbotron {
     padding: 1.5em; background-color:#e5f7f8 !important; margin:auto; border-radius: 5px;
 }
