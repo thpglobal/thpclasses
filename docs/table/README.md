@@ -20,12 +20,13 @@ This class is designed to take a 2-D array of data and display it. It can do ver
 * **Mapping:** You may have a number of sparse columns that you want to map against a specific column - like a database outer join. It is often much easier to let this class do the joins than to try and build a single massive and complex query.
 * **Rowspans:** You may have multiple subvalues mapped to a column - for example, you may have indicators "Voter Participation" and "Meeting Participation" and within those you might disaggregate it into Women, Men, Total_Participants where you want Total to be computed by the class rather than in the database. 
 
-## Advanced Attributes
-
-* Table::rowspan - an integer value for how many columns should have their rows merged, say when there is diaggregated data.
 
 ## Advanced Methods Prior to "show()"
-
+* Table::rowspan - an integer value for how many columns should have their rows merged, say when there is diaggregated data.
+* Table::hidelink=FALSE; // OpOption to put href on next column
+* Table::href=""; // Link text preceding the value in the 0 cell
+* Table::dpoints=0; // Show how many decimal points?
+* Table::extraheader=""; // Additional text added above default header, for multirow headers
 * Table::infocol($assoc_array); // Popup info linked to each column header
 * Table::inforow($assoc_array); // Popup info linked to first visible column
 * Table::groups($assoc_array); // Add subheaders on column zero (invisible when set)
