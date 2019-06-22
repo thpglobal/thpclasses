@@ -233,6 +233,46 @@ class Table { // These are public for now but may eventually be private with set
 		if($_SESSION["debug"]) echo("<p>Debug Smart $query</p>\n");
 		$this->query($query);
 	}
+	
+	
+	
+	### Allow to select specific column names to display. 
+	### Add extra joins with non-foreign key tables to achieve complex queries
+    ### Pass extra joins, selects, group bys with the $extraJoin parameter
+ 	### Link any foreign keys to their dependent table name field
+	public function smartquery3($table, $what="*", $where="",$extraJoin=array()){
+		$from=" from $table a";
+		$alias=97; // ascii for lowercase a
+		$pdo_stmt=$this->db->query("select $what from $table limit 0"); // we need the names of the fields
+		$query="select ";
+		foreach(range(0, $pdo_stmt->columnCount() - 1) as $column_index) {
+			$name=$pdo_stmt->getColumnMeta($column_index)["name"];
+			if(substr($name,-3)=="_ID") {
+				$alias++; // go to the next lowercase letter
+				$from .=" left outer join ".strtolower(substr($name,0,-3))." ".chr($alias)." on a.$name=".chr($alias).".id ";
+				$query .= chr($alias).".name as ".substr($name,0,-3).", ";
+			}else{
+				$query .= "a.$name, ";
+			}
+		}
+		### Add extra joins if applicable
+		if( !empty($extraJoin) ) {
+            $query = str_replace($extraJoin['after'],$extraJoin['after'].$extraJoin['select'],$query);
+            $from .= $extraJoin['joins'];
+            $query = substr($query,0,-2).$from.$where. $extraJoin['groupby'] . " order by 1 desc limit 1500";
+		} else {
+             $query=substr($query,0,-2).$from.$where." order by 1 desc limit 1500";
+        }
+		if($_SESSION["debug"]) echo("<p>Debug Smart $query</p>\n");
+		$this->query($query);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	// Replaces the need for several lines in any page using an indicator table - defaults for Africa
 	public function indicators($table="af_indicator",$where="Source_ID=2",$start_row=1) { // set up standard disaggregated indicators
