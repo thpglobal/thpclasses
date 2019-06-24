@@ -4,7 +4,6 @@ class Page {
 	public $datatable = FALSE;
 	public $addStickyHeader = TRUE;
 	public $css=array("https://storage.googleapis.com/thp/thp.css"); // default used by all
-//	public $css=array("/static/bujar.css"); // default used by thpmne
 	public $preh1=""; // used for dashboard colorbar etc
 	public $time_start; // used to measure length for process
 	public $links=array("print"=>"'javascript:window.print();'");
@@ -67,7 +66,7 @@ class Page {
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
 		echo("<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap' rel='stylesheet'>");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>\n");
-		if(file_exists($_SERVER['DOCUMENT_ROOT']."/../static/pure.thp.css")) 
+		if(file_exists($_SERVER['DOCUMENT_ROOT']."/static/pure.thp.css")) 
 			$this->css[0]="/static/pure.thp.css";
 		if(!sizeof($this->css)) Die("</head><body>Error - there must be at least one $css entry</body></html>");
 		foreach($this->css as $css) echo("<link rel='stylesheet' href='$css'>\n");
