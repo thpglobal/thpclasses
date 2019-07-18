@@ -161,7 +161,8 @@ class Table { // These are public for now but may eventually be private with set
 		for($j=0;$j<$col1;$j++) $sums[$j]='';
 		$sums[$col1-1]="TOTALS:";
 		for($j=$col1;$j<$ncols;$j++){
-			for($i=$row1;$i<$nrows;$i++) $sums[$j] += $this->contents[$i][$j];
+			$v=$this->contents[$i][$j];
+			for($i=$row1;$i<$nrows;$i++) if(is_numeric($v)) $sums[$j] += $v;
 		}
 	    $this->contents[]=$sums;
     }
