@@ -62,7 +62,7 @@ class Page {
 		echo("<!DOCTYPE html>\n<html lang=$lang>\n<head>\n");
 		echo("<meta name=viewport content='width=device-width, initial-scale=1'>\n");
 		echo("<title>$title</title>\n");
-		echo("<link rel='shortcut icon' href='/static/favicon.png'>\n");
+		echo("<link rel='shortcut icon' type='image/x-icon' href='/static/favicon.png'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
 		echo("<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap' rel='stylesheet'>");
