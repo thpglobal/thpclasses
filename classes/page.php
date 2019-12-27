@@ -86,7 +86,9 @@ $(document).ready(function() {
     } );
  
     // DataTable
-    var table = $('#datatable').DataTable();
+    var table = $('#datatable').DataTable( {
+        "order": [[ 0, "desc" ]]
+    });
  
     // Apply the search
     table.columns().every( function () {
