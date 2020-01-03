@@ -7,9 +7,9 @@ Class CloudStorage extends StorageClient {
 		parent::registerStreamWrapper();
 	}
 	public function show($fullpath){
-	};
+	}
 	public function upload($sourcepath,$destpath){
-	};
+	}
 	public function download($fullpath){
 		$ext=strtolower(substr($fullpath,strrpos($fullpath,'.')));
 		$ct='binary/octet-stream'; // default for unknown type (downloads)
