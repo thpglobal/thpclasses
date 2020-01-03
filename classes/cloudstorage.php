@@ -2,7 +2,7 @@
 require $_SERVER["DOCUMENT_ROOT"].'/vendor/autoload.php';
 use Google\Cloud\Storage\StorageClient; 
 Class CloudStorage extends StorageClient {
-	$this->registerStreamWrapper();
+	registerStreamWrapper();
 	public function show($fullpath){
 	};
 	public function upload($sourcepath,$destpath){
