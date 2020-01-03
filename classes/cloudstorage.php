@@ -24,6 +24,6 @@ Class CloudStorage extends StorageClient {
 		if(array_key_exists($ext,$cts)){ $ct=$cts[$ext]; $mode='inline'; }
 		header("Content-Type:".$ct);
 		header("Content-Disposition:$mode; filename=$name");
-		echo readfile($path);
+		echo readfile($fullpath);
 	}
 }
