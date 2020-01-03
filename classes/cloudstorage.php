@@ -1,6 +1,6 @@
 <?php 
+require $_SERVER["DOCUMENT_ROOT"].'/vendor/autoload.php';
 Class CloudStorage {
-	require $_SERVER["DOCUMENT_ROOT"].'/vendor/autoload.php';
 	use Google\Cloud\Storage\StorageClient; 
 	$client = new StorageClient(['projectId' => 'thpmne']);
 	$client->registerStreamWrapper();
