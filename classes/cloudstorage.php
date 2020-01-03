@@ -1,10 +1,11 @@
 <?php 
 Class cloudstorage {
-public function setgs(){
-}
-public function show($fullpath){
-};
-public function upload($fullpath){
-};
-public function download($fullpath){
+	public function start(){
+	}
+	public function show($fullpath){
+	};
+	public function upload($sourcepath,$destpath){
+	};
+	public function download($fullpath){
+	}
 }
