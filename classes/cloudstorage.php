@@ -4,7 +4,7 @@ use Google\Cloud\Storage\StorageClient;
 Class CloudStorage extends StorageClient {
 	function __construct() {
 		parent::__construct();
-		parent:: registerStreamWrapper();
+		parent::registerStreamWrapper();
 	}
 	public function show($fullpath){
 	};
