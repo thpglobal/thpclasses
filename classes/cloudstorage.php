@@ -10,7 +10,7 @@ Class CloudStorage extends StorageClient {
 	}
 	public function upload($source,$bucketName,$objectName){
 	    $file = fopen($source, 'r');
-    	$bucket = $storage->bucket($bucketName);
+    	$bucket = parent::bucket($bucketName);
 	    $object = $bucket->upload($file,['name' => $objectName]);
 	}
 	public function download($fullpath){
