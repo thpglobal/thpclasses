@@ -10,7 +10,7 @@ Class CloudStorage extends StorageClient {
 	}
 	public function upload($source,$bucketName,$objectName){
 		$n=filesize($source);
-		Die(LOG_INFO,$source." size $n");
+		Die($source." size $n");
 	    $file = fopen($source, 'r');
     	$bucket = parent::bucket($bucketName);
 	    $object = $bucket->upload($file,['name' => $objectName]);
