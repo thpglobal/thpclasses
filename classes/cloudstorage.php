@@ -13,7 +13,7 @@ Class CloudStorage extends StorageClient {
 		$name=basename($fullpath);
 		// Figure out the content type, as uploads set this incorrectly
 		$cts=array(".pdf"=>"application/pdf","jpeg"=>"image/jpeg",".jpg"=>"image/jpg");
-		$cts["xlsx"]="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+//		$cts["xlsx"]="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 		$cts["docx"]="application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 		$cts["pptx"]="application/vnd.openxmlformats-officedocument.presentationml.presentation";
 		$cts[".doc"]="application/msword";
