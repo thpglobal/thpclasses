@@ -5,7 +5,7 @@ $_SESSION=array(); // Clear all session variables when logging off
 ?>
 <html>
     <head>
-        <meta name="google-signin-client_id" content="<?php echo($client_id)?>.apps.googleusercontent.com">
+        <meta name="google-signin-client_id" content="<?php echo($client_id)?>">
     </head>
     <body>
         <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
