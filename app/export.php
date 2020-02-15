@@ -30,9 +30,10 @@ for($i=0;$i<$nrows;$i++){
 			$value=htmlspecialchars($value);
 			if(array_key_exists($value,$strings)) { $nstrings++; $value=$strings[$value];}
 			else{$key=$value; $value=$nunique; $strings[$key]=$value; $nunique++; $nstrings++;}
-			$sheet1b .= '<c r="'.chr(65+$j).($i+1).'" s="1" t="s"><v>'.$value.'</v></c>';
+			$col_name=($j<26 ? chr(65+$j) : chr(65+floor($j/26)).chr(65+($j % 26)) );
+			$sheet1b .= '<c r="'.$col_name.($i+1).'" s="1" t="s"><v>'.$value.'</v></c>';
 		}else{
-			$sheet1b .= '<c r="'.chr(65+$j).($i+1).'" s="1"><v>'.$value.'</v></c>';
+			$sheet1b .= '<c r="'.$col_name.($i+1).'" s="1"><v>'.$value.'</v></c>';
 		}
 	}
 	$sheet1b .= '</row>';
