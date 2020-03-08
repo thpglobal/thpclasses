@@ -8,7 +8,7 @@ $page->icon("bar-chart","chart?chart_type=bar","Display as Bar Chart");
 $page->icon("line-chart","chart?chart_type=line","Display as Line Chart");
 $page->start("Query");
 ?>
-<p><a class=pure-button href=/admin/status>Show tables</a>
+<p><a class=pure-button href=?query=show+tables>Show tables</a>
 <button class=pure-button onclick="goback()">&lt;</button>
 <button class=pure-button onclick="gofwd()">&gt;</button>
 <button class=pure-button onclick="goclear()">&#x1f5d1;</button> 
