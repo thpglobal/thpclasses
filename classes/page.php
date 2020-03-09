@@ -65,7 +65,8 @@ class Page {
 		echo("<link rel='shortcut icon' href='/static/favicon.png'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css'>\n");
 		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
-        echo("<meta charset='utf-8'>\n");
+		echo("<link rel='stylesheet' href='https://storage.googleapis.com/thp/thp.css'>\n");
+		echo("<meta charset='utf-8'>\n");
         echo("</head>\n<body>\n");
         echo("<div class=container>\n");
 		echo("<h1>$title</h1>\n");
