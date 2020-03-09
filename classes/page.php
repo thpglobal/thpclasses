@@ -54,6 +54,22 @@ class Page {
 			echo("}\n</script>\n");
 		}
 	}
+	
+	public function start_light($title="THP",$lang="en") { // no menu, no icons, no datatable, no extras
+		foreach($_GET as $key=>$value) $_SESSION[$key]=$value;
+		$this->time_start=microtime(true);
+		echo("<!DOCTYPE html>\n<html lang=$lang>\n<head>\n");
+		echo("<meta name=viewport content='width=device-width, initial-scale=1'>\n");
+		echo("<title>$title</title>\n");
+		echo("<meta name='description' content='$title built on opensource github.com/thpglobal/thpclasses'/>\n");
+		echo("<link rel='shortcut icon' href='/static/favicon.png'>\n");
+		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css'>\n");
+		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
+        echo("<meta charset='utf-8'>\n");
+        echo("</head>\n<body>\n");
+        echo("<div class=container>\n");
+		echo("<h1>$title</h1>\n");
+	}
 
 	public function start($title="THP",$lang="en"){
 		$_SESSION["datatable"]=$this->datatable; // save for access by Table class
