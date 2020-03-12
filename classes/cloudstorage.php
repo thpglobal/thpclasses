@@ -13,13 +13,14 @@ Class CloudStorage extends StorageClient {
 		$name=basename($fullpath);
 		// Figure out the content type, as uploads set this incorrectly
 		$cts=array(".pdf"=>"application/pdf","jpeg"=>"image/jpeg",".jpg"=>"image/jpg");
-//		$cts["xlsx"]="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+		$cts["xlsx"]="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 		$cts["docx"]="application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 		$cts["pptx"]="application/vnd.openxmlformats-officedocument.presentationml.presentation";
 		$cts[".doc"]="application/msword";
 		if(array_key_exists($ext,$cts)){ $ct=$cts[$ext]; $mode='inline'; }
 		header("Content-Type:".$ct);
 		header("Content-Disposition:$mode; filename=$name");
-		echo readfile($fullpath);
+		header("Content-Transfer-Encoding: binary");
+		readfile($fullpath);
 	}
 }
