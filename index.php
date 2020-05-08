@@ -6,6 +6,6 @@ if($q) $path=substr($path,0,$q);
 if($path<>'/') {
 	include('app'.$path.'.php');
 }else{
-	include('app/welcome.php');
+	include('app/index.php');
 }
 ?>
