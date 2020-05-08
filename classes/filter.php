@@ -1,5 +1,5 @@
 <?php
-// CLASS FILTER - dropdowns that - on change - restart the page and set $_SESSION["name"];
+// CLASS FILTER - dropdowns that - on change - restart the page and set $_COOKIE["name"];
 class Filter {
 	protected $db;
 	public $width=4; // Filter denomiator, eg normally 1/4 of screen
@@ -28,7 +28,7 @@ class Filter {
 		return $this->pairs($name,$array);
 	}
 	public function toggle($name,$on_msg='On',$off_msg='Off'){
-		$now=$_SESSION[$name];
+		$now=$_COOKIE[$name];
 		if($now<>'off') $now='on';
 		$then=($now=='on' ? 'off' : 'on');
 		echo("<div class='pure-u-1 pure-u-md-1-4'>$name: <a class='fa fa-3x fa-toggle-$now' href='?$name=$then'></a>");
@@ -37,7 +37,7 @@ class Filter {
 	}
 	/* switch version of the toggle, shows both on/off labels */
 	public function switchToggle($name,$on_msg='On',$off_msg='Off'){
-		$now=$_SESSION[$name];
+		$now=$_COOKIE[$name];
 		if($now<>'off') $now='on';
 		$then=($now=='on' ? 'off' : 'on');
 		echo("<div class='pure-u-1 pure-u-md-1-4'>$name: ". ($this->showOffLabel ? $off_msg : '') . 
@@ -57,20 +57,18 @@ class Filter {
 		return $this->query($name,"select id,name from $name $where_clause order by 2");
 	}
 	public function pairs($name,$array,$all='(All)'){
-		if (!isset($_SESSION[$name])) $_SESSION[$name] = 0;
+		if (!isset($_COOKIE[$name])) $_COOKIE[$name] = 0;
 		echo "<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>" .
 			"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" .
 			"<select id='$name' name=$name onchange=this.form.submit(); >\n";
 		if($all>'') echo("<option value=0>$all\n");
 		foreach($array as $key=>$value) { // default to first if required
-			if(($all=='') and ($_SESSION[$name]==0)) $_SESSION[$name]=$key;
+//			if(($all=='') and ($_COOKIE[$name]==0)) $_COOKIE[$name]=$key;
 			echo("<option value=$key");
-			if($key==$_SESSION[$name]) echo(" SELECTED");
+			if($key==$_COOKIE[$name]) echo(" SELECTED");
 			echo(">$value\n");
 		}
 		echo("</select></div></form>\n");
-		return $_SESSION[$name];
+		return $_COOKIE[$name];
 	}	
 }
-// END CLASS FILTER
-?>
