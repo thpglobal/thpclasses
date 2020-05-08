@@ -13,13 +13,15 @@ $today=date("Y-m-d");
 $thisyear=date("Y");
 $thismonth=date("m");
 $thisquarter=floor(($thismonth+2)/3);
-if(!($_SESSION["year"]>1970)) $_SESSION["year"]=$thisyear;
-$year=$_SESSION["year"];
+if(!($_COOKIE["year"]>1970)) {setcookie("year",$thisyear); $_COOKIE["year"]=$thisyear;}
+$year=$_COOKIE["year"];
 
 // Routines to process GET and callbacks
-foreach($_GET as $key=>$value) $_SESSION[$key]=$value; // make sure permissions are not handled via $_SESSION
+foreach($_GET as $key=>$value) {
+	setcookie
+	$_COOKIE[$key]=$value; // make sure permissions are not handled via $_SESSION
 function goback($reply){
-	$back=$_SESSION["back"];
+	$back=$_COOKIE["back"];
 	$_SESSION["reply"]=$reply;
 	if(!($back>'')) $back="/error";
 	header("Location:$back");
@@ -31,7 +33,7 @@ $email="test@test.org"; // clear the session
 $can_edit=TRuE; // default for the demo
 $admin=TRUE;
 function debug($msg,$x) {
-	if($_SESSION["debug"]) {
+	if($_COOKIE["debug"]) {
     	echo("<p>Debug $msg: ");print_r($x);echo("</p>\n");
     }
 }
