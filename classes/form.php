@@ -7,7 +7,7 @@ class Form {
 	public $hidden=array("id");
 	public $ignore=array();
 	private function debug($name,$item){
-		if($_SESSION["debug"]) {
+		if($_COOKIE["debug"]) {
 			echo("<p>$name: "); print_r($item); echo("</p>\n");
 		}
 	}
@@ -72,12 +72,11 @@ class Form {
 		echo("></div>\n");
 	}
 	public function date($name,$required=0){ // This restricts daterange to mindate/maxdate if set
-		if(!isset($_SeSSION["lastdate"])) $_SESSION["lastdate"]=date("Y-m-d");
-		if(!isset($this->data[$name])) $this->data[$name]=$_SESSION["lastdate"];
+		if(!isset($this->data[$name])) $this->data[$name]=date("Y-m-d");
 		echo($this->div1."'$name'>".ucwords($name).":</label>");
 		echo("<input type=date name='$name' value='".$this->data[$name]."'");
-		if(isset($_SESSION["mindate"])) echo(" min='".$_SESSION["mindate"]."'");
-		if(isset($_SESSION["maxdate"])) echo(" max='".$_SESSION["maxdate"]."'");		
+		if(isset($_COOKIE["mindate"])) echo(" min='".$_COOKIE["mindate"]."'");
+		if(isset($_COOKIE["maxdate"])) echo(" max='".$_COOKIE["maxdate"]."'");		
 		if($required) echo (' required');
 		echo("><span class=status></span></div>\n");
 	}
@@ -94,7 +93,7 @@ class Form {
 		echo("<input type=hidden name='$name' value='$value'>\n");
 	}
 	public function pairs($name,$array,$required=0){
-	if($_SESSION["debug"]) echo("<p>$name=>".$this->data["name"]."</p>\n");
+	if($_COOKIE["debug"]) echo("<p>$name=>".$this->data["name"]."</p>\n");
         $requiredAttr=($required) ? ' required ' : '';
         //HtML5 requires required value to be empty (not zero) for validation
         $requiredVal=($required) ? '' : 0;
