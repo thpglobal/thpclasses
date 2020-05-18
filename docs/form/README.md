@@ -32,7 +32,7 @@ Note: either the current or default values are in $_SESSION[$name]. Validation i
 
 ->textarea($name);
 
-->pairs($name,$assoc_array); // simple dropdown based on an array
+->pairs($name,$assoc_array,$required=0); // simple dropdown based on an array - if $required than 0 not included
 
-->query($name,$query that results in pairs);
+->query($name,$query that results in pairs,$required);
 
