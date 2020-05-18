@@ -9,7 +9,7 @@ This class basically creates a set of dropdowns to establish parameters for data
 
 ## Instantiate
 
-Nearly all methods have a return value that is also copied into $_SESSION[$name] for the "stickyness" of settings.
+Nearly all methods have a return value that is also copied into $_COOKIE[$name] for the "stickyness" of settings.
 
 * $filter= new Filter; 
 * $filter->start($db); // Starts the grid of filters - link it to the database
@@ -17,7 +17,7 @@ $filter->end(); // This is really important as it closes the div. To create rows
 
 ## Methods that don't access $db
 * $int_value=$filter->range($name,$n1,$n2); returns selected number within a range
-* $key_value=$filter->pairs($name, $pairs); // nicely formatted dropdown from an associative array, when changed it passes the select in $_GET[$name] and restarts the page (which puts it into $_SESSION[$name] and returns the value). This is the mother ship function - table calls query which calls pairs.
+* $key_value=$filter->pairs($name, $pairs); // nicely formatted dropdown from an associative array, when changed it passes the select in $_GET[$name] and restarts the page (which puts it into $_COOKIE[$name] and returns the value). This is the mother ship function - table calls query which calls pairs.
 * $key_value=$filter->toggle($name,$on_msg='on',$off_msg='off'); returns 'on' or 'off'
 
 ## Methods that query the database into the above
