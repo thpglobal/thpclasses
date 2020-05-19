@@ -1,6 +1,9 @@
 # thpclasses
 PHP classes designed for monitoring and evaluation data by The Hunger Project but is made public for anyone to easily and quickly establish database apps, on any platform but especially on Google App Engine. It's big advantage is the clever way it uses $_SESSSION variables to make dropdown filter selections sticky.
 
+## Latest refactoring - May 2020
+Except for the passing of query results ($contents), all use of $_SESSION has been replaced by $_COOKIE. This is to eliminate premature time outs. It complicates things, as all changes to $_COOKIE must happen with two calls BEFORE the Page::Start: $_COOKIE[$key)=$val and setcookie($key,val);
+
 ## Running with just default scripts
 
 To create the *simplest possible* GAE PHP 7.2 app that uses this package as a sub-module, create these folders and files which will simply run the family of build in pages for basic database CRUD functionality.
@@ -24,7 +27,7 @@ include("../thpclasses/includes/menu.php"); // copy the demo menu from the class
 
 ### /app.yaml
 ```
-runtime: php72
+runtime: php73
 entrypoint: thpclasses/app/index.php
 handlers:
 
