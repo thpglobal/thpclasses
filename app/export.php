@@ -9,7 +9,7 @@ ini_set('display_startup_errors',1);
 error_reporting(E_ALL & ~E_NOTICE);
 
 $contents=$_SESSION["contents"];
-if(sizeof($contents)==0) header("Location:/?reply=Error:+Nothing+to+export.");}
+if(sizeof($contents)==0) header("Location:/?reply=Error:+Nothing+to+export.");
 $fname=$_COOKIE["fname"];
 if($fname=="") $fname=date('Y-m-d')."_Export";
 $fname=$fname.".xlsx";
