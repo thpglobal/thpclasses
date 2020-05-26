@@ -9,10 +9,9 @@ ini_set('display_startup_errors',1);
 error_reporting(E_ALL & ~E_NOTICE);
 
 $contents=$_SESSION["contents"];
-if(sizeof($contents)==0) {$_SESSION["reply"]="Error: Nothing to export."; header("Location:/error");}
-$fname=$_SESSION["fname"];
+if(sizeof($contents)==0) header("Location:/?reply=Error:+Nothing+to+export.");}
+$fname=$_COOKIE["fname"];
 if($fname=="") $fname=date('Y-m-d')."_Export";
-$fname .= !empty($_SESSION['table']) ?  ('_' . $_SESSION['table']) : '';
 $fname=$fname.".xlsx";
 
 // Convert the contents array into two xml files - one for numerics and one for strings
@@ -93,5 +92,3 @@ header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetm
 header("Cache-Control: no-store, no-cache");
 header('Content-Disposition: attachment; filename="'.$fname.'"');
 copy($tmp,'php://output');
-
-?>
