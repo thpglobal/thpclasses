@@ -1,10 +1,12 @@
 <?php
 // GENERIC UPDATE
 // This is called from various EDIT pages
-require_once(__DIR__."/../../includes/thpsecurity.php");
-if($_SESSION["debug"]) echo("<html lang=en><head><meta charset='utf-8'></head><body><h1>Debug Update</h1>\n");
+require_once($_SERVER["DOCUMENT_ROOT"]."/includes/thpsecurity.php");
+if($_COOKIE["debug"]) {
+	echo("<html lang=en><head><meta charset='utf-8'></head><body><h1>Debug Update</h1>\n");
+	echo("Post:<pre>".print_r($_POST,TRUE)."</pre>\n");
+}
 //sometimes we need zero as default update value, set this variable from the app page
-$defaultUpdateValue=(isset($_SESSION['defaultUpdateValue'])) ? $_SESSION['defaultUpdateValue'] : "NULL";
 $id=$_POST["id"];
 if($id=='') $id=0;
 $table=$_POST["table"];
@@ -32,7 +34,6 @@ if(!empty($error[2])){
 	if($id==0) $id=$db->lastInsertId();
 	$reply = "<div class='info-success'>Success with $prefix $table record for ID: $id </div>";
 }
-unset($_SESSION['defaultUpdateValue']);//unset at the end
 if($_SESSION["debug"]) {
 	echo("<p>Reply $reply</p>\n");
 	echo("<p>Query $query</p>\n");
