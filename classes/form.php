@@ -153,4 +153,3 @@ class Form {
 		}
 	}
 } // END OF CLASS FORM
-?>
