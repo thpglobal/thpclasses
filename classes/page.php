@@ -73,6 +73,8 @@ class Page {
 	}
 
 	public function start($title="THP",$lang="en"){
+		$reply=$_COOKIE["reply"];
+		setcookie["reply"]="";
 		$_SESSION["datatable"]=$this->datatable; // save for access by Table class
 		foreach($_GET as $key=>$value) $_SESSION[$key]=$value;
 		$this->time_start=microtime(true);
@@ -135,11 +137,9 @@ $(document).ready(function() {
             echo("<a href=$link class='fa fa-$key' title='$hint'></a>\n");
         }
         echo($this->appendTitle."</span></h1>\n");
-		$reply=$_SESSION["reply"];
 		if($reply>''){
-			unset($_SESSION["reply"]); 
-				$color="green";
-				if(substr($reply,0,5)=="Error") $color="red";
+			$color="green";
+			if(substr($reply,0,5)=="Error") $color="red";
 			echo("<p style='text-align:center;color:white;background-color:".$color."'>$reply</p>\n");
 		}
 		
@@ -158,7 +158,7 @@ $(document).ready(function() {
 		$this->hints[$type]=$hint;
 	}
 	public function toggle($name,$on_msg='On',$off_msg='Off'){
-		$now=$_SESSION[$name];
+		$now=$_COOKIE[$name];
 		if($now<>'off') $now='on'; // default is ON
 		$then=($now=='on' ? 'off' : 'on');
 		$this->appendTitle.="<a class='fa fa-toggle-$now' href='?$name=$then'></a> ";
@@ -173,5 +173,3 @@ $(document).ready(function() {
     }
 }
 // END CLASS PAGE
-
-?>
