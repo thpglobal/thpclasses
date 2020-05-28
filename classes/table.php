@@ -591,4 +591,3 @@ class Table { // These are public for now but may eventually be private with set
 		$_SESSION["contents"]=$this->contents;
 	}
 }
-?>
