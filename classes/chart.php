@@ -67,4 +67,3 @@ class Chart{
 		$this->make($this->ncharts,$title,$type,$x,$y);
 	}
 }
-?>
