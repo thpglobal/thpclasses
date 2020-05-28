@@ -10,4 +10,3 @@ require(__DIR__."/filter.php");
 require(__DIR__."/form.php");
 require(__DIR__."/table.php");
 require(__DIR__."/chart.php");
-?>
