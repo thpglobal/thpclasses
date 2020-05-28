@@ -74,7 +74,7 @@ class Page {
 
 	public function start($title="THP",$lang="en"){
 		$reply=$_COOKIE["reply"];
-		setcookie["reply"]="";
+		setcookie("reply","");
 		$_SESSION["datatable"]=$this->datatable; // save for access by Table class
 		foreach($_GET as $key=>$value) $_SESSION[$key]=$value;
 		$this->time_start=microtime(true);
