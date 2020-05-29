@@ -29,10 +29,10 @@ $qStatus=$db->exec($query);
 $error=$db->errorInfo();
 if(!empty($error[2])){
 	$error=$db->errorInfo();
-	$reply="<div class='info-error'>Error: ".$error[2]." with ". $query . "</div>";
+	$reply="Error: ".$error[2]." with ". $query;
 }else{
 	if($id==0) $id=$db->lastInsertId();
-	$reply = "<div class='info-success'>Success with $prefix $table record for ID: $id </div>";
+	$reply = "Success with $prefix $table record for ID: $id";
 }
 if($_SESSION["debug"]) {
 	echo("<p>Reply $reply</p>\n");
@@ -41,4 +41,3 @@ if($_SESSION["debug"]) {
 }else{
 	goback($reply);
 }
-?>
