@@ -25,6 +25,8 @@ foreach ($_POST as $key=>$value){
 }
 $query=substr($query,0,-2); // Trim off the final comma and space
 $query .= $suffix;
+if($_COOKIE["debug"]) echo("<p>$query</p>\n");
+
 $qStatus=$db->exec($query);
 $error=$db->errorInfo();
 if(!empty($error[2])){
@@ -34,10 +36,10 @@ if(!empty($error[2])){
 	if($id==0) $id=$db->lastInsertId();
 	$reply = "Success with $prefix $table record for ID: $id";
 }
-if($_SESSION["debug"]) {
+if($_COOKIE["debug"]) {
 	echo("<p>Reply $reply</p>\n");
 	echo("<p>Query $query</p>\n");
-	echo("<a href=".$_SESSION["back"].">Continue...</a>\n");
+	echo("<a href=".$_COOKIE["back"].">Continue...</a>\n");
 }else{
 	goback($reply);
 }
