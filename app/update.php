@@ -20,7 +20,6 @@ foreach ($_POST as $key=>$value){
 	$value=trim($db->quote($value));
 	if(substr($key,-5) == "_Date") $_SESSION["lastdate"]="'$value'"; // use last date entered as default
 	if($value=="'on'") $value="'1'";
-	if (($value=="") or ($value=="''")) $value="$defaultUpdateValue";
 	if ($key<>"id" and $key<>"table") $query .= $key."=$value, ";
 }
 $query=substr($query,0,-2); // Trim off the final comma and space
