@@ -83,10 +83,14 @@ class Page {
 		echo("<title>$title</title>\n");
 		echo("<meta name='description' content='$title built on opensource github.com/thpglobal/thpclasses'/>\n");
 		echo("<link rel='shortcut icon' href='/static/favicon.png'>\n");
-		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css'>\n");
-		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
-		echo("<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap' rel='stylesheet'>");
-		echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>\n");
+		if(file_exists($_SERVER['DOCUMENT_ROOT']."/static/purefa.css") {
+			echo("<link rel='stylesheet' href='/static/purefa.css'>\n"); // avoid all CDNs for Bangladesh
+		}else{
+			echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css'>\n");
+			echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive.css'>\n");
+			echo("<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap' rel='stylesheet'>");
+			echo("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>\n");
+		}
 		if(file_exists($_SERVER['DOCUMENT_ROOT']."/static/pure.thp.css")) 
 			$this->css[0]="/static/pure.thp.css";
 		if(!sizeof($this->css)) Die("</head><body>Error - there must be at least one $css entry</body></html>");
