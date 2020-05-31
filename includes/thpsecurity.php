@@ -18,8 +18,9 @@ $year=$_COOKIE["year"];
 
 // Routines to process GET and callbacks
 foreach($_GET as $key=>$value) {
-	setcookie
+	setcookie($key,$value,0,'/');
 	$_COOKIE[$key]=$value; // make sure permissions are not handled via $_SESSION
+}
 function goback($reply){
 	$back=$_COOKIE["back"];
 	$_SESSION["reply"]=$reply;
