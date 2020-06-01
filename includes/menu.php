@@ -6,6 +6,7 @@ $menu=array("Home"=>"/",
 	"Import"=>"upload",
 	"Export"=>"export",
 	"Query"=>"query",
-	"Cookies"=>"cookies"
+	"Cookies"=>"cookies",
+			"Test"=>"Cascade Test"
 	);
 $_SESSION["menu"]=$menu;
