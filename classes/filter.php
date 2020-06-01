@@ -57,18 +57,18 @@ class Filter {
 		return $this->query($name,"select id,name from $name $where_clause order by 2");
 	}
 	public function pairs($name,$array,$all='(All)'){
-		if (!isset($_COOKIE[$name])) $_COOKIE[$name] = 0;
-		echo "<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>" .
+		$now=$_COOKIE["name"];
+		echo "<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>\n" .
+			"<!-- now=$now -->\n" .
 			"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" .
 			"<select id='$name' name=$name onchange=this.form.submit(); >\n";
 		if($all>'') echo("<option value=0>$all\n");
 		foreach($array as $key=>$value) { // default to first if required
-//			if(($all=='') and ($_COOKIE[$name]==0)) $_COOKIE[$name]=$key;
 			echo("<option value=$key");
-			if($key==$_COOKIE[$name]) echo(" SELECTED");
+			if($key==$now) echo(" SELECTED");
 			echo(">$value\n");
 		}
 		echo("</select></div></form>\n");
-		return $_COOKIE[$name];
+		return $now;
 	}	
 }
