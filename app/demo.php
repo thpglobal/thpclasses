@@ -10,4 +10,3 @@ for($i=1;$i<100;$i++) $grid->row(array($i,$i+1,$i+2,$i+3));
 $grid->show();
 print_r($_SERVER);
 $page->end();
-?>
