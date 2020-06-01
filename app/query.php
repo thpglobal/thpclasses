@@ -1,6 +1,6 @@
 <?php
 // Simple query display
-require_once($_SERVER["DOCUMENT_ROOT"]."/thpclasses/classes/thp_classes.php");
+require_once($_SERVER[__DIR__."/../classes/thp_classes.php");
 $page=new Page;
 $page->icon("download","/export","Download as excel");
 $page->icon("pie-chart","chart?chart_type=pie","Display as Pie Chart");
