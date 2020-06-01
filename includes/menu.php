@@ -3,12 +3,9 @@
 
 /* Sample Menu items */
 $menu=array("Home"=>"/",
-	"Export"=>"export",
 	"Import"=>"upload",
+	"Export"=>"export",
 	"Query"=>"query",
-	"Session"=>"session",
-	"List"=>"list",
-			"Test"=>"test"
+	"Cookies"=>"cookies"
 	);
 $_SESSION["menu"]=$menu;
-?>
