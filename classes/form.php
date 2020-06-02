@@ -92,21 +92,22 @@ class Form {
 	public function hide($name,$value){
 		echo("<input type=hidden name='$name' value='$value'>\n");
 	}
-	public function pairs($name,$array,$all='(All)'){
-		$now=$_COOKIE[$name];
-		echo "<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>\n" .
-			"<!-- $name now=$now -->\n".
-			"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" .
-			"<select id='$name' name=$name onchange=this.form.submit(); >\n";
-		if($all) echo("<option value=0>$all\n");
-		foreach($array as $key=>$value) {
-			echo("<option value=$key");
-			if($key==$now) echo(" SELECTED");
-			echo(">$value\n");
-		}
-		echo("</select></div></form>\n");
-		return $now;
-	}
+	public function pairs($name,$array,$required=0){
+	if($_COOKIE["debug"]) echo("<p>$name=>".$this->data["name"]."</p>\n");
+        $requiredAttr=($required) ? ' required ' : '';
+        //HtML5 requires required value to be empty (not zero) for validation
+        $requiredVal=($required) ? '' : 0;
+        echo($this->div1."'$name'>".ucwords($name).":</label>");
+        echo("<select name='$name' $requiredAttr>\n<option value='$requiredVal'>(Select)\n");
+        foreach($array as $key=>$value){
+            echo("<option value='$key'");
+            if($key==$this->data[$name]) echo(" selected");
+            echo(">$value\n");
+        }
+        echo("</select>");
+        if($required){echo "<span class=status></span>";}
+        echo("</div>\n");
+    }
 	public function query($name,$query,$required=0){
 		$pdo_stmt=$this->db->query($query);
 		if(!is_object($pdo_stmt)) Die("Fatal Error - bad query - $query \n");
