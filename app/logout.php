@@ -1,7 +1,16 @@
 <?php
 session_start(); 
 $_SESSION=array(); // Clear all session variables when logging off
-setcookie("user","",0,'/');
+// unset cookies
+if (isset($_SERVER['HTTP_COOKIE'])) {
+    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+    foreach($cookies as $cookie) {
+        $parts = explode('=', $cookie);
+        $name = trim($parts[0]);
+        setcookie($name, '', time()-1000);
+        setcookie($name, '', time()-1000, '/');
+    }
+}
 //Logout script below from: https://stackoverflow.com/questions/35883692/google-sign-in-api-how-do-i-log-someone-out-with-php
 ?>
 <html>
