@@ -1,7 +1,8 @@
 <?php
 session_start(); 
 $_SESSION=array(); // Clear all session variables when logging off
-// unset cookies
+// unset cookies per reference:
+// https://stackoverflow.com/questions/2310558/how-to-delete-all-cookies-of-my-website-in-php
 if (isset($_SERVER['HTTP_COOKIE'])) {
     $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
     foreach($cookies as $cookie) {
