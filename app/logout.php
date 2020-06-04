@@ -1,14 +1,3 @@
-<?php
-session_start(); 
-$_SESSION=array(); // Clear all session variables when logging off
-// unset cookies per reference:
-// https://stackoverflow.com/questions/2310558/how-to-delete-all-cookies-of-my-website-in-php
-    foreach($_COOKIE as $name=>$value) {
-        setcookie($name, '', time()-1000);
-        setcookie($name, '', time()-1000, '/');
-    }
-//Logout script below from: https://stackoverflow.com/questions/35883692/google-sign-in-api-how-do-i-log-someone-out-with-php
-?>
 <html>
     <head>
         <meta name="google-signin-client_id" content="<?php echo($client_id)?>">
