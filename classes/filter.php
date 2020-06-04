@@ -56,8 +56,11 @@ class Filter {
 		$where_clause=($where=='' ? "" : "where $where");
 		return $this->query($name,"select id,name from $name $where_clause order by 2");
 	}
+	// Modify this to ensure that only an allowable value is returned
 	public function pairs($name,$array,$all='(All)'){
 		$now=$_COOKIE[$name];
+		$selected=FALSE; // nothing selected so far
+		
 		echo "<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>\n" .
 			"<!-- $name $all now=$now -->\n" .
 			"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" .
@@ -65,10 +68,11 @@ class Filter {
 		if($all>'') echo("<option value=0>$all\n");
 		foreach($array as $key=>$value) { // default to first if required
 			echo("<option value=$key");
-			if($key==$now) echo(" SELECTED");
+			if($key==$now) {$selected=TRUE; echo(" SELECTED");}
 			echo(">$value\n");
 		}
 		echo("</select></div></form>\n");
-		return $now;
+		if(!$selected) $_COOKIE[$name]=0;
+		return ($selected ? $now : 0);
 	}	
 }
