@@ -1,3 +1,6 @@
+<?php
+setcookie("user","",0,'/');
+?>
 <html>
     <head>
         <meta name="google-signin-client_id" content="<?php echo($client_id)?>">
