@@ -1,7 +1,7 @@
 <?php // Edit one record from old budget tables
 require(__DIR__."/../classes/thp_classes.php"); // Load the classes
-$table=$_SESSION["table"];
-$id=$_SESSION["id"];
+$table=$_COOKIE["table"];
+$id=$_COOKIE["id"];
 if($id=='') $id=0;
 $prefix=($id>0 ? "Edit Record $id" : "Create new record");
 $page=new Page;
@@ -12,4 +12,3 @@ $form->start($db,"/update");
 $form->record($table,$id);
 $form->end("Save data");
 $page->end();
-?>
