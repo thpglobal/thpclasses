@@ -1,7 +1,7 @@
 <?php
 // Import an xlsx file into $contents based on ZipArchive
 require(__DIR__."/../includes/thpsecurity.php");
-$into=$_SESSION["into"];
+$into=$_COOKIE["into"];
 if($into=="") $into="/dump";
 $tmpname=$_FILES['userfile']['tmp_name'];
 debug("Files:",$_FILES);
@@ -42,7 +42,6 @@ foreach ($xlrows as $xlrow) {
 	$contents[]=$line;
 }
 $_SESSION["contents"]=$contents;
-$_SESSION["reply"]="Success importing $nrows from $name";
-if(!$_SESSION["debug"]) header("Location:".$into);
-echo("<p><a href=$into>Click here for $into</a></p>");
-?>
+$reply="Success importing $nrows from $name";
+if(!$_COOKIE["debug"]) header("Location:$into?reply=$reply");
+echo("<p><a href=$into?reply=$reply>Click here for $into</a></p>");
