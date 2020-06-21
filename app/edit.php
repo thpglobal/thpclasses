@@ -9,6 +9,7 @@ if($hide) {
 	$n=strpos($hide,"_ID"); 
 	$cookie_name= strtolower( ($n ? substr($hide,0,$n-1) : $hide));
 	$hidden=array($hide=>$_COOKIE[$cookie_name]);
+	if($_COOKIE["debug"]) echo("<p>Hide $hide $hidden</p>\n");
 }													
 if($id=='') $id=0;
 $prefix=($id>0 ? "Edit Record $id" : "Create new record");
