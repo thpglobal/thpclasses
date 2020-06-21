@@ -6,7 +6,7 @@ $id=$_COOKIE["id"];
 $hide=$_COOKIE["hidden"]; // Allow one hidden variable to be passed in the url
 if($hide) {
 	// is it the name of a dropdown link?
-	$n=strpos("_ID",$hide); 
+	$n=strpos($hide,"_ID"); 
 	$cookie_name= strtolower( ($n ? substr($hide,0,$n-1) : $hide));
 	$hidden=array($hide=>$_COOKIE[$cookie_name]);
 }													
