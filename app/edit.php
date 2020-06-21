@@ -16,7 +16,7 @@ $page=new Page;
 $page->start("$prefix in $table");
 if($table=='') Die("No table set.");
 $form=new Form;
-$form->debug("Hide","$hidden $cookie_name ".$_COOKIE[$cookie_name]);
+debug("Hide","$hidden $cookie_name ".$_COOKIE[$cookie_name]);
 $form->start($db,"/update");
 if($hide) $form->hidden=$hidden;
 $form->record($table,$id);
