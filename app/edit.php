@@ -7,7 +7,7 @@ $hide=$_COOKIE["hidden"]; // Allow one hidden variable to be passed in the url
 if($hide) {
 	// is it the name of a dropdown link?
 	$n=strpos($hide,"_ID"); 
-	$cookie_name= strtolower( ($n ? substr($hide,0,$n-1) : $hide));
+	$cookie_name= strtolower( ($n ? substr($hide,0,$n) : $hide));
 	$hidden=array($hide=>$_COOKIE[$cookie_name]);
 }													
 if($id=='') $id=0;
@@ -16,7 +16,7 @@ $page=new Page;
 $page->start("$prefix in $table");
 if($table=='') Die("No table set.");
 $form=new Form;
-debug("Hide","$hidden $cookie_name ".$_COOKIE[$cookie_name]);
+debug("Hide","$hide $cookie_name ".$_COOKIE[$cookie_name]);
 $form->start($db,"/update");
 if($hide) $form->hidden=$hidden;
 $form->record($table,$id);
