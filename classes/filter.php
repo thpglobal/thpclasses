@@ -35,11 +35,11 @@ class Filter {
 		return $this->pairs($name,$array);
 	}
 	public function toggle($name,$on_msg='On',$off_msg='Off'){
-		$now=$this($name);
+		$now=$this->now($name);
 		if($now<>'off') $now='on';
 		$then=($now=='on' ? 'off' : 'on');
 		echo("<a class='fa fa-3x fa-toggle-$now' href='?$name=$then'></a>");
-		echo( ($now=='on' ? $on_msg : $off_msg)."</div>\n");
+		echo( ($now=='on' ? $on_msg : $off_msg)."</div></form>\n");
 		return $now;
 	}
 	/* switch version of the toggle, shows both on/off labels */
