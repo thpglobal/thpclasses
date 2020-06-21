@@ -17,6 +17,7 @@ $page->start("$prefix in $table");
 if($table=='') Die("No table set.");
 $form=new Form;
 $form->start($db,"/update");
+if($hide) $form->hidden=$hidden;
 $form->record($table,$id);
 $form->end("Save data");
 $page->end();
