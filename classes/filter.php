@@ -28,6 +28,7 @@ class Filter {
 		echo "\n<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>\n" .
 		"<!-- $name now=$now -->\n" .
 		"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" ;
+		return $now;
 	}
 
 	public function range($name,$n1=1, $n2=4){
