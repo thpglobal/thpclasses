@@ -23,16 +23,23 @@ class Filter {
     public function end(){
         echo("</div>\n");
     }
+	private function now($name) { // common first steps for all filter - returns default value
+		$now=$_COOKIE[$name];
+		echo "\n<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>\n" .
+		"<!-- $name now=$now -->\n" .
+		"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" ;
+	}
+
 	public function range($name,$n1=1, $n2=4){
 		for($i=$n1;$i<=$n2;$i++) $array[$i]=$i;
 		return $this->pairs($name,$array);
 	}
 	public function toggle($name,$on_msg='On',$off_msg='Off'){
-		$now=$_COOKIE[$name];
+		$now=$this($name);
 		if($now<>'off') $now='on';
 		$then=($now=='on' ? 'off' : 'on');
-		echo("<div class='pure-u-1 pure-u-md-1-".$this->width."'>$name: <a class='fa fa-3x fa-toggle-$now' href='?$name=$then'></a>");
-		echo( ($now=='on' ? $on_msg : $off_msg)."</div>");
+		echo("<a class='fa fa-3x fa-toggle-$now' href='?$name=$then'></a>");
+		echo( ($now=='on' ? $on_msg : $off_msg)."</div>\n");
 		return $now;
 	}
 	/* switch version of the toggle, shows both on/off labels */
@@ -56,15 +63,10 @@ class Filter {
 		$where_clause=($where=='' ? "" : "where $where");
 		return $this->query($name,"select id,name from $name $where_clause order by 2");
 	}
-	// Modify this to ensure that only an allowable value is returned
 	public function pairs($name,$array,$all='(All)'){
-		$now=$_COOKIE[$name];
+		$now=$this->now($name); // do first steps
 		$selected=FALSE; // nothing selected so far
-		
-		echo "<form class='pure-form pure-u-1 pure-u-md-1-".$this->width."'>\n" .
-			"<!-- $name $all now=$now -->\n" .
-			"<div class='form-group'><label for='$name'>".ucfirst($name).":&nbsp;</label>" .
-			"<select id='$name' name=$name onchange=this.form.submit(); >\n";
+		echo "<select id='$name' name=$name onchange=this.form.submit(); >\n";
 		if($all>'') echo("<option value=0>$all\n");
 		foreach($array as $key=>$value) { // default to first if required
 			echo("<option value=$key");
