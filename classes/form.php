@@ -58,7 +58,7 @@ class Form {
 	public function num($name,$min=NULL,$max=NULL){
 		$value=$this->data[$name];
 		if(isset($this->minNumAll)) $min=$this->minNumAll;
-		if(isset($this->maxNumAll)) $min=$this->maxNumAll;
+		if(isset($this->maxNumAll)) $max=$this->maxNumAll;
 		if($value=='') $value=0;
 		$label=ucwords($name);
 		if($min<>NULL) $label .= "$min to $max";
@@ -144,6 +144,7 @@ class Form {
 			}elseif(substr($name,-3)=="_ID"){
 				$subtable=strtolower(substr($name,0,-3));
 				$where=$this->where[$name];
+				echo("\n<!-- where $where -->\n");
 				$this->query($name,"select id,name from $subtable $where order by 2");
 			}elseif($type=="TINY") {
 				$this->toggle($name);
