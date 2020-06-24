@@ -4,6 +4,8 @@ class Form {
 	protected $db;
 	private $div1="<div class='pure-control-group'>\n<label for=";
 	public $data=array();
+	public $minNumAll;
+	public $maxNumAll;
 	public $hidden=array("id");
 	public $ignore=array();
 	private function debug($name,$item){
@@ -54,6 +56,8 @@ class Form {
 	
 	public function num($name,$min=NULL,$max=NULL){
 		$value=$this->data[$name];
+		if(isset($this->minNumAll)) $min=$this->minNumAll;
+		if(isset($this->maxNumAll)) $min=$this->maxNumAll;
 		if($value=='') $value=0;
 		$label=ucwords($name);
 		if($min<>NULL) $label .= "$min to $max";
