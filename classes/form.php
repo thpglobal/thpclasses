@@ -8,6 +8,7 @@ class Form {
 	public $maxNumAll;
 	public $hidden=array("id");
 	public $ignore=array();
+	public $where=array(); // ability to add filters to dropdowns inside ->record
 	private function debug($name,$item){
 		if($_COOKIE["debug"]) {
 			echo("<p>$name: "); print_r($item); echo("</p>\n");
@@ -142,7 +143,8 @@ class Form {
 				$this->hide($name,strtolower($_SERVER["USER_EMAIL"]));
 			}elseif(substr($name,-3)=="_ID"){
 				$subtable=strtolower(substr($name,0,-3));
-				$this->query($name,"select id,name from $subtable order by 2");
+				$where=$this->where[$name];
+				$this->query($name,"select id,name from $subtable $where order by 2");
 			}elseif($type=="TINY") {
 				$this->toggle($name);
 			}elseif($type=="LONG") {
