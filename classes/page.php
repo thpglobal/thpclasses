@@ -74,7 +74,7 @@ class Page {
 
 	public function start($title="THP",$lang="en"){
 		$reply=$_COOKIE["reply"];
-		setcookie("reply","");
+		setcookie("reply","",0,'/');
 		$_SESSION["datatable"]=$this->datatable; // save for access by Table class
 		foreach($_GET as $key=>$value) $_SESSION[$key]=$value;
 		$this->time_start=microtime(true);
@@ -141,7 +141,7 @@ $(document).ready(function() {
             echo("<a href=$link class='fa fa-$key' title='$hint'></a>\n");
         }
         echo($this->appendTitle."</span></h1>\n");
-		if($reply>''){
+		if($reply){
 			$color="green";
 			if(substr($reply,0,5)=="Error") $color="red";
 			echo("<p style='text-align:center;color:white;background-color:".$color."'>$reply</p>\n");
