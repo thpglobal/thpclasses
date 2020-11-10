@@ -1,0 +1,16 @@
+{
+    "name": "thpglobal/thpclasses",
+    "type": "library",
+    "description": "database common classes",
+    "keywords": ["mysql","purecss","php","gae"],
+    "homepage": "https://thp.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "John Coonrod",
+            "email": "john.coonrod@thp.org",
+            "homepage": "https://www.linkedin.com/in/johncoonrod/",
+            "role": "EVP"
+        }
+    ],
+}
