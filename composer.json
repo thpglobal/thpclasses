@@ -1,6 +1,9 @@
 {
     "name": "thpglobal/thpclasses",
     "type": "library",
+	"autoload": {
+		"psr-4": {"Thpglobal\\": "thpglobal/thpclasses/classes/"}
+	}
     "description": "database common classes",
     "keywords": ["mysql","purecss","php","gae"],
     "homepage": "https://thp.org",
