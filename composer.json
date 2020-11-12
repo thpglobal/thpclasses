@@ -2,7 +2,7 @@
     "name": "thpglobal/thpclasses",
     "type": "library",
 	"autoload": {
-		"psr-4": {"Thpglobal\\": "thpglobal/thpclasses/classes/"}
+		"psr-4": {"Thpglobal\\": "thpclasses/classes/"}
 	},
     "description": "database common classes",
     "keywords": ["mysql","purecss","php","gae"],
