@@ -1,6 +1,5 @@
 <?php
 // START CLASS PAGE
-namespace Thpglobal;
 class Page {
 	public $datatable = FALSE;
 	public $addStickyHeader = TRUE;
