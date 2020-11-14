@@ -1,6 +1,6 @@
 <?php
 // Import an xlsx file into $contents based on ZipArchive
-require(__DIR__."/../includes/thpsecurity.php");
+require($_SERVER["DOCUMENT_ROOT"]."/includes/thpsecurity.php");
 $into=$_COOKIE["into"];
 if($into=="") $into="/dump";
 $tmpname=$_FILES['userfile']['tmp_name'];
