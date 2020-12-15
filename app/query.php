@@ -17,14 +17,15 @@ $page->start("Query");
 echo("<form><textarea id=q name=query rows=3 cols=80>".$_GET["query"]."</textarea><input type=submit onclick='saveq()'></form>\n");
 if( isset($_GET["query"]) ){
 	$query=$_GET["query"];
-	$start=substr($query,0,4);
+	$start=substr($query,0,4); // determine type of event based on first 4 letters
 	if(in_array($start,array("show","sele","expl"))){
 		$grid=new Table;
 		$grid->start($db);
 		$grid->query($query);
 		$grid->show();
 	}else{
-		$db->exec($query);
+    $count=$db->exec($query);
+    echo("<p>Rows affected: $count</p>");
 	}
 }
 ?>
