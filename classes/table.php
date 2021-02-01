@@ -439,7 +439,8 @@ class Table { // These are public for now but may eventually be private with set
 				$rs=($rowspan[$i]>1 ? " rowspan=".$rowspan[$i] : ""); // is there a rowspan clause in the TDs?
 				if($ninforow>0) $info=$this->info($this->inforow[$row[$nstart]]); // Does the row include an info icon?
 				if($href>'') {
-					$open_new=($this->newtab,' target=_blank','');
+					$open_new='';
+					if($this->newtab) $open_new=" target=_blank";
 					echo("<td$rs><a href='".$href.$row[$ntag]."'$open_new>".$info.$row[$nstart]."</a></td>"); // a link?
 				} else { 
 					echo("<td$rs>".$info.$row[$nstart]."</td>");
