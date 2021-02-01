@@ -3,6 +3,7 @@
 class Table { // These are public for now but may eventually be private with setters
 	protected $db; // database connection
 	public $contents=array(array()); // main 2d array
+	public $newtab=FALSE; // if true, link opens in new tab
 	public $hidelink=FALSE; // Option to put href on next column
 	public $rowspan=0; // If>0, then start rowspan with column this many columns
 	public $backmap=array(); // Create backpointers to the array after pivot
@@ -392,7 +393,7 @@ class Table { // These are public for now but may eventually be private with set
 	
 	public $rowspan2=0; // Notes fields need a rowspan mid-row for studies etc.
 	
-	public function show($href=''){ // experimental version
+	public function show($href=''){ 
         // Set parameters appropriate to various options
 	    $ngroups=sizeof($this->groups); // Option to group rows with subheaders
 	    $ninforow=sizeof($this->inforow); // Option to show info symbols at start of row
@@ -438,7 +439,8 @@ class Table { // These are public for now but may eventually be private with set
 				$rs=($rowspan[$i]>1 ? " rowspan=".$rowspan[$i] : ""); // is there a rowspan clause in the TDs?
 				if($ninforow>0) $info=$this->info($this->inforow[$row[$nstart]]); // Does the row include an info icon?
 				if($href>'') {
-					echo("<td$rs><a href='".$href.$row[$ntag]."'>".$info.$row[$nstart]."</a></td>"); // a link?
+					$open_new=($this->newtab,' target=_blank','');
+					echo("<td$rs><a href='".$href.$row[$ntag]."'$open_new>".$info.$row[$nstart]."</a></td>"); // a link?
 				} else { 
 					echo("<td$rs>".$info.$row[$nstart]."</td>");
 				} // or no link
