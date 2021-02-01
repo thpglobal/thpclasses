@@ -22,8 +22,9 @@ This class is designed to take a 2-D array of data and display it. It can do ver
 
 
 ## Advanced Methods Prior to "show()"
+* Table::newtab=TRUE; // Option to open links in a new tab. Default is FALSE
 * Table::rowspan - an integer value for how many columns should have their rows merged, say when there is diaggregated data.
-* Table::hidelink=FALSE; // OpOption to put href on next column
+* Table::hidelink=FALSE; // Option to put href on next column
 * Table::href=""; // Link text preceding the value in the 0 cell
 * Table::dpoints=0; // Show how many decimal points?
 * Table::extraheader=""; // Additional text added above default header, for multirow headers
