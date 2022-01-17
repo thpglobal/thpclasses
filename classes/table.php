@@ -378,7 +378,7 @@ class Table { // These are public for now but may eventually be private with set
 		$striped=($nclasses>0 ? "" : "pure-table-striped");
 		$tid=($_SESSION["datatable"] ? "id='datatable'" : "");
 		$sticky=($_SESSION["datatable"] ? "" : "style='position: sticky; top: -1px;'");
-		echo("<table $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
+		echo("<table role=grid $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
 		if(strlen($this->extraheader)>0) echo($this->extraheader);
 		for($j=$jstart;$j<$ncols;$j++){
             $infoIndex=($this->infoMatchWithID) ? $row[$j-1].'_'.$row[$j] : $row[$j];
@@ -501,7 +501,7 @@ class Table { // These are public for now but may eventually be private with set
 		$striped=($nclasses>0 ? "" : "pure-table-striped");
 		$sticky=($_SESSION["datatable"] ? "" : "style='position: sticky; top: -1px;'");
 		$tid=($_SESSION["datatable"] ? "id='datatable'" : "");
-		echo("<table $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
+		echo("<table role=grid $tid class='pure-table $striped pure-table-bordered'>\n<thead>\n");
 		if(strlen($this->extraheader)>0) echo($this->extraheader);
 		foreach($this->contents as $i=>$row) {
 			if($i==0){ // column headers - replace underscores with blanks to look nicer
