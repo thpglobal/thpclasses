@@ -1,6 +1,7 @@
 <html lang="en">
 <!-- NOTE: $client_id must be set by calling appication -->
   <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="<?php echo($client_id)?>">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
