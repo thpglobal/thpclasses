@@ -1,6 +1,6 @@
 <?php
 $next_path=$_COOKIE["path"];
-if($next_path="/index.php") $next_path="";
+if($next_path=="/index.php") $next_path="";
 if(!$next_path) $next_path="/";
 $checkendpoint = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=";
 $checkurl= $checkendpoint.$_POST['idtoken'];
