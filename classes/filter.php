@@ -35,6 +35,13 @@ class Filter {
 		for($i=$n1;$i<=$n2;$i++) $array[$i]=$i;
 		return $this->pairs($name,$array);
 	}
+
+	public function date($name){
+		$now=$this->now($name);
+		echo("<input type=date name=$name value='$now' onchange=this.form.submit();></div></form>");
+		return $now;
+	}
+
 	public function toggle($name,$on_msg='On',$off_msg='Off'){
 		$now=$this->now($name);
 		if($now<>'off') $now='on';
