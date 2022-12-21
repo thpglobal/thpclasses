@@ -6,7 +6,7 @@ The classes have been majorly refactored to be compatible with PHP8.1 and to be 
 
 ## Running with just default scripts
 
-To create the *simplest possible* GAE PHP 7.2 app that uses this package as a sub-module, create these folders and files which will simply run the family of build in pages for basic database CRUD functionality.
+To create the *simplest possible* GAE PHP 8.1 app that uses this package as a sub-module, create these folders and files which will simply run the family of build in pages for basic database CRUD functionality.
 
 ### /includes/thpsecurity
 
@@ -27,8 +27,8 @@ include("../thpclasses/includes/menu.php"); // copy the demo menu from the class
 
 ### /app.yaml
 ```
-runtime: php73
-entrypoint: thpclasses/app/index.php
+runtime: php8.1
+entrypoint: /app/index.php
 handlers:
 
 - url: /static
