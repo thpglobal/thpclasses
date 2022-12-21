@@ -1,8 +1,8 @@
-# thpclasses
-PHP classes designed for monitoring and evaluation data by The Hunger Project but is made public for anyone to easily and quickly establish database apps, on any platform but especially on Google App Engine. It's big advantage is the clever way it uses $_SESSSION variables to make dropdown filter selections sticky.
+# Classes -- thpclasses has been deprecated 
+PHP classes designed for monitoring and evaluation data by The Hunger Project but is made public for anyone to easily and quickly establish database apps, on any platform but especially on Google App Engine. It's big advantage is the clever way it uses $_COOKIE variables to make dropdown filter selections sticky.
 
-## Latest refactoring - May 2020
-Except for the passing of query results ($contents), all use of $_SESSION has been replaced by $_COOKIE. This is to eliminate premature time outs. It complicates things, as all changes to $_COOKIE must happen with two calls BEFORE the Page::Start: $_COOKIE[$key)=$val and setcookie($key,val);
+## Latest refactoring - December 2022
+The classes have been majorly refactored to be compatible with PHP8.1 and to be utilized using composer (composer require thpglobal/classes rather than a git submodule.
 
 ## Running with just default scripts
 
