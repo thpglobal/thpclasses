@@ -2,11 +2,8 @@
 PHP classes designed for monitoring and evaluation data by The Hunger Project but is made public for anyone to easily and quickly establish database apps, on any platform but especially on Google App Engine. It's big advantage is the clever way it uses $_COOKIE variables to make dropdown filter selections sticky.
 
 ## Latest refactoring - December 2022
-The classes have been majorly refactored to be compatible with PHP8.1 and to be utilized using composer (composer require thpglobal/classes rather than a git submodule.
+These classes have been replaced by those in the Classes repository to be compatible with PHP8.1 and to be utilized using composer (composer require thpglobal/classes) rather than a git submodule.
 
-## Running with just default scripts
-
-To create the *simplest possible* GAE PHP 8.1 app that uses this package as a sub-module, create these folders and files which will simply run the family of build in pages for basic database CRUD functionality.
 
 ### /includes/thpsecurity
 
